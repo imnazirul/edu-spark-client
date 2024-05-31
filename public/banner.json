@@ -1,0 +1,32 @@
+[
+  {
+    "img": "https://i.ibb.co/Dg3CC4f/pexels-pixabay-38544.jpg",
+    "header": "Mobile App Development",
+    "description": "Learn to create engaging mobile apps for Android and iOS using Java, Kotlin, Swift, and frameworks like Flutter and React Native."
+  },
+  {
+    "img": "https://i.ibb.co/Dg3CC4f/pexels-pixabay-38544.jpg",
+    "header": "UI/UX Design",
+    "description": "Master the art of creating user-friendly interfaces and enhancing user experiences with courses on wireframing, prototyping, and design tools."
+  },
+  {
+    "img": "https://i.ibb.co/Dg3CC4f/pexels-pixabay-38544.jpg",
+    "header": "Web Development",
+    "description": "Build dynamic websites and web applications with HTML, CSS, JavaScript, and frameworks like React, Angular, and Vue.js."
+  },
+  {
+    "img": "https://i.ibb.co/Dg3CC4f/pexels-pixabay-38544.jpg",
+    "header": "Cybersecurity",
+    "description": "Protect data and networks by learning ethical hacking, information security, network defense strategies, and certifications like CISSP and CEH."
+  },
+  {
+    "img": "https://i.ibb.co/Dg3CC4f/pexels-pixabay-38544.jpg",
+    "header": "Digital Marketing",
+    "description": "Boost your marketing skills with SEO, SEM, content marketing, social media strategies, and analytics to drive online business growth."
+  },
+  {
+    "img": "https://i.ibb.co/Dg3CC4f/pexels-pixabay-38544.jpg",
+    "header": "Graphic Design",
+    "description": "Unleash your creativity with courses in graphic design, covering essential tools like Photoshop, Illustrator, and InDesign."
+  }
+]
