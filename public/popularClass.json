@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "title": "Introduction to Python",
+    "name": "Alice Johnson",
+    "image": "https://example.com/images/python_class.jpg",
+    "price": "$49.99",
+    "short_description": "Learn the basics of Python programming from scratch.",
+    "total_enrolment": 120
+  },
+  {
+    "id": 2,
+    "title": "Advanced JavaScript",
+    "name": "Bob Smith",
+    "image": "https://example.com/images/javascript_class.jpg",
+    "price": "$59.99",
+    "short_description": "Master advanced JavaScript concepts and techniques.",
+    "total_enrolment": 200
+  },
+  {
+    "id": 3,
+    "title": "Web Development Bootcamp",
+    "name": "Charlie Davis",
+    "image": "https://example.com/images/webdev_class.jpg",
+    "price": "$99.99",
+    "short_description": "Become a full-stack web developer in 12 weeks.",
+    "total_enrolment": 150
+  },
+  {
+    "id": 4,
+    "title": "Data Science with R",
+    "name": "Dana Lee",
+    "image": "https://example.com/images/datascience_class.jpg",
+    "price": "$69.99",
+    "short_description": "Learn data science techniques using the R programming language.",
+    "total_enrolment": 85
+  },
+  {
+    "id": 5,
+    "title": "Machine Learning A-Z",
+    "name": "Eli Martinez",
+    "image": "https://example.com/images/machinelearning_class.jpg",
+    "price": "$79.99",
+    "short_description": "A complete guide to machine learning, from theory to implementation.",
+    "total_enrolment": 95
+  },
+  {
+    "id": 6,
+    "title": "Graphic Design Fundamentals",
+    "name": "Fiona Clark",
+    "image": "https://example.com/images/graphicdesign_class.jpg",
+    "price": "$39.99",
+    "short_description": "Learn the basics of graphic design and Adobe Illustrator.",
+    "total_enrolment": 110
+  },
+  {
+    "id": 7,
+    "title": "Digital Marketing Mastery",
+    "name": "George Wilson",
+    "image": "https://example.com/images/digitalmarketing_class.jpg",
+    "price": "$89.99",
+    "short_description": "Become an expert in digital marketing and social media strategies.",
+    "total_enrolment": 130
+  }
+]
