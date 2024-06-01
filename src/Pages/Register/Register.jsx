@@ -1,11 +1,10 @@
-/* eslint-disable react/no-unescaped-entities */
-import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { FcGoogle } from "react-icons/fc";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+import { Link } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -14,7 +13,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const handleLogin = (data) => {
+  const handleRegister = (data) => {
     console.log(data);
   };
 
@@ -24,11 +23,12 @@ const Login = () => {
 
   return (
     <>
+      {" "}
       <section className="flex justify-center flex-col items-center bg-[url('https://i.ibb.co/71j9gy9/joanna-kosinska-LAa-So-L0-Lr-Ys-unsplash.jpg')] bg-cover bg-center bg-blend-multiply min-h-screen bg-blue-500 bg-opacity-30">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-jost font-bold text-center pt-5 lg:pt-10 text-btn-1 text-white font-poppins">
-          SIGN IN
+          SIGN UP
         </h1>
-        <div className="flex gap-3 bg-blue-600 max-w-5xl p-5 rounded-xl mb-10">
+        <div className="flex gap-3 mb-10 bg-blue-600 max-w-5xl p-5 rounded-xl">
           <div className="">
             <img
               src="https://i.ibb.co/zNnbLRd/cloud-computing-modern-flat-concept-for-web-banner-design-man-enters-password-and-login-to-access-cl.png"
@@ -38,7 +38,30 @@ const Login = () => {
           </div>
           <div className="flex flex-1 flex-col justify-center text-center rounded-sm pr-8">
             <div className=" w-full  ">
-              <form onSubmit={handleSubmit(handleLogin)} className="">
+              <form onSubmit={handleSubmit(handleRegister)} className="">
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text text-white text-lg">Name</span>
+                  </label>
+                  <input
+                    {...register("fullName", {
+                      required: {
+                        value: true,
+                        message: "Name is a Required Field!",
+                      },
+                    })}
+                    type="text"
+                    placeholder="Name"
+                    className="input input-bordered"
+                  />
+                </div>
+                <div>
+                  {errors.fullName && (
+                    <p className="text-red-500 font-semibold font-jost">
+                      {errors.fullName.message}
+                    </p>
+                  )}
+                </div>
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text text-white text-lg">Email</span>
@@ -47,7 +70,7 @@ const Login = () => {
                     {...register("email", {
                       required: {
                         value: true,
-                        message: "Email is a Required Field!",
+                        message: "Email is a required Field!",
                       },
                     })}
                     type="email"
@@ -62,6 +85,32 @@ const Login = () => {
                     </p>
                   )}
                 </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text text-white text-lg">
+                      Upload Profile Picture
+                    </span>
+                  </label>
+                  {/* md */}
+                  <input
+                    {...register("photo", {
+                      required: {
+                        value: true,
+                        message: "Profile Photo is a required Field",
+                      },
+                    })}
+                    type="file"
+                    className="file-input file-input-bordered file-input-md w-full max-w-xs"
+                  />
+                </div>
+                <div>
+                  {errors.photoUrl && (
+                    <p className="text-red-500 font-semibold font-jost">
+                      {errors.photoUrl.message}
+                    </p>
+                  )}
+                </div>
+
                 <div className="form-control relative">
                   <label className="label">
                     <span className="label-text text-white text-lg">
@@ -74,10 +123,32 @@ const Login = () => {
                         value: true,
                         message: "Enter password to proceed!",
                       },
+                      minLength: {
+                        value: 6,
+                        message: "Password Must be equal 6 Character or longer",
+                      },
+                      maxLength: {
+                        value: 32,
+                        message: "Password Cannot be longer than 32 characters",
+                      },
+                      validate: {
+                        isLower: (value) => {
+                          if (/[a-z]/.test(value)) {
+                            return true;
+                          }
+                          return "Password Must Contain At Least One Lowercase Character";
+                        },
+                        isUpper: (value) => {
+                          if (/[A-Z]/.test(value)) {
+                            return true;
+                          }
+                          return "Password Must Contain At Least One UpperCase Character";
+                        },
+                      },
                     })}
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
-                    className="input w-full input-bordered"
+                    className="input input-bordered"
                   />
                   <span
                     onClick={() => {
@@ -99,17 +170,9 @@ const Login = () => {
                     </p>
                   )}
                 </div>
-                <label className="label">
-                  <a
-                    href="#"
-                    className="label-text text-white-alt link link-hover text-[16px] text-white"
-                  >
-                    Forgot password?
-                  </a>
-                </label>
                 <div className="form-control mt-6">
-                  <button className="btn bg-primary-1 hover:bg-primary-1 text-lg text-white hover:bg-btn-1">
-                    Login
+                  <button className="btn  bg-primary-1 hover:bg-primary-1  text-lg text-white ">
+                    Register
                   </button>
                 </div>
               </form>
@@ -126,9 +189,9 @@ const Login = () => {
                 {/* <GoogleButton onClick={handleGoogleLogin} /> */}
               </div>
               <p className="text-center mb-4 text-lg text-white">
-                Don't have any account?{" "}
-                <Link to="/register" className="link text-blue-200 pb-2">
-                  Sign Up
+                Already have an account?{" "}
+                <Link to="/login" className="link text-blue-200 pb-2">
+                  Sign In
                 </Link>
               </p>
             </div>
@@ -139,4 +202,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
