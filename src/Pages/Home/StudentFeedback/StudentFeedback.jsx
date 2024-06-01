@@ -24,7 +24,7 @@ const StudentFeedback = () => {
     sliderRef.slickPrev();
   };
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     arrows: true,
     slidesToShow: 3,
@@ -88,7 +88,7 @@ const StudentFeedback = () => {
             <div className=" flex ">
               <div className="relative">
                 <img
-                  className="w-16 rounded-full"
+                  className="w-16 rounded-full border-2 border-blue-500"
                   src="https://rhoomy.smartdemowp.com/wp-content/uploads/team-6.jpg"
                   alt=""
                 />
@@ -105,7 +105,9 @@ const StudentFeedback = () => {
                 <p className="text-primary-1 font-semibold ml-3">Student</p>
               </div>
             </div>
-
+            <h3 className="text-xl font-semibold mt-2">
+              Class: {feedback.class}
+            </h3>
             <div>
               <ReactStars
                 value={feedback.rating}
@@ -122,28 +124,17 @@ const StudentFeedback = () => {
               seeking a personalized travel experience.
             </p>
             <h1 className="text-xl md:text-2xl text-primary-1 font-bold text-center"></h1>
-            <ul className="flex justify-center gap-3 text-2xl">
-              <li>
-                <a href="#"></a>
-              </li>
-              <li>
-                <a href="#"></a>
-              </li>
-              <li>
-                <a href="#"></a>
-              </li>{" "}
-            </ul>
           </div>
         ))}
       </Slider>
       <button
-        className="btn absolute left-2 top-[50%] rounded-full outline-none"
+        className="btn absolute left-2 top-[40%] rounded-full outline-none"
         onClick={previous}
       >
         <IoIosArrowBack></IoIosArrowBack>
       </button>{" "}
       <button
-        className="btn absolute right-2 top-[50%] rounded-full outline-none"
+        className="btn absolute right-2 top-[40%] rounded-full outline-none"
         onClick={next}
       >
         <IoIosArrowForward></IoIosArrowForward>

@@ -2,6 +2,7 @@
   {
     "id": 1,
     "name": "John Doe",
+    "class": "Web Development",
     "img": "https://example.com/profile_images/john_doe.jpg",
     "comment": "I love how interactive the lessons are! The tutors really engage with us and make learning fun.",
     "rating": 5
@@ -9,6 +10,7 @@
   {
     "id": 2,
     "name": "Emily Smith",
+    "class": "Graphic Design",
     "img": "https://example.com/profile_images/emily_smith.jpg",
     "comment": "The video explanations are super helpful. I can pause and rewind whenever I need to, which helps me grasp concepts better.",
     "rating": 4
@@ -16,6 +18,7 @@
   {
     "id": 3,
     "name": "Michael Johnson",
+    "class": "Mobile App Development",
     "img": "https://example.com/profile_images/michael_johnson.jpg",
     "comment": "The tutors are really knowledgeable and patient. They take the time to make sure I understand everything before moving on.",
     "rating": 5
@@ -23,6 +26,7 @@
   {
     "id": 4,
     "name": "Sarah Adams",
+    "class": "Digital Marketing",
     "img": "https://example.com/profile_images/sarah_adams.jpg",
     "comment": "I appreciate the flexibility of scheduling sessions. It's great that I can book a session whenever it fits into my schedule.",
     "rating": 4
@@ -30,6 +34,7 @@
   {
     "id": 5,
     "name": "David Brown",
+    "class": "Web Design",
     "img": "https://example.com/profile_images/david_brown.jpg",
     "comment": "The platform is user-friendly and easy to navigate. I can quickly find the resources I need for my homework.",
     "rating": 5
