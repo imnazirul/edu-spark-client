@@ -26,7 +26,7 @@ const UserStats = () => {
               />
 
               <div className="mt-2 flex-1 flex gap-5 flex-col md:mx-6">
-                <div className="flex items-center justify-between bg-secondary-1 text-white px-4 py-2 rounded-md">
+                <div className="flex items-center justify-between bg-secondary-1 brightness-110 text-white px-4 py-2 rounded-md">
                   <div className="text-xl font-bold"></div>
                   <div className="flex items-center">
                     <div className="text-4xl font-bold">
@@ -53,7 +53,7 @@ const UserStats = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between bg-secondary-1 text-white px-4 py-2 rounded-md">
+                <div className="flex items-center justify-between bg-secondary-1 brightness-110 text-white px-4 py-2 rounded-md">
                   <div className="flex items-center">
                     <VisibilitySensor onChange={handleVisibility}>
                       <div className="text-4xl font-bold">
@@ -80,7 +80,7 @@ const UserStats = () => {
                     </VisibilitySensor>
                   </div>
                 </div>
-                <div className="flex items-center justify-between bg-secondary-1 text-white px-4 py-2 rounded-md">
+                <div className="flex items-center justify-between bg-secondary-1 brightness-110 text-white px-4 py-2 rounded-md">
                   <div className="text-xl font-bold"></div>
 
                   <div className="flex items-center">

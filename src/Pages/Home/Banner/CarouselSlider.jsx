@@ -26,7 +26,7 @@ const CarouselSlider = () => {
               </h1> */}
             <h1 className="text-3xl mb-4 font-bold leading-none sm:text-5xl">
               <span className="text-white"> WEB</span>
-              <span className="text-secondary-1"> DEVELOPMENT</span>
+              <span className="text-primary-1"> DEVELOPMENT</span>
             </h1>
             <p className="md:mb-5 max-sm:text-sm font-poppins lg:text-lg text-[#ffffffCC] flex flex-col">
               Unleash your creativity with courses in graphic design, covering
@@ -66,7 +66,7 @@ const CarouselSlider = () => {
               </h1> */}
             <h1 className="text-3xl mb-4 font-bold leading-none sm:text-5xl">
               <span className="text-white">GRAPHIC</span>
-              <span className="text-secondary-1"> DESIGN</span>
+              <span className="text-primary-1"> DESIGN</span>
             </h1>
             <p className="md:mb-5 max-sm:text-sm font-poppins lg:text-lg text-[#ffffffCC] flex flex-col">
               Unleash your creativity with courses in graphic design, covering
@@ -106,7 +106,7 @@ const CarouselSlider = () => {
               </h1> */}
             <h1 className="text-3xl mb-4 font-bold leading-none sm:text-5xl">
               <span className="text-white">MOBILE APP</span>
-              <span className="text-secondary-1"> DEVELOPMENT</span>
+              <span className="text-primary-1"> DEVELOPMENT</span>
             </h1>
             <p className="md:mb-5 max-sm:text-sm font-poppins lg:text-lg text-[#ffffffCC] flex flex-col">
               Unleash your creativity with courses in graphic design, covering
@@ -146,7 +146,7 @@ const CarouselSlider = () => {
               </h1> */}
             <h1 className="text-3xl mb-4 font-bold leading-none sm:text-5xl">
               <span className="text-white"> DIGITAL</span>
-              <span className="text-secondary-1"> MARKETING</span>
+              <span className="text-primary-1"> MARKETING</span>
             </h1>
             <p className="md:mb-5 max-sm:text-sm font-poppins lg:text-lg text-[#ffffffCC] flex flex-col">
               Unleash your creativity with courses in graphic design, covering
@@ -186,7 +186,7 @@ const CarouselSlider = () => {
               </h1> */}
             <h1 className="text-3xl mb-4 font-bold leading-none sm:text-5xl">
               <span className="text-white">CYBER</span>
-              <span className="text-secondary-1"> SECURITY</span>
+              <span className="text-primary-1"> SECURITY</span>
             </h1>
             <p className="md:mb-5 max-sm:text-sm font-poppins lg:text-lg text-[#ffffffCC] flex flex-col">
               Unleash your creativity with courses in graphic design, covering
@@ -226,7 +226,7 @@ const CarouselSlider = () => {
               </h1> */}
             <h1 className="text-3xl mb-4 font-bold leading-none sm:text-5xl">
               <span className="text-white">WEB</span>
-              <span className="text-secondary-1"> DESIGN</span>
+              <span className="text-primary-1"> DESIGN</span>
             </h1>
             <p className="md:mb-5 max-sm:text-sm font-poppins lg:text-lg text-[#ffffffCC] flex flex-col">
               Unleash your creativity with courses in graphic design, covering
