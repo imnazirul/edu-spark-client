@@ -69,12 +69,13 @@ const StudentFeedback = () => {
     ],
   };
   return (
-    <div className="slider-container relative mt-8 lg:mt-16">
+    <div className="slider-container l relative mt-8 lg:mt-16 h-[430px]">
       <SectionTitle
         title="STUDENT FEEDBACK"
         subtitle="Rate your experience and provide feedback. Your input helps us improve our services and enhance your learning journey."
       ></SectionTitle>
       <Slider
+        className=" "
         ref={(slider) => {
           sliderRef = slider;
         }}

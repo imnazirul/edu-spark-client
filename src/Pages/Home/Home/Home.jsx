@@ -4,6 +4,8 @@ import StudentFeedback from "../StudentFeedback/StudentFeedback";
 import UserStats from "../UserStats/UserStats";
 import BecomeInstructor from "../BecomeInstructor/BecomeInstructor";
 import EduArticles from "../EduArticles/EduArticles";
+import PopularCategories from "../PopularCategories/PopularCategories";
+import NewsLetter from "../NewsLetter/NewsLetter";
 
 const Home = () => {
   return (
@@ -14,6 +16,8 @@ const Home = () => {
       <BecomeInstructor></BecomeInstructor>
       <EduArticles></EduArticles>
       <StudentFeedback></StudentFeedback>
+      <PopularCategories></PopularCategories>
+      <NewsLetter></NewsLetter>
     </>
   );
 };
