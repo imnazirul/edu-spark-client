@@ -1,8 +1,16 @@
 import { NavLink, Outlet } from "react-router-dom";
 import "./dashboard.css";
 import { Menu } from "@mui/icons-material";
+import useRole from "../CustomHooks/useRole";
 
 const Dashboard = () => {
+  const { role: userRole, isRoleLoading } = useRole();
+  const role = userRole;
+
+  if (isRoleLoading) {
+    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  }
+
   return (
     <div className="font-poppins lg:flex">
       {/* dashboard sidebar */}
@@ -36,14 +44,66 @@ const Dashboard = () => {
           ></label>
 
           <div className="menu  p-4 w-80 min-h-full space-y-8 bg-[url('https://images.pexels.com/photos/5825604/pexels-photo-5825604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-black bg-opacity-40 text-white z-50  bg-bottom bg-cover bg-blend-overlay">
-            <span className="dashboard-item ">
-              <NavLink
-                className="px-4 py-2 text-2xl w-full font-semibold "
-                to="/dashboard/my_enroll_class"
-              >
-                My Enroll Class
-              </NavLink>
-            </span>{" "}
+            {role === "admin" ? (
+              <>
+                <span className="dashboard-item ">
+                  <NavLink
+                    className="px-4 py-2 text-2xl w-full font-semibold "
+                    to="/dashboard/teacher_requests"
+                  >
+                    Teacher Requests
+                  </NavLink>
+                </span>{" "}
+                <span className="dashboard-item ">
+                  <NavLink
+                    className="px-4 py-2 text-2xl w-full font-semibold "
+                    to="/dashboard/users"
+                  >
+                    Users
+                  </NavLink>
+                </span>{" "}
+                <span className="dashboard-item ">
+                  <NavLink
+                    className="px-4 py-2 text-2xl w-full font-semibold "
+                    to="/dashboard/my_enroll_class"
+                  >
+                    All Classes
+                  </NavLink>
+                </span>{" "}
+              </>
+            ) : role === "teacher" ? (
+              <>
+                {" "}
+                <span className="dashboard-item ">
+                  <NavLink
+                    className="px-4 py-2 text-2xl w-full font-semibold "
+                    to="/dashboard/add_class"
+                  >
+                    Add Class
+                  </NavLink>
+                </span>
+                <span className="dashboard-item ">
+                  <NavLink
+                    className="px-4 py-2 text-2xl w-full font-semibold "
+                    to="/dashboard/my_class"
+                  >
+                    My Class
+                  </NavLink>
+                </span>
+              </>
+            ) : (
+              <>
+                {" "}
+                <span className="dashboard-item ">
+                  <NavLink
+                    className="px-4 py-2 text-2xl w-full font-semibold "
+                    to="/dashboard/my_enroll_class"
+                  >
+                    My Enroll Class
+                  </NavLink>
+                </span>{" "}
+              </>
+            )}
             <span className="dashboard-item ">
               <NavLink
                 className="px-4 py-2 text-2xl w-full font-semibold "

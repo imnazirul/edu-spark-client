@@ -6,8 +6,10 @@ import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import toast from "react-hot-toast";
 import useAuth from "../../CustomHooks/useAuth";
+import usePublicMutationPost from "../../CustomHooks/usePublicMutationPost";
 
 const Login = () => {
+  const mutation = usePublicMutationPost("/users");
   const [showPassword, setShowPassword] = useState(false);
   const { signIn, setLoading, signInWithGoogle } = useAuth();
   const [btnText, setBtnText] = useState("Sign In");
@@ -44,7 +46,13 @@ const Login = () => {
     );
 
     signIn(email, password)
-      .then(() => {
+      .then((res) => {
+        const user = {
+          name: res.user?.displayName,
+          email: email,
+          role: "student",
+        };
+        mutation.mutate(user);
         toast.success("Sign In Successful");
         navigate(location?.state ? location.state : "/");
       })
@@ -61,7 +69,14 @@ const Login = () => {
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then(() => {
+      .then((res) => {
+        //create user entry to database
+        const user = {
+          name: res.user?.displayName,
+          email: res.user?.email,
+          role: "student",
+        };
+        mutation.mutate(user);
         toast.success("Sign In Successful");
         navigate(location?.state ? location.state : "/");
       })

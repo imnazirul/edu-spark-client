@@ -7,14 +7,23 @@ import useAuth from "../../CustomHooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 import useAxiosPublic from "../../CustomHooks/useAxiosPublic";
 
+import usePublicMutationPost from "../../CustomHooks/usePublicMutationPost";
+
 const img_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
 
 const Register = () => {
+  const mutation = usePublicMutationPost("/users");
   const [btnText, setBtnText] = useState("Sign Up");
   const [showPassword, setShowPassword] = useState(false);
-  const { createUser, updateUserProfile, setReload, reload, setLoading } =
-    useAuth();
+  const {
+    createUser,
+    updateUserProfile,
+    signInWithGoogle,
+    setReload,
+    reload,
+    setLoading,
+  } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const axiosPublic = useAxiosPublic();
@@ -60,13 +69,16 @@ const Register = () => {
 
     if (res.data.success) {
       const photoURL = res.data.data.display_url;
-      console.log(photoURL);
+      // console.log(photoURL);
 
       createUser(email, password)
         .then(() => {
           updateUserProfile(fullName, photoURL)
             .then(() => {
               //create user entry to the database
+              const user = { name: fullName, email: email, role: "student" };
+
+              mutation.mutate(user);
 
               setReload(!reload);
             })
@@ -89,7 +101,21 @@ const Register = () => {
   };
 
   const handleGoogleSignIn = () => {
-    console.log("google login");
+    signInWithGoogle()
+      .then((res) => {
+        const user = {
+          name: res.user?.displayName,
+          email: res.user?.email,
+          role: "student",
+        };
+        mutation.mutate(user);
+        toast.success("Sign In Successful");
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch(() => {
+        setLoading(false);
+        toast.error("An Unknown Error Occurred!");
+      });
   };
 
   return (
