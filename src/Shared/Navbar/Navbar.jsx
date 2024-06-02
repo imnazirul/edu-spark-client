@@ -1,18 +1,30 @@
 import { Link, NavLink } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import "./Navbar.css";
-
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import Logout from "@mui/icons-material/Logout";
 import { useEffect, useState } from "react";
-
-// import toast from "react-hot-toast";
-// import useAuth from "../../CustomHooks/useAuth";
-// import { Tooltip } from "react-tooltip";
-// import { IoIosArrowDown } from "react-icons/io";
-// import { FaDonate } from "react-icons/fa";
+import useAuth from "../../CustomHooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
-  //   const { user, loading, logOut } = useAuth();
+  const { user, loading, logOut } = useAuth();
   const [theme, setTheme] = useState("light");
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
@@ -46,21 +58,16 @@ const Navbar = () => {
           Teach On EduSpark
         </NavLink>
       </span>
-      <span className="hover:text-secondary-1">
-        <NavLink className="px-4 py-2 rounded-lg " to="/login">
-          Sign In
-        </NavLink>
-      </span>{" "}
     </>
   );
 
-  //   const handleSignOut = () => {
-  //     logOut()
-  //       .then(() => {
-  //         toast.success("Log Out Successfully");
-  //       })
-  //       .catch((err) => console.log(err));
-  //   };
+  const handleSignOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("Log Out Successfully");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="flex justify-center item-center">
@@ -136,16 +143,20 @@ const Navbar = () => {
         </label>
 
         <div className="navbar-end flex md:gap-5 items-center">
-          {/* {loading ? (
+          {loading ? (
             <>
               <span className="loading loading-spinner loading-md"></span>
             </>
           ) : user ? (
-            <div className="flex items-center gap-1">
-              <a>
-                <div
-                  data-tooltip-id="my-tooltip"
-                  data-tooltip-content={user.displayName && user.displayName}
+            <>
+              <Tooltip title="Account settings">
+                <IconButton
+                  onClick={handleClick}
+                  size="small"
+                  sx={{ ml: 2 }}
+                  aria-controls={open ? "account-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
                 >
                   <div
                     tabIndex={0}
@@ -159,29 +170,82 @@ const Navbar = () => {
                       />
                     </div>
                   </div>
-                  <Tooltip
-                    style={{ backgroundColor: "#3d52a0", borderRadius: "10px" }}
-                    className="z-50 "
-                    id="my-tooltip"
-                    place="left"
-                  />
-                </div>
-              </a>
-              <button
-                onClick={handleSignOut}
-                className="max-sm:btn-sm bg-green-1000 btn bg-secondary-1 text-[#FCFCFC] font-bold hover:bg-secondary-1 border-none"
+                </IconButton>
+              </Tooltip>
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    mt: 1.5,
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    "&::before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
+                      zIndex: 0,
+                    },
+                  },
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                Sign Out
-              </button>
-            </div>
-          ) : ( */}
-          <Link
-            to="/login"
-            className="max-sm:btn-sm bg-green-1000 btn bg-primary-1 text-[#FCFCFC] font-bold flex items-center gap-1 hover:bg-primary-1 border-none"
-          >
-            <FiLogIn></FiLogIn>Sign In
-          </Link>
-          {/* )} */}
+                <MenuItem onClick={handleClose}>
+                  <Avatar />
+                  My Profile
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <div className="avatar">
+                    <div className="w-8 mr-1 rounded-full">
+                      <img src={user?.photoURL} />
+                    </div>
+                  </div>{" "}
+                  {user?.displayName}
+                </MenuItem>
+                <Divider />
+                <MenuItem>
+                  <Link to="dashboard" className="flex  items-center">
+                    {" "}
+                    <ListItemIcon>
+                      <DashboardRoundedIcon />{" "}
+                    </ListItemIcon>
+                    Dashboard
+                  </Link>
+                </MenuItem>
+
+                <MenuItem onClick={handleSignOut}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Logout
+                </MenuItem>
+              </Menu>
+            </>
+          ) : (
+            <Link
+              to="/login"
+              className="max-sm:btn-sm bg-green-1000 btn bg-primary-1 text-[#FCFCFC] font-bold flex items-center gap-1 hover:bg-primary-1 border-none"
+            >
+              <FiLogIn></FiLogIn>Sign In
+            </Link>
+          )}
         </div>
       </div>
     </div>
