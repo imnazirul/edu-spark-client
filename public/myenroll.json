@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Public Speaking Mastery",
+    "name": "Linda Thomas",
+    "image": "https://i.ibb.co/jkh9Rs0/android-app-best-practices-1.jpg",
+
+    "_id": "u3v4w5x6y7z8a9b0"
+  },
+  {
+    "id": 1,
+    "title": "Complete Web Development",
+    "name": "John Doe",
+    "image": "https://i.ibb.co/P1XmMpF/pexels-pixabay-270408.jpg",
+
+    "category": "web development",
+    "_id": "c1d2e3f4g5h6i7j8"
+  },
+  {
+    "id": 3,
+    "title": "Graphic Design Masterclass",
+    "name": "Emily Johnson",
+    "image": "https://i.ibb.co/qsTpQCN/Graphic-Design-01-scaled.jpg",
+
+    "_id": "k9l0m1n2o3p4q5r6"
+  }
+]

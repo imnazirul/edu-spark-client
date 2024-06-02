@@ -100,7 +100,7 @@ const TeachOnEdu = () => {
                 </div>
                 <div className="form-control mt-6">
                   <button className="btn bg-primary-1 hover:bg-primary-1 text-lg text-white hover:bg-btn-1">
-                    APPLY NOW
+                    SUBMIT FOR REVIEW
                   </button>
                 </div>
               </form>

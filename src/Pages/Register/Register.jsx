@@ -66,6 +66,8 @@ const Register = () => {
         .then(() => {
           updateUserProfile(fullName, photoURL)
             .then(() => {
+              //create user entry to the database
+
               setReload(!reload);
             })
             .catch((err) => console.log(err));

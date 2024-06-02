@@ -1,10 +1,9 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import "./Navbar.css";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -13,8 +12,10 @@ import Logout from "@mui/icons-material/Logout";
 import { useEffect, useState } from "react";
 import useAuth from "../../CustomHooks/useAuth";
 import toast from "react-hot-toast";
+import { Dashboard } from "@mui/icons-material";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { user, loading, logOut } = useAuth();
   const [theme, setTheme] = useState("light");
   const [anchorEl, setAnchorEl] = useState(null);
@@ -149,7 +150,7 @@ const Navbar = () => {
             </>
           ) : user ? (
             <>
-              <Tooltip title="Account settings">
+              <Tooltip title="User Account">
                 <IconButton
                   onClick={handleClick}
                   size="small"
@@ -207,11 +208,11 @@ const Navbar = () => {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                <MenuItem onClick={handleClose}>
+                <MenuItem>
                   <Avatar />
                   My Profile
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem>
                   <div className="avatar">
                     <div className="w-8 mr-1 rounded-full">
                       <img src={user?.photoURL} />
@@ -220,14 +221,12 @@ const Navbar = () => {
                   {user?.displayName}
                 </MenuItem>
                 <Divider />
-                <MenuItem>
-                  <Link to="dashboard" className="flex  items-center">
-                    {" "}
-                    <ListItemIcon>
-                      <DashboardRoundedIcon />{" "}
-                    </ListItemIcon>
-                    Dashboard
-                  </Link>
+                <MenuItem onClick={() => navigate("/dashboard/profile")}>
+                  {" "}
+                  <ListItemIcon>
+                    <Dashboard />{" "}
+                  </ListItemIcon>
+                  Dashboard
                 </MenuItem>
 
                 <MenuItem onClick={handleSignOut}>

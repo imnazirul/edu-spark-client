@@ -7,6 +7,9 @@ import TeachOnEdu from "../Pages/TeachOnEdu/TeachOnEdu";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import ClassDetails from "../Pages/ClassDetails/ClassDetails";
+import Dashboard from "../Layout/Dashboard";
+import MyEnrollClass from "../Pages/Dashboard/StudentDashboard/MyEnrollClass";
+import Profile from "../Pages/Dashboard/Profile/Profile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +39,20 @@ const router = createBrowserRouter([
       {
         path: "/class_details/:id",
         element: <ClassDetails></ClassDetails>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "my_enroll_class",
+        element: <MyEnrollClass></MyEnrollClass>,
+      },
+      {
+        path: "profile",
+        element: <Profile></Profile>,
       },
     ],
   },

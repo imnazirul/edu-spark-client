@@ -1,0 +1,10 @@
+.active {
+  color: #1957e0;
+  background-color: #1958e038;
+  opacity: 30;
+}
+
+.dashboard-item {
+  border-left: 5px #1957e0 solid;
+  padding: 8px 0 8px 0;
+}
