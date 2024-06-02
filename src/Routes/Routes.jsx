@@ -6,6 +6,7 @@ import AllClasses from "../Pages/AllClasses/AllClasses";
 import TeachOnEdu from "../Pages/TeachOnEdu/TeachOnEdu";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import ClassDetails from "../Pages/ClassDetails/ClassDetails";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/class_details/:id",
+        element: <ClassDetails></ClassDetails>,
       },
     ],
   },
