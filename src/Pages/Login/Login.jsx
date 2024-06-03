@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -13,7 +13,10 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { signIn, setLoading, signInWithGoogle } = useAuth();
   const [btnText, setBtnText] = useState("Sign In");
+  const location = useLocation();
   const navigate = useNavigate();
+  const from = location?.state?.from?.pathname || "/";
+
   const {
     register,
     handleSubmit,
@@ -27,7 +30,7 @@ const Login = () => {
       <div role="status" className="flex gap-1 items-center">
         <svg
           aria-hidden="true"
-          className="w-8 h-8 text-gray-200 animate-spin  fill-blue-600"
+          className="w-7 h-7 text-gray-200 animate-spin  fill-blue-600"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -51,10 +54,11 @@ const Login = () => {
           name: res.user?.displayName,
           email: email,
           role: "student",
+          photoURL: res.user?.photoURL,
         };
         mutation.mutate(user);
         toast.success("Sign In Successful");
-        navigate(location?.state ? location.state : "/");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         setBtnText("Error");
@@ -75,10 +79,11 @@ const Login = () => {
           name: res.user?.displayName,
           email: res.user?.email,
           role: "student",
+          photoURL: res.user?.photoURL,
         };
         mutation.mutate(user);
         toast.success("Sign In Successful");
-        navigate(location?.state ? location.state : "/");
+        navigate(from, { replace: true });
       })
       .catch(() => {
         setLoading(false);

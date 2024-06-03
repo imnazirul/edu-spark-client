@@ -15,6 +15,7 @@ import Users from "../Pages/Dashboard/AdminDashboard/Users";
 import AllClassesAdmin from "../Pages/Dashboard/AdminDashboard/AllClassesAdmin";
 import AddClass from "../Pages/Dashboard/TeacherDashboard/AddClass";
 import MyClass from "../Pages/Dashboard/TeacherDashboard/MyClass";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,7 +32,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/techOnEduSpark",
-        element: <TeachOnEdu></TeachOnEdu>,
+        element: (
+          <PrivateRoute>
+            <TeachOnEdu></TeachOnEdu>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -43,13 +48,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/class_details/:id",
-        element: <ClassDetails></ClassDetails>,
+        element: (
+          <PrivateRoute>
+            <ClassDetails></ClassDetails>
+          </PrivateRoute>
+        ),
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       //admin routes
       {

@@ -1,7 +1,6 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import "./Navbar.css";
-import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -146,7 +145,7 @@ const Navbar = () => {
         <div className="navbar-end flex md:gap-5 items-center">
           {loading ? (
             <>
-              <span className="loading loading-spinner loading-md"></span>
+              <span className="loading loading-spinner bg-primary-1 loading-md"></span>
             </>
           ) : user ? (
             <>
@@ -164,7 +163,7 @@ const Navbar = () => {
                     role="button"
                     className="btn btn-ghost btn-circle avatar"
                   >
-                    <div className="w-10 rounded-full">
+                    <div className="w-10 md:w-12 rounded-full">
                       <img
                         alt="Tailwind CSS Navbar component"
                         src={user?.photoURL}
@@ -208,10 +207,6 @@ const Navbar = () => {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                <MenuItem>
-                  <Avatar />
-                  My Profile
-                </MenuItem>
                 <MenuItem>
                   <div className="avatar">
                     <div className="w-8 mr-1 rounded-full">

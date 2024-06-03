@@ -1,32 +1,62 @@
 [
   {
-    "img": "https://i.ibb.co/Dg3CC4f/pexels-pixabay-38544.jpg",
-    "header": "Mobile App Development",
-    "description": "Learn to create engaging mobile apps for Android and iOS using Java, Kotlin, Swift, and frameworks like Flutter and React Native."
+    "name": "MD Nazirul Islam",
+    "email": "nazirul.me04@gmail.com",
+    "role": "admin",
+    "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocJEotBJDWeDdO_PwcIx0eyuWc-146RRYw5gRNqf6W6btEaZtw=s96-c"
   },
   {
-    "img": "https://i.ibb.co/Dg3CC4f/pexels-pixabay-38544.jpg",
-    "header": "UI/UX Design",
-    "description": "Master the art of creating user-friendly interfaces and enhancing user experiences with courses on wireframing, prototyping, and design tools."
+    "name": "Chris Hemsworth",
+    "email": "chris.hemsworth@gmail.com",
+    "role": "teacher",
+    "photoURL": "https://i.ibb.co/GPjtvZW/be21bcfc78ac481b5609ae80fe6243992d-chrishemsworth-1x-rsquare-w1400.webp"
   },
   {
-    "img": "https://i.ibb.co/Dg3CC4f/pexels-pixabay-38544.jpg",
-    "header": "Web Development",
-    "description": "Build dynamic websites and web applications with HTML, CSS, JavaScript, and frameworks like React, Angular, and Vue.js."
+    "name": "Chris Hemsworth",
+    "email": "c.hemsworthe7@gmail.com",
+    "role": "student",
+    "photoURL": "https://i.ibb.co/LxnwhqW/wp11500896-dark-windows-11-wallpapers-copy-9562x5376.jpg"
   },
   {
-    "img": "https://i.ibb.co/Dg3CC4f/pexels-pixabay-38544.jpg",
-    "header": "Cybersecurity",
-    "description": "Protect data and networks by learning ethical hacking, information security, network defense strategies, and certifications like CISSP and CEH."
+    "name": "Chris Hemsworth",
+    "email": "c.hemsworthe74@gmail.com",
+    "role": "student",
+    "photoURL": "https://i.ibb.co/GPjtvZW/be21bcfc78ac481b5609ae80fe6243992d-chrishemsworth-1x-rsquare-w1400.webp"
   },
   {
-    "img": "https://i.ibb.co/Dg3CC4f/pexels-pixabay-38544.jpg",
-    "header": "Digital Marketing",
-    "description": "Boost your marketing skills with SEO, SEM, content marketing, social media strategies, and analytics to drive online business growth."
+    "name": "Chris Hemsworth",
+    "email": "c.hemsworthe7grfd@gmail.com",
+    "role": "student",
+    "photoURL": "https://i.ibb.co/GPjtvZW/be21bcfc78ac481b5609ae80fe6243992d-chrishemsworth-1x-rsquare-w1400.webp"
   },
   {
-    "img": "https://i.ibb.co/Dg3CC4f/pexels-pixabay-38544.jpg",
-    "header": "Graphic Design",
-    "description": "Unleash your creativity with courses in graphic design, covering essential tools like Photoshop, Illustrator, and InDesign."
+    "name": "MD Nazirul Islam",
+    "email": "nazirul.me04@gmail.com",
+    "role": "admin",
+    "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocJEotBJDWeDdO_PwcIx0eyuWc-146RRYw5gRNqf6W6btEaZtw=s96-c"
+  },
+  {
+    "name": "Chris Hemsworth",
+    "email": "chris.hemsworth@gmail.com",
+    "role": "teacher",
+    "photoURL": "https://i.ibb.co/GPjtvZW/be21bcfc78ac481b5609ae80fe6243992d-chrishemsworth-1x-rsquare-w1400.webp"
+  },
+  {
+    "name": "Chris Hemsworth",
+    "email": "c.hemsworthe7@gmail.com",
+    "role": "student",
+    "photoURL": "https://i.ibb.co/LxnwhqW/wp11500896-dark-windows-11-wallpapers-copy-9562x5376.jpg"
+  },
+  {
+    "name": "Chris Hemsworth",
+    "email": "c.hemsworthe74@gmail.com",
+    "role": "student",
+    "photoURL": "https://i.ibb.co/GPjtvZW/be21bcfc78ac481b5609ae80fe6243992d-chrishemsworth-1x-rsquare-w1400.webp"
+  },
+  {
+    "name": "Chris Hemsworth",
+    "email": "c.hemsworthe7grfd@gmail.com",
+    "role": "student",
+    "photoURL": "https://i.ibb.co/GPjtvZW/be21bcfc78ac481b5609ae80fe6243992d-chrishemsworth-1x-rsquare-w1400.webp"
   }
 ]

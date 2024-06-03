@@ -76,7 +76,12 @@ const Register = () => {
           updateUserProfile(fullName, photoURL)
             .then(() => {
               //create user entry to the database
-              const user = { name: fullName, email: email, role: "student" };
+              const user = {
+                name: fullName,
+                email: email,
+                role: "student",
+                photoURL: photoURL,
+              };
 
               mutation.mutate(user);
 
@@ -107,6 +112,7 @@ const Register = () => {
           name: res.user?.displayName,
           email: res.user?.email,
           role: "student",
+          photoURL: res.user?.photoURL,
         };
         mutation.mutate(user);
         toast.success("Sign In Successful");

@@ -1,133 +1,235 @@
 import { NavLink, Outlet } from "react-router-dom";
 import "./dashboard.css";
-import { Menu } from "@mui/icons-material";
 import useRole from "../CustomHooks/useRole";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Drawer from "@material-ui/core/Drawer";
+import VideoSettingsRoundedIcon from "@mui/icons-material/VideoSettingsRounded";
+import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import OndemandVideoRoundedIcon from "@mui/icons-material/OndemandVideoRounded";
+import RequestPageRoundedIcon from "@mui/icons-material/RequestPageRounded";
+import Typography from "@material-ui/core/Typography";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import { useState } from "react";
+
+const drawerWidth = 300;
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    background: "#1957E0",
+  },
+  drawer: {
+    flexShrink: 0,
+    width: drawerWidth,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    background: "#F2F2F2",
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+  toolbar: {
+    ...theme.mixins.toolbar,
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.black,
+    padding: theme.spacing(3),
+  },
+}));
 
 const Dashboard = () => {
+  const classes = useStyles();
+  const theme = useTheme();
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
   const { role: userRole, isRoleLoading } = useRole();
   const role = userRole;
-
+  const [open, setOpen] = useState(false);
   if (isRoleLoading) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
   }
 
+  const toggleDrawer = (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setOpen(!open);
+  };
+
   return (
-    <div className="font-poppins lg:flex">
-      {/* dashboard sidebar */}
-      <div className="lg:max-w-80 h-full max-h-screen overflow-hidden text-white lg:drawer-open">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-
-        {/* Page content here */}
-        <div className="w-full bg-primary-1 flex justify-between items-center">
-          <label
-            htmlFor="my-drawer-2"
-            className="text-white drawer-button lg:hidden ml-2 "
+    <div className={`${classes.root} font-poppins`}>
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={toggleDrawer}
+            className={classes.menuButton}
           >
-            <Menu style={{ width: "50px", height: "50px" }}></Menu>
-          </label>
-
-          <div className="text-2xl flex items-center px-5 py-2 text-center font-semibold">
-            <img
-              className="w-10"
-              src="https://i.ibb.co/cyns15p/images-removebg-preview-1.png"
-              alt=""
-            />
-            <h1>Dashboard</h1>
-          </div>
-        </div>
-
-        <div className="drawer-side">
-          <label
-            htmlFor="my-drawer-2"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-
-          <div className="menu  p-4 w-80 min-h-full space-y-8 bg-[url('https://images.pexels.com/photos/5825604/pexels-photo-5825604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-black bg-opacity-40 text-white z-50  bg-bottom bg-cover bg-blend-overlay">
-            {role === "admin" ? (
-              <>
+            <MenuRoundedIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            <div className="text-xl uppercase gap-2 flex items-center px-5 py-2 text-center font-semibold">
+              <img
+                className="w-10"
+                src="https://i.ibb.co/cyns15p/images-removebg-preview-1.png"
+                alt=""
+              />
+              <h1>Dashboard</h1>
+            </div>
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        className={`${classes.drawer}`}
+        variant={isMdUp ? "permanent" : "temporary"}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor="left"
+        open={open}
+        onClose={toggleDrawer}
+      >
+        <div className={classes.toolbar} />
+        <Divider />
+        <List className="space-y-3">
+          {role === "admin" ? (
+            <>
+              <ListItem>
                 <span className="dashboard-item ">
                   <NavLink
-                    className="px-4 py-2 text-2xl w-full font-semibold "
+                    className="px-4 py-2 pb-[10px] text-xl uppercase w-full font-semibold "
                     to="/dashboard/teacher_requests"
                   >
+                    <RequestPageRoundedIcon
+                      style={{ paddingBottom: "4px" }}
+                    ></RequestPageRoundedIcon>{" "}
                     Teacher Requests
                   </NavLink>
-                </span>{" "}
+                </span>
+              </ListItem>
+              <ListItem>
                 <span className="dashboard-item ">
                   <NavLink
-                    className="px-4 py-2 text-2xl w-full font-semibold "
+                    className="px-4 py-2 pb-[10px] text-xl uppercase w-full font-semibold "
                     to="/dashboard/users"
                   >
+                    <GroupsRoundedIcon
+                      style={{ paddingBottom: "4px" }}
+                    ></GroupsRoundedIcon>{" "}
                     Users
                   </NavLink>
-                </span>{" "}
+                </span>
+              </ListItem>
+              <ListItem>
                 <span className="dashboard-item ">
                   <NavLink
-                    className="px-4 py-2 text-2xl w-full font-semibold "
-                    to="/dashboard/my_enroll_class"
+                    className="px-4 py-2 pb-[10px] text-xl w-full font-semibold "
+                    to="/dashboard/all_classes"
                   >
-                    All Classes
+                    <VideoSettingsRoundedIcon
+                      style={{ paddingBottom: "4px" }}
+                    ></VideoSettingsRoundedIcon>{" "}
+                    ALL CLASSES
                   </NavLink>
-                </span>{" "}
-              </>
-            ) : role === "teacher" ? (
-              <>
-                {" "}
+                </span>
+              </ListItem>
+            </>
+          ) : role === "teacher" ? (
+            <>
+              <ListItem>
                 <span className="dashboard-item ">
                   <NavLink
-                    className="px-4 py-2 text-2xl w-full font-semibold "
+                    className="px-4 py-2 text-xl uppercase w-full font-semibold "
                     to="/dashboard/add_class"
                   >
                     Add Class
                   </NavLink>
                 </span>
+              </ListItem>
+              <ListItem>
                 <span className="dashboard-item ">
                   <NavLink
-                    className="px-4 py-2 text-2xl w-full font-semibold "
+                    className="px-4 py-2 text-xl uppercase w-full font-semibold "
                     to="/dashboard/my_class"
                   >
                     My Class
                   </NavLink>
                 </span>
-              </>
-            ) : (
-              <>
-                {" "}
-                <span className="dashboard-item ">
-                  <NavLink
-                    className="px-4 py-2 text-2xl w-full font-semibold "
-                    to="/dashboard/my_enroll_class"
-                  >
-                    My Enroll Class
-                  </NavLink>
-                </span>{" "}
-              </>
-            )}
+              </ListItem>
+            </>
+          ) : (
+            <ListItem>
+              <span className="dashboard-item ">
+                <NavLink
+                  className="px-4 py-2 pb-[10px] text-xl uppercase w-full font-semibold "
+                  to="/dashboard/my_enroll_class"
+                >
+                  <OndemandVideoRoundedIcon
+                    style={{ paddingBottom: "4px" }}
+                  ></OndemandVideoRoundedIcon>{" "}
+                  My Enroll Class
+                </NavLink>
+              </span>{" "}
+            </ListItem>
+          )}
+          <ListItem>
+            {" "}
             <span className="dashboard-item ">
               <NavLink
-                className="px-4 py-2 text-2xl w-full font-semibold "
+                className="px-4 py-2 pb-[10px]  rounded-none text-xl uppercase w-full font-semibold "
                 to="/dashboard/profile"
               >
+                <AccountCircleRoundedIcon
+                  style={{ paddingBottom: "4px" }}
+                ></AccountCircleRoundedIcon>{" "}
                 My Profile
               </NavLink>
             </span>{" "}
-            <div className="divider"></div>
+          </ListItem>
+        </List>
+
+        <Divider />
+        <List>
+          <ListItem>
             <span className="dashboard-item ">
               <NavLink
-                className="px-4 py-2 text-2xl w-full font-semibold "
+                className="px-4  flex items-center gap-1  text-xl uppercase w-full font-semibold "
                 to="/"
               >
-                Home
+                <HomeRoundedIcon></HomeRoundedIcon> Home
               </NavLink>
             </span>
-          </div>
-        </div>
-      </div>
-      <div className="flex-1 max-h-screen overflow-y-auto px-5">
-        {" "}
+          </ListItem>
+        </List>
+      </Drawer>
+      <main className={`${classes.content} mt-16 font-poppins overflow-x-auto`}>
         <Outlet></Outlet>
-      </div>
+      </main>
     </div>
   );
 };

@@ -27,7 +27,7 @@ const MyEnrollClass = () => {
             />
           </div>
           <div className="flex flex-col max-sm:items-center px-3">
-            <h2 className="mb-2 text-2xl bg-gradient-to-r inline-block text-transparent bg-clip-text from-blue-300 to-purple-500 font-bold tracking-tight max-sm:text-center">
+            <h2 className="mb-2 text-2xl bg-gradient-to-r inline-block text-transparent bg-clip-text from-gray-700 to-gray-900 font-bold tracking-tight max-sm:text-center">
               {enrolledClass.title}
             </h2>
             <p className="mb-3 font-normal text-white  ">

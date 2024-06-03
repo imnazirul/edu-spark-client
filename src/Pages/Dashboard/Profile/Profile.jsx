@@ -25,15 +25,15 @@ const Profile = () => {
   return (
     <>
       <div className="w-full  px-4 mx-auto">
-        <div className="relative flex flex-col min-w-0 break-words bg-base-100 w-full mb-6 shadow-xl rounded-lg mt-16">
+        <div className="relative flex flex-col min-w-0 break-words bg-base-100 w-full mb-6  rounded-lg ">
           <div className="px-6">
             <div className="flex flex-wrap justify-center">
               <div className="w-full px-4 flex justify-center">
-                <div className="relative">
+                <div className="relative rounded-full">
                   <img
                     alt="..."
                     src={user?.photoURL}
-                    className="shadow-xl w-28 rounded-full h-auto align-middle border-4 border-primary-1  "
+                    className="shadow-xl w-28 rounded-full object-cover h-28 align-middle border-4 border-primary-1  "
                   />
                 </div>
               </div>

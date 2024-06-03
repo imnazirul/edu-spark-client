@@ -6,7 +6,8 @@
     "price": "$49",
     "short_description": "Learn the basics of Python programming, including syntax, variables, and simple data structures for beginners.",
     "total_enrolment": 150,
-    "_id": "a1b2c3d4e5f6g7h8"
+    "status": "approved",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
     "title": "Mastering Data Science",
@@ -15,7 +16,9 @@
     "price": "$99",
     "short_description": "Advanced course on data science techniques and tools, covering machine learning, data visualization, and big data analytics.",
     "total_enrolment": 200,
-    "_id": "i9j0k1l2m3n4o5p6"
+
+    "status": "rejected",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
     "title": "Web Development Bootcamp",
@@ -24,7 +27,9 @@
     "price": "$75",
     "short_description": "Comprehensive guide to becoming a full-stack web developer. Learn HTML, CSS, JavaScript, and server-side technologies.",
     "total_enrolment": 180,
-    "_id": "q7r8s9t0u1v2w3x4"
+
+    "status": "pending",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
     "title": "Graphic Design Fundamentals",
@@ -33,7 +38,9 @@
     "price": "$65",
     "short_description": "Learn the principles and tools of graphic design. Explore typography, color theory, and digital illustration techniques.",
     "total_enrolment": 120,
-    "_id": "y5z6a7b8c9d0e1f2"
+
+    "status": "approved",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
     "title": "Digital Marketing Essentials",
@@ -42,7 +49,9 @@
     "price": "$85",
     "short_description": "Strategies and techniques for effective digital marketing. Learn SEO, content marketing, and social media optimization.",
     "total_enrolment": 210,
-    "_id": "g3h4i5j6k7l8m9n0"
+
+    "status": "rejected",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
     "title": "Photography for Beginners",
@@ -51,7 +60,9 @@
     "price": "$55",
     "short_description": "Essential skills and tips for aspiring photographers. Understand camera settings, composition, and post-processing techniques.",
     "total_enrolment": 140,
-    "_id": "o1p2q3r4s5t6u7v8"
+
+    "status": "approved",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
     "title": "Creative Writing Workshop",
@@ -60,7 +71,9 @@
     "price": "$45",
     "short_description": "Improve your writing skills with hands-on exercises. Explore storytelling, character development, and various writing styles.",
     "total_enrolment": 130,
-    "_id": "w9x0y1z2a3b4c5d6"
+
+    "status": "pending",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
     "title": "Yoga for Beginners",
@@ -69,7 +82,9 @@
     "price": "$40",
     "short_description": "Introductory yoga classes for beginners. Learn basic poses, breathing techniques, and relaxation methods for wellness.",
     "total_enrolment": 160,
-    "_id": "e7f8g9h0i1j2k3l4"
+
+    "status": "rejected",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
     "title": "Financial Planning 101",
@@ -78,7 +93,9 @@
     "price": "$70",
     "short_description": "Basic concepts and strategies for personal finance management. Understand budgeting, saving, and investment principles.",
     "total_enrolment": 190,
-    "_id": "m5n6o7p8q9r0s1t2"
+
+    "status": "approved",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
     "title": "Public Speaking Mastery",
@@ -87,7 +104,9 @@
     "price": "$60",
     "short_description": "Enhance your public speaking skills with practical tips. Learn speech preparation, delivery techniques, and audience engagement.",
     "total_enrolment": 170,
-    "_id": "u3v4w5x6y7z8a9b0"
+
+    "status": "approved",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
     "id": 1,
@@ -98,61 +117,130 @@
     "short_description": "Learn full stack web development from scratch. HTML, CSS, JavaScript, Node.js, databases, and deployment techniques.",
     "enrolment": 1200,
     "category": "web development",
-    "_id": "c1d2e3f4g5h6i7j8"
+
+    "status": "approved",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
-    "id": 3,
-    "title": "Graphic Design Masterclass",
-    "name": "Emily Johnson",
-    "image": "https://i.ibb.co/qsTpQCN/Graphic-Design-01-scaled.jpg",
-    "price": 179.99,
-    "short_description": "Become a professional graphic designer. Learn Photoshop, Illustrator, InDesign, branding, and portfolio creation.",
-    "enrolment": 950,
-    "category": "graphic design",
-    "_id": "k9l0m1n2o3p4q5r6"
-  },
-  {
-    "id": 4,
-    "title": "iOS App Development with Swift",
-    "name": "Michael Brown",
-    "image": "https://i.ibb.co/HKB7ZV0/e91a4659d80f9de0294d1fc4d9c78b23a4e93146-1456x816.webp",
-    "price": 199.99,
-    "short_description": "Build amazing iOS apps with Swift. From beginner to advanced concepts, including UIKit and SwiftUI frameworks.",
-    "enrolment": 1100,
-    "category": "mobile app development",
-    "_id": "s7t8u9v0w1x2y3z4"
-  },
-  {
-    "id": 5,
-    "title": "Android App Development for Beginners",
-    "name": "David Wilson",
+    "title": "Introduction to Python",
+    "name": "John Doe",
     "image": "https://i.ibb.co/jkh9Rs0/android-app-best-practices-1.jpg",
-    "price": 169.99,
-    "short_description": "Start building Android apps with Kotlin. No prior programming experience required. Learn from basics to deployment.",
-    "enrolment": 780,
-    "category": "mobile app development",
-    "_id": "a5b6c7d8e9f0g1h2"
+    "price": "$49",
+    "short_description": "Learn the basics of Python programming, including syntax, variables, and simple data structures for beginners.",
+    "total_enrolment": 150,
+
+    "status": "approved",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
-    "id": 6,
-    "title": "Digital Marketing Complete Course",
+    "title": "Mastering Data Science",
+    "name": "Jane Smith",
+    "image": "https://i.ibb.co/jkh9Rs0/android-app-best-practices-1.jpg",
+    "price": "$99",
+    "short_description": "Advanced course on data science techniques and tools, covering machine learning, data visualization, and big data analytics.",
+    "total_enrolment": 200,
+
+    "status": "rejected",
+    "email": "chris.hemsworth@gmail.com"
+  },
+  {
+    "title": "Web Development Bootcamp",
+    "name": "Michael Brown",
+    "image": "https://i.ibb.co/jkh9Rs0/android-app-best-practices-1.jpg",
+    "price": "$75",
+    "short_description": "Comprehensive guide to becoming a full-stack web developer. Learn HTML, CSS, JavaScript, and server-side technologies.",
+    "total_enrolment": 180,
+
+    "status": "pending",
+    "email": "chris.hemsworth@gmail.com"
+  },
+  {
+    "title": "Graphic Design Fundamentals",
+    "name": "Emily Johnson",
+    "image": "https://i.ibb.co/jkh9Rs0/android-app-best-practices-1.jpg",
+    "price": "$65",
+    "short_description": "Learn the principles and tools of graphic design. Explore typography, color theory, and digital illustration techniques.",
+    "total_enrolment": 120,
+
+    "status": "approved",
+    "email": "chris.hemsworth@gmail.com"
+  },
+  {
+    "title": "Digital Marketing Essentials",
+    "name": "Robert Lee",
+    "image": "https://i.ibb.co/jkh9Rs0/android-app-best-practices-1.jpg",
+    "price": "$85",
+    "short_description": "Strategies and techniques for effective digital marketing. Learn SEO, content marketing, and social media optimization.",
+    "total_enrolment": 210,
+
+    "status": "rejected",
+    "email": "chris.hemsworth@gmail.com"
+  },
+  {
+    "title": "Photography for Beginners",
     "name": "Sarah Davis",
-    "image": "https://i.ibb.co/Tm0HqVr/Blau-und-Rot-Volkstumlich-Weihnachtsgruse-Veranstaltungen-und-besonderes-Interesse-Prasentation-1-19.png",
-    "price": 189.99,
-    "short_description": "Master digital marketing. Learn SEO, social media marketing, email marketing, content creation, and analytics tools.",
-    "enrolment": 1400,
-    "category": "digital marketing",
-    "_id": "i3j4k5l6m7n8o9p0"
+    "image": "https://i.ibb.co/jkh9Rs0/android-app-best-practices-1.jpg",
+    "price": "$55",
+    "short_description": "Essential skills and tips for aspiring photographers. Understand camera settings, composition, and post-processing techniques.",
+    "total_enrolment": 140,
+
+    "status": "approved",
+    "email": "chris.hemsworth@gmail.com"
   },
   {
-    "id": 7,
-    "title": "UX/UI Design Fundamentals",
-    "name": "Chris Martinez",
-    "image": "https://i.ibb.co/3Tb7mLW/Is-UI-UX-Design-an-Art-or-Science.jpg",
-    "price": 159.99,
-    "short_description": "Understand the basics of UX/UI design. Create user-friendly and aesthetically pleasing interfaces. Learn prototyping and testing.",
-    "enrolment": 900,
-    "category": "web design",
-    "_id": "q1r2s3t4u5v6w7x8"
+    "title": "Creative Writing Workshop",
+    "name": "James Wilson",
+    "image": "https://i.ibb.co/jkh9Rs0/android-app-best-practices-1.jpg",
+    "price": "$45",
+    "short_description": "Improve your writing skills with hands-on exercises. Explore storytelling, character development, and various writing styles.",
+    "total_enrolment": 130,
+
+    "status": "pending",
+    "email": "chris.hemsworth@gmail.com"
+  },
+  {
+    "title": "Yoga for Beginners",
+    "name": "Patricia Martinez",
+    "image": "https://i.ibb.co/jkh9Rs0/android-app-best-practices-1.jpg",
+    "price": "$40",
+    "short_description": "Introductory yoga classes for beginners. Learn basic poses, breathing techniques, and relaxation methods for wellness.",
+    "total_enrolment": 160,
+
+    "status": "rejected",
+    "email": "chris.hemsworth@gmail.com"
+  },
+  {
+    "title": "Financial Planning 101",
+    "name": "David Anderson",
+    "image": "https://i.ibb.co/jkh9Rs0/android-app-best-practices-1.jpg",
+    "price": "$70",
+    "short_description": "Basic concepts and strategies for personal finance management. Understand budgeting, saving, and investment principles.",
+    "total_enrolment": 190,
+
+    "status": "approved",
+    "email": "chris.hemsworth@gmail.com"
+  },
+  {
+    "title": "Public Speaking Mastery",
+    "name": "Linda Thomas",
+    "image": "https://i.ibb.co/jkh9Rs0/android-app-best-practices-1.jpg",
+    "price": "$60",
+    "short_description": "Enhance your public speaking skills with practical tips. Learn speech preparation, delivery techniques, and audience engagement.",
+    "total_enrolment": 170,
+
+    "status": "approved",
+    "email": "chris.hemsworth@gmail.com"
+  },
+  {
+    "title": "Complete Web Development",
+    "name": "John Doe",
+    "image": "https://i.ibb.co/P1XmMpF/pexels-pixabay-270408.jpg",
+    "price": 199.99,
+    "short_description": "Learn full stack web development from scratch. HTML, CSS, JavaScript, Node.js, databases, and deployment techniques.",
+    "enrolment": 1200,
+    "category": "web development",
+
+    "status": "approved",
+    "email": "chris.hemsworth@gmail.com"
   }
 ]

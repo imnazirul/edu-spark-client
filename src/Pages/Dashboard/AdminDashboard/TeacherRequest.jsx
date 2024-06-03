@@ -1,5 +1,5 @@
 const TeacherRequest = () => {
-  return <div>teacher request</div>;
+  return <div className="">teacher request</div>;
 };
 
 export default TeacherRequest;
