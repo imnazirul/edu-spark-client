@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
@@ -30,6 +31,31 @@ const Users = () => {
     setQuery(!query);
   };
   // console.log(searchText);
+
+  const handleMakeAdmin = (email, name) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do You Want to Make this Person Admin?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Make Admin",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.patch(`/users/${email}`);
+
+        if (res.data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            title: "Success!",
+            text: `${name} is Admin Now`,
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
 
   if (isPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
@@ -113,11 +139,14 @@ const Users = () => {
 
                   <th>
                     {user?.role === "admin" ? (
-                      <button className="btn bg-secondary-1 text-white btn-sm">
+                      <button className="rounded-3xl bg-opacity-20 bg-secondary-1  text-secondary-1  btn-sm">
                         Admin
                       </button>
                     ) : (
-                      <button className="btn bg-primary-1 text-white btn-sm">
+                      <button
+                        onClick={() => handleMakeAdmin(user?.email, user?.name)}
+                        className="btn bg-primary-1 text-white btn-sm"
+                      >
                         Make Admin
                       </button>
                     )}

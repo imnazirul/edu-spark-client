@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const TeacherRequest = () => {
   const axiosSecure = useAxiosSecure();
@@ -7,7 +8,8 @@ const TeacherRequest = () => {
   const {
     data: teacherRequests = [],
     isPending,
-    isError,
+    refetch,
+    // isError,
   } = useQuery({
     queryKey: ["teachersRequest"],
     queryFn: async () => {
@@ -16,11 +18,57 @@ const TeacherRequest = () => {
     },
   });
 
-  const handleReqApprove = (id) => {
-    console.log("approve", id);
+  const handleReqApprove = (id, name) => {
+    const info = { status: "approved" };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Approve Teacher",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.patch(`/teacher_requests/${id}`, info);
+        console.log(res);
+        if (res.data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Approved!",
+            text: `${name} is Now a Teacher.`,
+            icon: "success",
+          });
+        }
+      }
+    });
   };
-  const handleReqReject = (id) => {
-    console.log("reject", id);
+
+  const handleReqReject = (id, name) => {
+    // TODO: CHANGE USER ROLE TO TEACHER
+    const info = { status: "rejected" };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Reject Teacher",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.patch(`/teacher_requests/${id}`, info);
+        console.log(res);
+        if (res.data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Rejected!",
+            text: `${name} got Rejected.`,
+            icon: "success",
+          });
+        }
+      }
+    });
   };
 
   if (isPending) {
@@ -30,9 +78,9 @@ const TeacherRequest = () => {
   return (
     <div>
       <div className="overflow-x-auto">
-        <table className="table text-center">
+        <table className="table text-center ">
           {/* head */}
-          <thead>
+          <thead className="bg-pink-600 text-white">
             <tr>
               <th>IMAGE </th>
               <th>NAME</th>
@@ -68,7 +116,7 @@ const TeacherRequest = () => {
                       request.status === "approved"
                         ? "text-green-500 bg-green-500"
                         : request.status === "rejected"
-                        ? "text-green-500 bg-green-500"
+                        ? "text-red-500 bg-red-500"
                         : "text-orange-500 bg-orange-500"
                     } bg-opacity-15 rounded-3xl px-3 py-1`}
                   >
@@ -78,13 +126,19 @@ const TeacherRequest = () => {
                 <td>
                   <div className="flex gap-1 items-center">
                     <button
-                      onClick={handleReqApprove}
+                      onClick={() =>
+                        handleReqApprove(request?._id, request?.name)
+                      }
+                      disabled={request?.status !== "pending"}
                       className="btn mr-1 bg-green-500 text-white btn-xs"
                     >
                       Approve
                     </button>
                     <button
-                      onClick={handleReqReject}
+                      onClick={() =>
+                        handleReqReject(request?._id, request?.name)
+                      }
+                      disabled={request?.status !== "pending"}
                       className="btn bg-red-500 text-white btn-xs"
                     >
                       Reject

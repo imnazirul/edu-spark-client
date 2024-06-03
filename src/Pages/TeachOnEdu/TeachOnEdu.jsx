@@ -26,6 +26,7 @@ const TeachOnEdu = () => {
     },
     onSuccess: (res) => {
       if (res.insertedId) {
+        refetch();
         Swal.fire({
           title: "Submitted Successfully!",
           text: "Please Wait You Got Any Response",
@@ -36,7 +37,11 @@ const TeachOnEdu = () => {
   });
 
   // check if his any application already in Pending
-  const { data: applications = [], isPending } = useQuery({
+  const {
+    data: applications = [],
+    isPending,
+    refetch,
+  } = useQuery({
     queryKey: ["applications"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/teacher_requests/${user?.email}`);
