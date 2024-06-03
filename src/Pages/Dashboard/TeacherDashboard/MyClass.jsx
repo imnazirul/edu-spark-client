@@ -5,6 +5,7 @@ import UpdateIcon from "@mui/icons-material/Update";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import InfoIcon from "@mui/icons-material/Info";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyClass = () => {
   const { user } = useAuth();
@@ -96,7 +97,7 @@ const MyClass = () => {
               </p>
             </div>
             <div className="flex flex-col relative justify-between w-[25%] gap-4">
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 justify-center items-center">
                 <p className="font-semibold text-white text-xl">STATUS : </p>
                 {classItem?.status === "approved" ? (
                   <p className="text-green-500 px-3 text-center py-1 bg-white bg-opacity-80 rounded-3xl text-xl font-medium">
@@ -112,12 +113,12 @@ const MyClass = () => {
                   </p>
                 )}
               </div>
-              <button
-                // onClick={() => (classItem)}
+              <Link
                 className="btn btn-sm bg-green-500 hover:bg-green-200   border-green-500 hover:bg-opacity-70 hover:border-green-100  text-white hover:text-green-600  text-lg font-medium "
+                to={`/dashboard/update_class/${classItem._id}`}
               >
                 <UpdateIcon></UpdateIcon> UPDATE
-              </button>
+              </Link>
               <button
                 onClick={() => handleDelete(classItem?._id)}
                 className="btn btn-sm bg-red-500 hover:bg-red-200   border-red-500 hover:bg-opacity-70 hover:border-red-100  text-white hover:text-red-500   text-lg font-medium "
