@@ -1,11 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../CustomHooks/useAuth";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
+import UpdateIcon from "@mui/icons-material/Update";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import InfoIcon from "@mui/icons-material/Info";
+import Swal from "sweetalert2";
 
 const MyClass = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: classes = [], isPending } = useQuery({
+  const {
+    data: classes = [],
+    isPending,
+    refetch,
+  } = useQuery({
     queryKey: ["teacherClasses", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/teacher_classes/${user?.email}`);
@@ -17,39 +25,114 @@ const MyClass = () => {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
   }
 
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/classes/${id}`);
+        if (res.data.deletedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your Class has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
+  // const handleUpdate = (id) => {
+  //   console.log("update", id);
+  // };
+
   return (
-    <div className="bg-[url('https://static.vecteezy.com/system/resources/previews/001/937/601/original/online-education-application-learning-worldwide-on-computer-mobile-website-background-social-distance-concept-the-classroom-training-course-library-illustration-flat-vector.jpg')]">
+    <div>
       <h1 className="text-2xl md:text-3xl lg:text-4xl text-center font-semibold font-poppins underline mb-4">
         YOUR CLASSES
       </h1>
 
-      <div className="grid grid-cols-2 items-center gap-5">
+      <div className="flex flex-col pl-5 gap-2">
         {classes.map((classItem) => (
           <div
             key={classItem._id}
-            className="flex glass card flex-col items-center justify-start max-w-3xl  border border-gray-200 rounded-lg shadow md:flex-row  bg-base-300 bg-blend-overlay bg-opacity-20"
+            className="flex flex-col items-center justify-start  p-3  border border-gray-200 rounded-lg shadow md:flex-row  bg-gradient-to-r  from-blue-500 to-primary-1 bg-base-300 bg-blend-overlay bg-opacity-20"
           >
-            <div className="h-full overflow-hidden w-72 rounded-xl p-5">
+            <div className="h-full overflow-hidden w-[30%] rounded-xl pr-3">
               <img
-                className="object-cover w-full h-40 rounded-xl  "
+                className="object-cover w-full h-48 rounded-xl  "
                 src={classItem.image}
                 alt=""
               />
             </div>
-            <div className="flex flex-col max-sm:items-center px-3">
-              <h2 className="mb-2 text-2xl bg-gradient-to-r inline-block text-transparent bg-clip-text from-gray-700 to-gray-900 font-bold tracking-tight max-sm:text-center">
+
+            <div className="w-[45%]">
+              <div className="">
+                <p className="text-white ">
+                  <span>Email: </span>
+                  {classItem.email}
+                </p>
+                <p className=" font-normal text-white  ">
+                  <span>Name: </span> {classItem.name}
+                </p>
+              </div>
+              <h2 className=" text-2xl bg-gradient-to-r inline-block text-transparent bg-clip-text from-gray-700 to-gray-900 font-bold tracking-tight max-sm:text-center">
                 {classItem.title}
               </h2>
-              <p className="mb-3 font-normal text-white  ">{classItem.name}</p>
-              <div className="flex gap-5 pb-4">
-                {" "}
-                <button className="btn bg-blue-900 hover:bg-transparent border-blue-900 hover:border-blue-900 hover:scale-105 transition duration-300 text-white  text-lg font-medium ">
-                  Update
-                </button>
-                <button className="btn text-white text-lg border-2 border-blue-900 hover:bg-blue-900 hover:border-blue-900   bg-transparent  hover:scale-105 transition duration-300">
-                  Delete
-                </button>
+              <p className="text-xl mb-1 text-white font-medium">
+                Price: $
+                <span className="text-3xl font-semibold">
+                  {classItem.price}
+                </span>
+              </p>
+              <p className="mb-3 font-normal text-white  ">
+                {classItem.short_description}
+              </p>
+            </div>
+            <div className="flex flex-col relative justify-between w-[25%] gap-4">
+              <div className="flex gap-2 items-center">
+                <p className="font-semibold text-white text-xl">STATUS : </p>
+                {classItem?.status === "approved" ? (
+                  <p className="text-green-500 px-3 text-center py-1 bg-white bg-opacity-80 rounded-3xl text-xl font-medium">
+                    Approved
+                  </p>
+                ) : classItem?.status === "rejected" ? (
+                  <p className="text-red-500 text-center py-1 bg-white bg-opacity-80 rounded-3xl text-xl font-medium px-3">
+                    Rejected
+                  </p>
+                ) : (
+                  <p className="text-blue-500  text-center py-1 bg-white bg-opacity-80 rounded-3xl text-xl font-medium px-3">
+                    Pending
+                  </p>
+                )}
               </div>
+              <button
+                // onClick={() => (classItem)}
+                className="btn btn-sm bg-green-500 hover:bg-green-200   border-green-500 hover:bg-opacity-70 hover:border-green-100  text-white hover:text-green-600  text-lg font-medium "
+              >
+                <UpdateIcon></UpdateIcon> UPDATE
+              </button>
+              <button
+                onClick={() => handleDelete(classItem?._id)}
+                className="btn btn-sm bg-red-500 hover:bg-red-200   border-red-500 hover:bg-opacity-70 hover:border-red-100  text-white hover:text-red-500   text-lg font-medium "
+              >
+                <DeleteOutlineIcon></DeleteOutlineIcon> DELETE
+              </button>
+              {classItem?.status === "approved" ? (
+                <button className="btn btn-sm bg-blue-700  hover:bg-opacity-70 hover:bg-blue-200 border-blue-700 hover:border-blue-900  text-white hover:text-blue-800    text-lg font-medium">
+                  <InfoIcon></InfoIcon> SEE DETAILS
+                </button>
+              ) : (
+                <button className="text-gray-500 text-opacity-80 bg-gray-200 bg-opacity-60 py-1 rounded-lg cursor-not-allowed">
+                  <InfoIcon></InfoIcon> SEE DETAILS
+                </button>
+              )}
             </div>
           </div>
         ))}
