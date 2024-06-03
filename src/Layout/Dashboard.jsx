@@ -5,12 +5,14 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Drawer from "@material-ui/core/Drawer";
 import VideoSettingsRoundedIcon from "@mui/icons-material/VideoSettingsRounded";
+import AddToQueueRoundedIcon from "@mui/icons-material/AddToQueueRounded";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import OndemandVideoRoundedIcon from "@mui/icons-material/OndemandVideoRounded";
+import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 import RequestPageRoundedIcon from "@mui/icons-material/RequestPageRounded";
 import Typography from "@material-ui/core/Typography";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -19,6 +21,8 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { useState } from "react";
+import { Logout } from "@mui/icons-material";
+import useAuth from "../CustomHooks/useAuth";
 
 const drawerWidth = 300;
 
@@ -59,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = () => {
   const classes = useStyles();
+  const { logOut } = useAuth();
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
   const { role: userRole, isRoleLoading } = useRole();
@@ -77,6 +82,12 @@ const Dashboard = () => {
     }
 
     setOpen(!open);
+  };
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {})
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -122,7 +133,7 @@ const Dashboard = () => {
               <ListItem>
                 <span className="dashboard-item ">
                   <NavLink
-                    className="px-4 py-2 pb-[10px] text-xl uppercase w-full font-semibold "
+                    className="px-4 py-2 pb-[8px] text-xl uppercase w-full font-semibold "
                     to="/dashboard/teacher_requests"
                   >
                     <RequestPageRoundedIcon
@@ -135,7 +146,7 @@ const Dashboard = () => {
               <ListItem>
                 <span className="dashboard-item ">
                   <NavLink
-                    className="px-4 py-2 pb-[10px] text-xl uppercase w-full font-semibold "
+                    className="px-4 py-2 pb-[8px] text-xl uppercase w-full font-semibold "
                     to="/dashboard/users"
                   >
                     <GroupsRoundedIcon
@@ -148,7 +159,7 @@ const Dashboard = () => {
               <ListItem>
                 <span className="dashboard-item ">
                   <NavLink
-                    className="px-4 py-2 pb-[10px] text-xl w-full font-semibold "
+                    className="px-4 py-2 pb-[8px] text-xl w-full font-semibold "
                     to="/dashboard/all_classes"
                   >
                     <VideoSettingsRoundedIcon
@@ -167,17 +178,17 @@ const Dashboard = () => {
                     className="px-4 py-2 text-xl uppercase w-full font-semibold "
                     to="/dashboard/add_class"
                   >
-                    Add Class
+                    <AddToQueueRoundedIcon></AddToQueueRoundedIcon> Add Class
                   </NavLink>
                 </span>
               </ListItem>
               <ListItem>
                 <span className="dashboard-item ">
                   <NavLink
-                    className="px-4 py-2 text-xl uppercase w-full font-semibold "
+                    className="px-4 py-2  text-xl uppercase w-full font-semibold "
                     to="/dashboard/my_class"
                   >
-                    My Class
+                    <SchoolRoundedIcon></SchoolRoundedIcon> My Class
                   </NavLink>
                 </span>
               </ListItem>
@@ -186,7 +197,7 @@ const Dashboard = () => {
             <ListItem>
               <span className="dashboard-item ">
                 <NavLink
-                  className="px-4 py-2 pb-[10px] text-xl uppercase w-full font-semibold "
+                  className="px-4 py-2 pb-[8px] text-xl uppercase w-full font-semibold "
                   to="/dashboard/my_enroll_class"
                 >
                   <OndemandVideoRoundedIcon
@@ -201,7 +212,7 @@ const Dashboard = () => {
             {" "}
             <span className="dashboard-item ">
               <NavLink
-                className="px-4 py-2 pb-[10px]  rounded-none text-xl uppercase w-full font-semibold "
+                className="px-4 py-2 pb-[8px]  rounded-none text-xl uppercase w-full font-semibold "
                 to="/dashboard/profile"
               >
                 <AccountCircleRoundedIcon
@@ -214,15 +225,20 @@ const Dashboard = () => {
         </List>
 
         <Divider />
-        <List>
-          <ListItem>
-            <span className="dashboard-item ">
+        <List className="space-y-4">
+          <ListItem className="mt-5">
+            <span className=" ">
               <NavLink
-                className="px-4  flex items-center gap-1  text-xl uppercase w-full font-semibold "
+                className="flex items-center gap-1  text-xl uppercase w-full font-semibold "
                 to="/"
               >
                 <HomeRoundedIcon></HomeRoundedIcon> Home
               </NavLink>
+            </span>
+          </ListItem>
+          <ListItem onClick={handleLogout}>
+            <span className="cursor-pointer flex items-center gap-1  text-xl uppercase w-full font-semibold ">
+              <Logout></Logout> Logout
             </span>
           </ListItem>
         </List>
