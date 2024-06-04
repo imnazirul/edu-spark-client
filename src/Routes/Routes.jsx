@@ -18,7 +18,7 @@ import MyClass from "../Pages/Dashboard/TeacherDashboard/MyClass";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import UpdateClass from "../Pages/Dashboard/TeacherDashboard/UpdateClass";
 import EnrolledClassDetails from "../Pages/Dashboard/StudentDashboard/EnrolledClassDetails";
-import MyClassDetails from "../Pages/Dashboard/TeacherDashboard/MyClassDetails/MyClassDetails";
+import MyClassDetails from "../Pages/Dashboard/TeacherDashboard/MyClassDetails";
 
 const router = createBrowserRouter([
   {
