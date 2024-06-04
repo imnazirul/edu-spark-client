@@ -13,11 +13,11 @@ const MyEnrollClass = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 gap-5 my-8">
+    <div className="grid grid-cols-1 gap-5 mb-8">
       {enrolledClasses.map((enrolledClass, index) => (
         <div
           key={index}
-          className="flex flex-col items-center justify-start max-w-3xl  border border-gray-200 rounded-lg shadow md:flex-row  bg-gradient-to-r  from-blue-500 to-blue-800 bg-base-300 bg-blend-overlay bg-opacity-20"
+          className="flex flex-col items-center justify-start max-w-5xl  border border-gray-200 rounded-lg shadow md:flex-row  bg-gradient-to-r  from-blue-700 to-blue-400 bg-base-300 bg-blend-overlay bg-opacity-20"
         >
           <div className="h-full overflow-hidden w-72 rounded-xl p-5">
             <img

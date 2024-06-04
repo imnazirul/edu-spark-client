@@ -4,20 +4,31 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const img_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
 
 const AddClass = () => {
   const axiosSecure = useAxiosSecure();
+  const [btnText, setBtnText] = useState(
+    <>
+      <ControlPointRoundedIcon> </ControlPointRoundedIcon> ADD CLASS
+    </>
+  );
   // TODO: ERROR MESSAGE
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: async (data) => {
       const res = await axiosSecure.post("/classes", data);
       return res.data;
     },
     onSuccess: (response) => {
       if (response?.insertedId) {
+        setBtnText(
+          <>
+            <ControlPointRoundedIcon> </ControlPointRoundedIcon> ADD CLASS
+          </>
+        );
         Swal.fire({
           title: "CLASS ADDED!",
           text: "PLEASE WAIT FOR APPROVAL",
@@ -26,6 +37,11 @@ const AddClass = () => {
       }
     },
     onError: () => {
+      setBtnText(
+        <>
+          <ControlPointRoundedIcon> </ControlPointRoundedIcon> ADD CLASS
+        </>
+      );
       Swal.fire({
         title: "AN ERROR HAPPENED WHILE ADDING CLASS",
         text: "PLEASE RELOAD OR TRY AGAIN LATER",
@@ -41,31 +57,55 @@ const AddClass = () => {
   } = useForm();
 
   const handleAddClass = async (classData) => {
-    const imgFile = { image: classData.image[0] };
+    setBtnText(
+      <>
+        <div className="border-blue-400 h-7 w-7 animate-spin rounded-full border-[3px] border-t-white" />
+        ADDING CLASS...
+      </>
+    );
+    try {
+      const imgFile = { image: classData.image[0] };
 
-    const res = await axiosSecure.post(img_hosting_api, imgFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
+      const res = await axiosSecure.post(img_hosting_api, imgFile, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
 
-    if (res.data.success) {
-      const imageURL = res.data.data.display_url;
+      if (res.data.success) {
+        const imageURL = res.data.data.display_url;
 
-      const ClassInfo = {
-        price: parseFloat(classData.price),
-        title: classData.title,
-        long_description: classData.long_description || "Not Available",
-        short_description: classData.short_description,
-        name: user?.displayName,
-        email: user?.email,
-        teacherImg: user?.photoURL,
-        totalEnrollment: 0,
-        image: imageURL,
-        status: "pending",
-      };
+        const ClassInfo = {
+          price: parseFloat(classData.price),
+          title: classData.title,
+          long_description: classData.long_description || "Not Available",
+          short_description: classData.short_description,
+          name: user?.displayName,
+          email: user?.email,
+          teacherImg: user?.photoURL,
+          totalEnrollment: 0,
+          image: imageURL,
+          status: "pending",
+        };
 
-      mutate(ClassInfo);
+        mutate(ClassInfo);
+      }
+    } catch (err) {
+      setBtnText(
+        <>
+          <ControlPointRoundedIcon> </ControlPointRoundedIcon> ADD CLASS
+        </>
+      );
+      Swal.fire({
+        title: "UNSUPPORTED IMAGE FORMAT",
+        customClass: {
+          confirmButton: "confirm-button-class",
+          title: "title-class",
+          icon: "icon-class",
+        },
+        text: "PLEASE CHANGE THE PHOTO AND TRY AGAIN",
+        icon: "error",
+      });
     }
   };
 
@@ -212,7 +252,7 @@ const AddClass = () => {
                 },
               })}
               placeholder="Class Description"
-              className="input input-bordered pt-1 h-16 resize-none"
+              className="input input-bordered pt-1  h-20 text-sm  resize-none"
             ></textarea>
             {errors.short_description && (
               <p className="text-red-500 font-medium font-jost">
@@ -236,8 +276,7 @@ const AddClass = () => {
 
           <div className="form-control mt-6 col-span-2">
             <button className="btn  bg-primary-1 hover:bg-primary-1  text-lg text-white ">
-              <ControlPointRoundedIcon> </ControlPointRoundedIcon>{" "}
-              {isPending ? "ADDING CLASS..." : "ADD CLASS"}
+              {btnText}
             </button>
           </div>
         </form>

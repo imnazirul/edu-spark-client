@@ -84,6 +84,7 @@ const TeacherRequest = () => {
             <tr>
               <th>IMAGE </th>
               <th>NAME</th>
+              <th>EMAIL</th>
               <th>EXPERIENCE</th>
               <th>TITLE</th>
               <th>CATEGORY</th>
@@ -107,6 +108,7 @@ const TeacherRequest = () => {
                   </div>
                 </td>
                 <td>{request?.name}</td>
+                <td>{request?.email}</td>
                 <td>{request?.experience}</td>
                 <td>{request?.title}</td>
                 <td>{request?.category}</td>
@@ -118,7 +120,7 @@ const TeacherRequest = () => {
                         : request.status === "rejected"
                         ? "text-red-500 bg-red-500"
                         : "text-orange-500 bg-orange-500"
-                    } bg-opacity-15 rounded-3xl px-3 py-1`}
+                    } bg-opacity-15 rounded-3xl capitalize px-3 py-1`}
                   >
                     {request?.status}
                   </span>
@@ -130,7 +132,7 @@ const TeacherRequest = () => {
                         handleReqApprove(request?._id, request?.name)
                       }
                       disabled={request?.status !== "pending"}
-                      className="btn mr-1 bg-green-500 text-white btn-xs"
+                      className="btn mr-1 bg-green-500 hover:bg-transparent hover:text-green-500 hover:border-green-500 text-white btn-sm"
                     >
                       Approve
                     </button>
@@ -139,7 +141,7 @@ const TeacherRequest = () => {
                         handleReqReject(request?._id, request?.name)
                       }
                       disabled={request?.status !== "pending"}
-                      className="btn bg-red-500 text-white btn-xs"
+                      className="btn bg-red-500 hover:bg-transparent hover:text-red-500 hover:border-red-500 text-white btn-sm"
                     >
                       Reject
                     </button>

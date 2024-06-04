@@ -6,8 +6,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../CustomHooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 import useAxiosPublic from "../../CustomHooks/useAxiosPublic";
-
+import "./sweetalert.css";
 import usePublicMutationPost from "../../CustomHooks/usePublicMutationPost";
+import Swal from "sweetalert2";
 
 const img_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
@@ -34,14 +35,14 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const handleRegister = async (formData) => {
+  const handleRegister = (formData) => {
     const { fullName, photo, email, password } = formData;
 
     setBtnText(
       <div role="status" className="flex gap-1 items-center">
         <svg
           aria-hidden="true"
-          className="w-8 h-8 text-gray-200 animate-spin  fill-blue-600"
+          className="w-7 h-7 text-gray-200 animate-spin  fill-blue-600"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -61,48 +62,69 @@ const Register = () => {
 
     const imgFile = { image: photo[0] };
 
-    const res = await axiosPublic.post(img_hosting_api, imgFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
+    axiosPublic
+      .post(img_hosting_api, imgFile, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        if (res.data.success) {
+          const photoURL = res.data.data.display_url;
+          // console.log(photoURL);
 
-    if (res.data.success) {
-      const photoURL = res.data.data.display_url;
-      // console.log(photoURL);
-
-      createUser(email, password)
-        .then(() => {
-          updateUserProfile(fullName, photoURL)
+          createUser(email, password)
             .then(() => {
-              //create user entry to the database
-              const user = {
-                name: fullName,
-                email: email,
-                role: "student",
-                photoURL: photoURL,
-              };
+              updateUserProfile(fullName, photoURL)
+                .then(() => {
+                  //create user entry to the database
+                  const user = {
+                    name: fullName,
+                    email: email,
+                    role: "student",
+                    photoURL: photoURL,
+                  };
 
-              mutation.mutate(user);
+                  mutation.mutate(user);
+                  setBtnText("Sign In");
+                  setReload(!reload);
+                })
+                .catch((err) => {
+                  setBtnText("Sign In");
+                  console.log(err);
+                });
 
-              setReload(!reload);
+              toast.success("Registration Successful.");
+              navigate(location?.state ? location.state : "/");
             })
-            .catch((err) => console.log(err));
-
-          toast.success("Registration Successful.");
-          navigate(location?.state ? location.state : "/");
-        })
-        .catch((err) => {
-          setLoading(false);
-          if (err.message === "Firebase: Error (auth/email-already-in-use).") {
-            toast.error("Email Already In Use");
-          } else {
-            toast.error("An Unknown Error Occurred!");
-          }
+            .catch((err) => {
+              setBtnText("Sign In");
+              setLoading(false);
+              if (
+                err.message === "Firebase: Error (auth/email-already-in-use)."
+              ) {
+                toast.error("Email Already In Use");
+              } else {
+                toast.error("An Unknown Error Occurred!");
+              }
+            });
+        } else {
+          toast.error("An Unknown Error Occurred!");
+        }
+      })
+      .catch(() => {
+        setBtnText("Sign In");
+        Swal.fire({
+          title: "UNSUPPORTED IMAGE FORMAT",
+          customClass: {
+            confirmButton: "confirm-button-class",
+            title: "title-class",
+            icon: "icon-class",
+          },
+          text: "PLEASE CHANGE THE PHOTO AND TRY AGAIN",
+          icon: "error",
         });
-    } else {
-      toast.error("An Unknown Error Occurred!");
-    }
+      });
   };
 
   const handleGoogleSignIn = () => {

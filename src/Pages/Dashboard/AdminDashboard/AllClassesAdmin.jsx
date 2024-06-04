@@ -109,21 +109,25 @@ const AllClassesAdmin = () => {
                 <td className="  justify-center">
                   <div className="flex items-center justify-center gap-1">
                     {sinClass.status === "approved" ? (
-                      <button className=" text-green-500 ">Approved</button>
+                      <button className=" text-green-500 bg-green-500 bg-opacity-10 px-3 rounded-3xl py-1">
+                        Approved
+                      </button>
                     ) : sinClass.status === "rejected" ? (
-                      <button className=" text-red-500  ">Rejected</button>
+                      <button className=" text-red-500  bg-red-500 bg-opacity-10 px-3 rounded-3xl py-1">
+                        Rejected
+                      </button>
                     ) : (
                       <>
                         {" "}
                         <button
                           onClick={() => handleApprove(sinClass?._id)}
-                          className="btn bg-green-600 text-white btn-sm"
+                          className="btn bg-green-600 hover:bg-transparent hover:text-green-500 hover:border-green-500 text-white btn-sm"
                         >
                           Approve
                         </button>
                         <button
                           onClick={() => handleReject(sinClass?._id)}
-                          className="btn bg-red-500 text-white btn-sm"
+                          className="btn hover:bg-transparent hover:text-red-500 hover:border-red-500 bg-red-500 text-white btn-sm"
                         >
                           Reject
                         </button>
@@ -134,7 +138,7 @@ const AllClassesAdmin = () => {
                 <td>
                   <button
                     disabled={sinClass?.status !== "approved"}
-                    className="btn  bg-blue-500 text-white  btn-sm"
+                    className="btn hover:bg-transparent hover:text-blue-500 hover:border-blue-500 bg-blue-500 text-white  btn-sm"
                   >
                     Progress
                   </button>

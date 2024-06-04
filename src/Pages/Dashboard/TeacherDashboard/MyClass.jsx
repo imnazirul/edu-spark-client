@@ -63,7 +63,7 @@ const MyClass = () => {
         {classes.map((classItem) => (
           <div
             key={classItem._id}
-            className="flex flex-col items-center justify-start  p-3  border border-gray-200 rounded-lg shadow md:flex-row  bg-gradient-to-r  from-blue-500 to-primary-1 bg-base-300 bg-blend-overlay bg-opacity-20"
+            className="flex flex-col items-center justify-center  p-3  border border-gray-200 rounded-lg shadow md:flex-row  bg-gradient-to-r  from-blue-700 to-blue-400 bg-base-300 bg-blend-overlay bg-opacity-20"
           >
             <div className="h-full overflow-hidden w-[30%] rounded-xl pr-3">
               <img
@@ -83,7 +83,7 @@ const MyClass = () => {
                   <span>Name: </span> {classItem.name}
                 </p>
               </div>
-              <h2 className=" text-2xl bg-gradient-to-r inline-block text-transparent bg-clip-text from-gray-700 to-gray-900 font-bold tracking-tight max-sm:text-center">
+              <h2 className=" text-2xl text- font-bold tracking-tight max-sm:text-center">
                 {classItem.title}
               </h2>
               <p className="text-xl mb-1 text-white font-medium">
@@ -98,17 +98,17 @@ const MyClass = () => {
             </div>
             <div className="flex flex-col relative justify-between w-[25%] gap-4">
               <div className="flex gap-2 justify-center items-center">
-                <p className="font-semibold text-white text-xl">STATUS : </p>
+                <p className="font-semibold text-white text-lg">STATUS : </p>
                 {classItem?.status === "approved" ? (
-                  <p className="text-green-500 px-3 text-center py-1 bg-white bg-opacity-80 rounded-3xl text-xl font-medium">
+                  <p className="text-green-500 px-3 text-center py-1 bg-white  border-green-500 rounded-3xl text-lg font-medium">
                     Approved
                   </p>
                 ) : classItem?.status === "rejected" ? (
-                  <p className="text-red-500 text-center py-1 bg-white bg-opacity-80 rounded-3xl text-xl font-medium px-3">
+                  <p className="text-red-500 text-center py-1 bg-white  rounded-3xl text-lg font-medium px-3">
                     Rejected
                   </p>
                 ) : (
-                  <p className="text-blue-500  text-center py-1 bg-white bg-opacity-80 rounded-3xl text-xl font-medium px-3">
+                  <p className="text-blue-500  text-center py-1 bg-white  rounded-3xl text-lg font-medium px-3">
                     Pending
                   </p>
                 )}

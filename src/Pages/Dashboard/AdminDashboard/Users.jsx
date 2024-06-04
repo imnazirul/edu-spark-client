@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
@@ -139,13 +140,13 @@ const Users = () => {
 
                   <th>
                     {user?.role === "admin" ? (
-                      <button className="rounded-3xl bg-opacity-20 bg-secondary-1  text-secondary-1  btn-sm">
-                        Admin
+                      <button className="rounded-3xl bg-opacity-20 bg-primary-1  text-primary-1  btn-sm">
+                        <AdminPanelSettingsIcon></AdminPanelSettingsIcon> Admin
                       </button>
                     ) : (
                       <button
                         onClick={() => handleMakeAdmin(user?.email, user?.name)}
-                        className="btn bg-primary-1 text-white btn-sm"
+                        className="btn bg-primary-1 hover:bg-transparent hover:text-primary-1 hover:border-primary-1 text-white btn-sm"
                       >
                         Make Admin
                       </button>

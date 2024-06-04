@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import UpdateIcon from "@mui/icons-material/Update";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const img_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
@@ -15,6 +16,13 @@ const UpdateClass = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [btnText, setBtnText] = useState(
+    <>
+      {" "}
+      <UpdateIcon></UpdateIcon>
+      UPDATE CLASS
+    </>
+  );
 
   const { mutate: updateClass } = useMutation({
     mutationFn: async ({ _id, data }) => {
@@ -23,6 +31,12 @@ const UpdateClass = () => {
     },
     onSuccess: (response) => {
       if (response.modifiedCount > 0) {
+        setBtnText(
+          <>
+            <UpdateIcon></UpdateIcon>
+            UPDATE CLASS
+          </>
+        );
         refetch();
         Swal.fire({
           title: "UPDATED!",
@@ -31,6 +45,19 @@ const UpdateClass = () => {
         });
       }
     },
+    onError: () => {
+      setBtnText(
+        <>
+          <UpdateIcon></UpdateIcon>
+          UPDATE CLASS
+        </>
+      );
+      Swal.fire({
+        title: "UPDATING FAILED!",
+        text: "THERE WAS AN ERROR , TRY AGAIN.",
+        icon: "error",
+      });
+    },
   });
 
   const {
@@ -38,7 +65,7 @@ const UpdateClass = () => {
     isPending,
     refetch,
   } = useQuery({
-    queryKey: ["updateClass", id],
+    queryKey: ["SingleClassItem", id],
     queryFn: async () => {
       const res = await axiosPublic.get(`/single_class/${id}`);
       return res.data;
@@ -70,28 +97,53 @@ const UpdateClass = () => {
       confirmButtonText: "Yes, UPDATE",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        if (classData.image.length > 0) {
-          const imgFile = { image: classData.image[0] };
-          const res = await axiosSecure.post(img_hosting_api, imgFile, {
-            headers: {
-              "content-type": "multipart/form-data",
-            },
-          });
-          //   console.log(res.data.success);
-          if (res.data.success) {
-            imgURL = res.data.data.display_url;
+        setBtnText(
+          <>
+            <div className="border-blue-400 h-7 w-7 animate-spin rounded-full border-[3px] border-t-white" />{" "}
+            UPDATING CLASS...
+          </>
+        );
+        try {
+          if (classData.image.length > 0) {
+            const imgFile = { image: classData.image[0] };
+            const res = await axiosSecure.post(img_hosting_api, imgFile, {
+              headers: {
+                "content-type": "multipart/form-data",
+              },
+            });
+            //   console.log(res.data.success);
+            if (res.data.success) {
+              imgURL = res.data.data.display_url;
+            }
           }
-        }
 
-        const updatedClassInfo = {
-          title: classData.title,
-          price: parseFloat(classData.price),
-          image: imgURL,
-          short_description: classData.short_description,
-          long_description: classData.long_description || "Not Available",
-        };
-        console.log(updatedClassInfo);
-        updateClass({ _id: id, data: updatedClassInfo });
+          const updatedClassInfo = {
+            title: classData.title,
+            price: parseFloat(classData.price),
+            image: imgURL,
+            short_description: classData.short_description,
+            long_description: classData.long_description || "Not Available",
+          };
+
+          updateClass({ _id: id, data: updatedClassInfo });
+        } catch (err) {
+          setBtnText(
+            <>
+              <UpdateIcon></UpdateIcon>
+              UPDATE CLASS
+            </>
+          );
+          Swal.fire({
+            title: "UNSUPPORTED IMAGE FORMAT",
+            customClass: {
+              confirmButton: "confirm-button-class",
+              title: "title-class",
+              icon: "icon-class",
+            },
+            text: "PLEASE CHANGE THE PHOTO AND TRY AGAIN",
+            icon: "error",
+          });
+        }
       }
     });
   };
@@ -100,7 +152,7 @@ const UpdateClass = () => {
     <div>
       {" "}
       <h1 className="text-2xl md:text-3xl lg:text-4xl text-center font-semibold font-poppins underline mb-4">
-        UPDATE CLASS ({id})
+        UPDATE CLASS
       </h1>
       <div>
         <div className="px-8">
@@ -149,7 +201,7 @@ const UpdateClass = () => {
         </div>
         <div className="divider divider-primary text-lg mt-12 mb-2 ">
           <span className="bg-primary-1 bg-opacity-20 text-primary-1 rounded-3xl px-3 ">
-            ADD CLASS INFO
+            UPDATE CLASS INFO
           </span>
         </div>
         <form
@@ -232,7 +284,7 @@ const UpdateClass = () => {
                 },
               })}
               placeholder="Class Description"
-              className="input input-bordered pt-1 h-16 resize-none"
+              className="input input-bordered pt-1 h-20 text-sm resize-none"
             ></textarea>
             {errors.short_description && (
               <p className="text-red-500 font-medium font-jost">
@@ -257,8 +309,7 @@ const UpdateClass = () => {
 
           <div className="form-control mt-6 col-span-2">
             <button className="btn  bg-primary-1 hover:bg-primary-1  text-lg text-white ">
-              <UpdateIcon></UpdateIcon>{" "}
-              {isPending ? "UPDATING CLASS..." : "UPDATE CLASS"}
+              {btnText}
             </button>
           </div>
         </form>

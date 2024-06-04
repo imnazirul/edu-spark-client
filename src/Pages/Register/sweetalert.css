@@ -1,0 +1,32 @@
+.confirm-button-class {
+  background-color: red !important;
+  color: white !important;
+  border: none !important;
+}
+
+.title-class {
+  font-size: 15px !important;
+}
+.text-class {
+  color: #1957e0;
+}
+
+.icon-class {
+  font-size: 10px !important;
+}
+
+.confirm-button-class .swal2-icon svg {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.swal2-actions .swal2-confirm {
+  background-color: #1957e0 !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.swal2-actions button:hover {
+  border: none !important;
+}
