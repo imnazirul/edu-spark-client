@@ -49,9 +49,6 @@ const MyClass = () => {
       }
     });
   };
-  // const handleUpdate = (id) => {
-  //   console.log("update", id);
-  // };
 
   return (
     <div>
@@ -59,15 +56,15 @@ const MyClass = () => {
         YOUR CLASSES
       </h1>
 
-      <div className="flex flex-col pl-5 gap-2">
+      <div className="flex flex-col pl-5 gap-4">
         {classes.map((classItem) => (
           <div
             key={classItem._id}
-            className="flex flex-col items-center justify-center  p-3  border border-gray-200 rounded-lg shadow md:flex-row  bg-gradient-to-r  from-blue-700 to-blue-400 bg-base-300 bg-blend-overlay bg-opacity-20"
+            className="flex flex-col items-center justify-enter gap-3 p-3  border border-gray-200 rounded-lg shadow md:flex-row  bg-gradient-to-r  from-blue-700 to-blue-400 bg-base-300 bg-blend-overlay bg-opacity-20"
           >
-            <div className="h-full overflow-hidden w-[30%] rounded-xl pr-3">
+            <div className="h-full overflow-hidden w-[30%] rounded-xl ">
               <img
-                className="object-cover w-full h-48 rounded-xl  "
+                className="object-cover w-full max-h-52 h-52 rounded-xl  "
                 src={classItem.image}
                 alt=""
               />
@@ -92,7 +89,7 @@ const MyClass = () => {
                   {classItem.price}
                 </span>
               </p>
-              <p className="mb-3 font-normal text-white  ">
+              <p className=" font-normal text-white  ">
                 {classItem.short_description}
               </p>
             </div>
@@ -126,9 +123,15 @@ const MyClass = () => {
                 <DeleteOutlineIcon></DeleteOutlineIcon> DELETE
               </button>
               {classItem?.status === "approved" ? (
-                <button className="btn btn-sm bg-blue-700  hover:bg-opacity-70 hover:bg-blue-200 border-blue-700 hover:border-blue-900  text-white hover:text-blue-800    text-lg font-medium">
-                  <InfoIcon></InfoIcon> SEE DETAILS
-                </button>
+                <Link
+                  className="btn btn-sm bg-blue-700  hover:bg-opacity-70 hover:bg-blue-200 border-blue-700 hover:border-blue-900  text-white hover:text-blue-800    text-lg font-medium"
+                  to={`/dashboard/my_class_details/${classItem?._id}`}
+                >
+                  {" "}
+                  <button className="">
+                    <InfoIcon></InfoIcon> SEE DETAILS
+                  </button>
+                </Link>
               ) : (
                 <button className="text-gray-500 text-opacity-80 bg-gray-200 bg-opacity-60 py-1 rounded-lg cursor-not-allowed">
                   <InfoIcon></InfoIcon> SEE DETAILS

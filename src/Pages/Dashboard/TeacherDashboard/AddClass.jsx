@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const img_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
@@ -16,14 +17,17 @@ const AddClass = () => {
       <ControlPointRoundedIcon> </ControlPointRoundedIcon> ADD CLASS
     </>
   );
+
+  const navigate = useNavigate();
   // TODO: ERROR MESSAGE
-  const { mutate } = useMutation({
+  const { mutate: addClass } = useMutation({
     mutationFn: async (data) => {
       const res = await axiosSecure.post("/classes", data);
       return res.data;
     },
     onSuccess: (response) => {
       if (response?.insertedId) {
+        reset();
         setBtnText(
           <>
             <ControlPointRoundedIcon> </ControlPointRoundedIcon> ADD CLASS
@@ -34,6 +38,8 @@ const AddClass = () => {
           text: "PLEASE WAIT FOR APPROVAL",
           icon: "success",
         });
+
+        navigate("/dashboard/my_class");
       }
     },
     onError: () => {
@@ -53,6 +59,7 @@ const AddClass = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -88,7 +95,7 @@ const AddClass = () => {
           status: "pending",
         };
 
-        mutate(ClassInfo);
+        addClass(ClassInfo);
       }
     } catch (err) {
       setBtnText(

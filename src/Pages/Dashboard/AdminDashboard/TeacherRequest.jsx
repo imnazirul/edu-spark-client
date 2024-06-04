@@ -18,8 +18,8 @@ const TeacherRequest = () => {
     },
   });
 
-  const handleReqApprove = (id, name) => {
-    const info = { status: "approved" };
+  const handleReqApprove = (id, name, email) => {
+    const info = { status: "approved", email: email };
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -31,7 +31,7 @@ const TeacherRequest = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axiosSecure.patch(`/teacher_requests/${id}`, info);
-        console.log(res);
+        // console.log(res);
         if (res.data.modifiedCount > 0) {
           refetch();
           Swal.fire({
@@ -129,7 +129,11 @@ const TeacherRequest = () => {
                   <div className="flex gap-1 items-center">
                     <button
                       onClick={() =>
-                        handleReqApprove(request?._id, request?.name)
+                        handleReqApprove(
+                          request?._id,
+                          request?.name,
+                          request?.email
+                        )
                       }
                       disabled={request?.status !== "pending"}
                       className="btn mr-1 bg-green-500 hover:bg-transparent hover:text-green-500 hover:border-green-500 text-white btn-sm"

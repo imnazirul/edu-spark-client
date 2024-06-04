@@ -8,11 +8,28 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import AutorenewRoundedIcon from "@mui/icons-material/AutorenewRounded";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
+import useRole from "../../CustomHooks/useRole";
 
 const TeachOnEdu = () => {
   const axiosSecure = useAxiosSecure();
+  const { role } = useRole();
   const { user } = useAuth();
   const [appliedExists, setAppliedExists] = useState(null);
+
+  const {
+    data: applications = [],
+    isPending,
+    refetch,
+  } = useQuery({
+    queryKey: ["applications"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/teacher_requests/${user?.email}`);
+      setAppliedExists(res.data.find((sData) => sData.status === "pending"));
+      // console.log(res.data);
+      return res.data;
+    },
+    refetchOnWindowFocus: "always",
+  });
 
   const {
     mutate: applyForTeaching,
@@ -37,19 +54,6 @@ const TeachOnEdu = () => {
   });
 
   // check if his any application already in Pending
-  const {
-    data: applications = [],
-    isPending,
-    refetch,
-  } = useQuery({
-    queryKey: ["applications"],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/teacher_requests/${user?.email}`);
-      setAppliedExists(res.data.find((sData) => sData.status === "pending"));
-      console.log(res.data);
-      return res.data;
-    },
-  });
 
   const {
     register,
@@ -79,14 +83,16 @@ const TeachOnEdu = () => {
         subtitle="Become an instructor and change lives — including your own"
       ></SectionTitle>
       <div className="mt-8">
-        {!appliedExists && (
-          <div className="divider mb-8 divider-primary">
-            {" "}
-            <h1 className="text-3xl text-primary-1 text-center font-semibold">
-              — APPLY NOW —
-            </h1>
-          </div>
-        )}
+        <div className="divider mb-8 divider-primary">
+          {" "}
+          <h1 className="text-3xl text-primary-1 text-center font-semibold">
+            {role === "teacher"
+              ? "ACCEPTED"
+              : appliedExists
+              ? "PENDING"
+              : "— APPLY NOW —"}
+          </h1>
+        </div>
 
         <div className="flex justify-evenly">
           <div>
@@ -138,12 +144,19 @@ const TeachOnEdu = () => {
                         className="input w-full input-bordered"
                       />
                     </div>
+
                     <button className="btn bg-primary-1 hover:bg-primary-1 mt-3 text-lg text-white hover:bg-btn-1">
                       <AutorenewRoundedIcon></AutorenewRoundedIcon>WE WILL
                       RESPONSE SHORTLY...
                     </button>
                   </form>
                 </>
+              ) : role === "teacher" ? (
+                <div className="mt-8">
+                  <h1 className="text-3xl font-semibold text-blue-600">
+                    YOU ARE A TEACHER
+                  </h1>
+                </div>
               ) : (
                 <form onSubmit={handleSubmit(handleApply)} className="flex-1">
                   <div className="form-control">
@@ -153,22 +166,27 @@ const TeachOnEdu = () => {
                       </span>
                     </label>
                     <select
-                      defaultValue="default"
+                      defaultValue=""
                       {...register("experience", {
                         required: {
                           value: true,
-                          message: "Experience is a Required Field!",
+                          message: "Select a option !",
                         },
                       })}
                       className="select select-bordered w-full max-w-xs"
                     >
-                      <option disabled value="default">
+                      <option disabled value="">
                         Select Experience Level
                       </option>
                       <option value="Beginner">Beginner</option>
                       <option value="Mid-Level">Mid-Level</option>
                       <option value="Experienced">Experienced</option>
                     </select>
+                    {errors.experience && (
+                      <p className="text-red-500 mt-[2px] font-semibold font-jost">
+                        {errors.experience.message}
+                      </p>
+                    )}
                   </div>
 
                   <div className="form-control relative">
@@ -179,12 +197,18 @@ const TeachOnEdu = () => {
                       {...register("title", {
                         required: {
                           value: true,
-                          message: "Title is a Required Field!",
+                          message: "Title is a Required !",
                         },
                       })}
                       placeholder="Title"
                       className="input w-full input-bordered"
                     />
+
+                    {errors.title && (
+                      <p className="text-red-500 mt-[2px] font-semibold font-jost">
+                        {errors.title.message}
+                      </p>
+                    )}
                   </div>
                   <div className="form-control">
                     <label className="label">
@@ -193,16 +217,16 @@ const TeachOnEdu = () => {
                       </span>
                     </label>
                     <select
-                      defaultValue="default"
+                      defaultValue=""
                       {...register("category", {
                         required: {
                           value: true,
-                          message: "Category is a Required Field!",
+                          message: "Category is a Required!",
                         },
                       })}
                       className="select select-bordered w-full max-w-xs"
                     >
-                      <option disabled value="default">
+                      <option disabled value="">
                         Select Category
                       </option>
                       <option>Web Development</option>
@@ -212,23 +236,23 @@ const TeachOnEdu = () => {
                       <option>Graphic Design</option>
                       <option>Digital Marketing</option>
                     </select>
+
+                    {errors.category && (
+                      <p className="text-red-500 mt-[2px] font-semibold font-jost">
+                        {errors.category.message}
+                      </p>
+                    )}
                   </div>
                   <div className="form-control mt-6">
                     {applications.length > 0 ? (
                       <button className="btn bg-primary-1 hover:bg-primary-1 text-lg text-white hover:bg-btn-1">
                         {isPostPending
                           ? "SUBMITTING..."
-                          : isSuccess
-                          ? "SUBMITTED"
                           : " REQUEST FOR ANOTHER"}
                       </button>
                     ) : (
                       <button className="btn bg-primary-1 hover:bg-primary-1 text-lg text-white hover:bg-btn-1">
-                        {isPostPending
-                          ? "SUBMITTING..."
-                          : isSuccess
-                          ? "SUBMITTED"
-                          : "SUBMIT FOR REVIEW"}
+                        {isPostPending ? "SUBMITTING..." : "SUBMIT FOR REVIEW"}
                       </button>
                     )}
                   </div>
@@ -241,16 +265,18 @@ const TeachOnEdu = () => {
 
           <div className=" flex flex-col justify-center items-center">
             <div className="avatar">
-              <div className="w-16 rounded-full">
+              <div className="w-20 h-20 rounded-full">
                 <img src={user?.photoURL} />
               </div>
             </div>
             <div className="text-center mb-5">
               <h1 className="text-xl">
-                <span className="font-semibold">MS KHAN</span>
+                <span className="font-semibold uppercase">
+                  {user?.displayName}
+                </span>
               </h1>
               <h3 className="text-lg">
-                <span className="font-medium">mskhan@gmail.com</span>
+                <span className="font-medium">{user?.email}</span>
               </h3>
             </div>
           </div>

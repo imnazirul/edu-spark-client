@@ -61,7 +61,7 @@ const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((err) => {
-        setBtnText("Error");
+        setBtnText("Sign In");
         setLoading(false);
         if (err.message === "Firebase: Error (auth/invalid-credential).") {
           toast.error("Invalid Email Or Password");

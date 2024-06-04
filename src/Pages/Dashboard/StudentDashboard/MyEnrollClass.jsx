@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const MyEnrollClass = () => {
   const [enrolledClasses, setEnrolledClasses] = useState([]);
@@ -35,9 +36,11 @@ const MyEnrollClass = () => {
             </p>
             <div className="flex gap-5 pb-4">
               {" "}
-              <button className="btn bg-blue-900 hover:bg-transparent border-blue-900 hover:border-blue-900 hover:scale-105 transition duration-300 text-white  text-lg font-medium ">
-                Continue Class
-              </button>
+              <Link to={`/dashboard/my_enrolled_class/${enrolledClass._id}`}>
+                <button className="btn bg-blue-900 hover:bg-transparent border-blue-900 hover:border-blue-900 hover:scale-105 transition duration-300 text-white  text-lg font-medium ">
+                  Continue Class
+                </button>
+              </Link>
               <button className="btn text-white text-lg border-2 border-blue-900 hover:bg-blue-900 hover:border-blue-900   bg-transparent  hover:scale-105 transition duration-300">
                 Outline
               </button>

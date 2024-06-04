@@ -7,6 +7,7 @@ const usePublicMutationPost = (url) => {
   return useMutation({
     mutationFn: async (data) => {
       const res = await axiosPublic.post(url, data);
+      console.log("user added to database", res.data);
       return res.data;
     },
   });
