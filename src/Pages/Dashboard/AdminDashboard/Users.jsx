@@ -31,7 +31,6 @@ const Users = () => {
     setSearchText(searchBarText);
     setQuery(!query);
   };
-  // console.log(searchText);
 
   const handleMakeAdmin = (email, name) => {
     Swal.fire({
@@ -45,7 +44,6 @@ const Users = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axiosSecure.patch(`/users/${email}`);
-
         if (res.data.modifiedCount) {
           refetch();
           Swal.fire({

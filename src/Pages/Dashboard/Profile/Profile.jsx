@@ -5,11 +5,16 @@ import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import CameraAltRoundedIcon from "@mui/icons-material/CameraAltRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import toast, { Toaster } from "react-hot-toast";
+const img_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user, updateUserProfile, reload, setReload } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [imgName, setImgName] = useState("");
+  const [btnText, setBtnText] = useState("Upload");
   const {
     data: userInfo = [],
     isPending,
@@ -39,14 +44,60 @@ const Profile = () => {
 
   const handleUpload = (e) => {
     e.preventDefault();
-    const imgFile = document.getElementById("uploadFile1").files;
-    const imgData = { image: imgFile[0] };
-    console.log(imgData);
+    const imgData = document.getElementById("uploadFile1").files;
+    const imgFile = { image: imgData[0] };
+    // console.log(imgData);
+
+    // const imgFile = { image: classData.image[0] };
+    setBtnText(
+      <>
+        <div className="border-blue-400 h-5 w-5 animate-spin rounded-full border-2 border-t-white" />{" "}
+        Uploading...
+      </>
+    );
+    axiosSecure
+      .post(img_hosting_api, imgFile, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        if (res.data.success) {
+          const imageURL = res.data.data.display_url;
+          updateUserProfile(user?.displayName, imageURL)
+            .then(() => {
+              // console.log(res);
+              setBtnText("Uploaded");
+              toast.success("Profile Picture Updated Successfully.");
+              setReload(!reload);
+              document.getElementById("my_modal_1").close();
+            })
+            .catch((err) => {
+              console.log(err);
+              setBtnText("Upload");
+            });
+        }
+      })
+      .catch(() => {
+        setBtnText("Upload");
+
+        Swal.fire({
+          title: "UNSUPPORTED IMAGE FORMAT",
+          customClass: {
+            confirmButton: "confirm-button-class",
+            title: "title-class",
+            icon: "icon-class",
+          },
+          text: "PLEASE CHANGE THE PHOTO AND TRY AGAIN",
+          icon: "error",
+        });
+      });
   };
 
   return (
     <>
       <div className="w-full  px-4 mx-auto">
+        <Toaster></Toaster>
         <div className="relative flex flex-col min-w-0 break-words bg-base-100 w-full mb-6  rounded-lg ">
           <div className="px-6">
             <div className="flex flex-wrap justify-center">
@@ -147,7 +198,7 @@ const Profile = () => {
                     {" "}
                     <p className="text-lg font-medium text-center">{imgName}</p>
                     <button className="btn btn-sm bg-blue-500 text-white hover:bg-transparent hover:text-blue-500 hover:border-blue-500">
-                      Upload
+                      {btnText}
                     </button>
                   </div>
                 ) : (

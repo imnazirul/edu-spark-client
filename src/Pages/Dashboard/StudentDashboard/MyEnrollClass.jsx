@@ -1,17 +1,28 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import useAuth from "../../../CustomHooks/useAuth";
+import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 
 const MyEnrollClass = () => {
-  const [enrolledClasses, setEnrolledClasses] = useState([]);
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
-  useEffect(() => {
-    fetch("/myenroll.json")
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        setEnrolledClasses(data);
-      });
-  }, []);
+  const {
+    data: enrolledClasses,
+    isPending,
+    // refetch,
+  } = useQuery({
+    queryKey: ["myEnrolledClasses", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/my_enrolled_classes/${user?.email}`);
+      // console.log(res.data, enrolledClassIds);
+      return res.data;
+    },
+  });
+
+  if (isPending) {
+    return <h1 className="text-5xl text-center-mt-10">Loading...</h1>;
+  }
 
   return (
     <div className="grid grid-cols-1 gap-5 mb-8">

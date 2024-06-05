@@ -2,9 +2,11 @@ import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import ClassCard from "../../components/ClassCard/ClassCard";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../CustomHooks/useAxiosPublic";
+import useEnrolledClassIds from "../../CustomHooks/useEnrolledClassIds";
 
 const AllClasses = () => {
   const axiosPublic = useAxiosPublic();
+  const { isIdsPending } = useEnrolledClassIds();
   const {
     data: classes = [],
     isPending,
@@ -18,7 +20,7 @@ const AllClasses = () => {
     },
   });
 
-  if (isPending) {
+  if (isPending || isIdsPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
   }
 

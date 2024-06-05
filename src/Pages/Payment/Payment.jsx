@@ -30,18 +30,22 @@ const Payment = () => {
 
   return (
     <div>
-      <h1 className="text-2xl md:text-3xl text-center font-semibold font-poppins">
+      <h1 className="text-2xl mb-5 md:text-3xl text-center font-semibold font-poppins">
         Payment For {classItem?.title}
       </h1>
       <div className="flex gap-5">
-        <div className="flex-1">
+        <div className="flex-1  p-5 bg-base-300 rounded-xl border">
+          <h1 className="text-3xl font-semibold mb-5">
+            {" "}
+            PAYMENT AMOUNT: ${classItem?.price}
+          </h1>
           <Elements className="bg-white" stripe={stripePromise}>
             <CheckoutForm price={classItem?.price} id={id} />
           </Elements>
         </div>
         <div className="flex-1">
           <div>
-            <img src={classItem?.image} alt="" />
+            <img className="h-96" src={classItem?.image} alt="" />
           </div>
         </div>
       </div>
