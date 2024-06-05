@@ -19,6 +19,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import UpdateClass from "../Pages/Dashboard/TeacherDashboard/UpdateClass";
 import EnrolledClassDetails from "../Pages/Dashboard/StudentDashboard/EnrolledClassDetails";
 import MyClassDetails from "../Pages/Dashboard/TeacherDashboard/MyClassDetails";
+import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
             <ClassDetails></ClassDetails>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/payment/:id",
+        element: <Payment></Payment>,
       },
     ],
   },

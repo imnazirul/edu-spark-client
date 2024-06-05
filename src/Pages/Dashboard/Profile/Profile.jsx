@@ -1,10 +1,15 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../CustomHooks/useAuth";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
+import CameraAltRoundedIcon from "@mui/icons-material/CameraAltRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { useState } from "react";
 
 const Profile = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [imgName, setImgName] = useState("");
   const {
     data: userInfo = [],
     isPending,
@@ -22,6 +27,23 @@ const Profile = () => {
     return <h1 className="text-xl text-center mt-16">Loading...</h1>;
   }
 
+  const handleName = () => {
+    const imgFile = document.getElementById("uploadFile1").files;
+    if (imgFile) {
+      setImgName(imgFile[0].name);
+    } else {
+      setImgName("");
+    }
+    console.log(imgFile);
+  };
+
+  const handleUpload = (e) => {
+    e.preventDefault();
+    const imgFile = document.getElementById("uploadFile1").files;
+    const imgData = { image: imgFile[0] };
+    console.log(imgData);
+  };
+
   return (
     <>
       <div className="w-full  px-4 mx-auto">
@@ -35,6 +57,16 @@ const Profile = () => {
                     src={user?.photoURL}
                     className="shadow-xl w-28 rounded-full object-cover h-28 align-middle border-4 border-primary-1  "
                   />
+                  <p
+                    onClick={() =>
+                      document.getElementById("my_modal_1").showModal()
+                    }
+                    className="absolute bottom-[2px] right-1 bg-gray-600 rounded-full p-1 cursor-pointer"
+                  >
+                    <CameraAltRoundedIcon
+                      sx={{ color: "white" }}
+                    ></CameraAltRoundedIcon>
+                  </p>
                 </div>
               </div>
               <div className="w-full px-4 text-center mt-5">
@@ -44,26 +76,6 @@ const Profile = () => {
                 <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
                   ({userInfo?.role})
                 </span>
-                <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                  <div className="mr-4 p-3 text-center">
-                    <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                      22
-                    </span>
-                    <span className="text-sm text-blueGray-400">Friends</span>
-                  </div>
-                  <div className="mr-4 p-3 text-center">
-                    <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                      10
-                    </span>
-                    <span className="text-sm text-blueGray-400">Photos</span>
-                  </div>
-                  <div className="lg:mr-4 p-3 text-center">
-                    <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                      89
-                    </span>
-                    <span className="text-sm text-blueGray-400">Comments</span>
-                  </div>
-                </div>
               </div>
             </div>
             <div className="text-center mt-12">
@@ -86,23 +98,79 @@ const Profile = () => {
               <div className="flex flex-wrap justify-center">
                 <div className="w-full lg:w-9/12 px-4">
                   <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                    An artist of considerable range, Jenna the name taken by
-                    Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                    performs and records all of his own music, giving it a warm,
-                    intimate feel with a solid groove structure. An artist of
-                    considerable range.
+                    "Life is like riding a bicycle. To keep your balance, you
+                    must keep moving."
                   </p>
                   <a
                     href="javascript:void(0);"
                     className="font-normal text-pink-500"
                   >
-                    Show more
+                    - Albert Einstein
                   </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {/* Open the modal using document.getElementById('ID').showModal() method */}
+
+        <dialog id="my_modal_1" className="modal">
+          <div className="modal-box">
+            <form onSubmit={handleUpload}>
+              <label
+                htmlFor="uploadFile1"
+                className="bg-white font-semibold text-base rounded max-w-md h-52 flex flex-col items-center justify-center cursor-pointer border-2 border-gray-300 border-dashed mx-auto font-[sans-serif]"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-11 mb-2 fill-gray-500"
+                  viewBox="0 0 32 32"
+                >
+                  <path
+                    d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
+                    data-original="#000000"
+                  />
+                  <path
+                    d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
+                    data-original="#000000"
+                  />
+                </svg>
+                Upload file
+                <input
+                  onChange={handleName}
+                  type="file"
+                  id="uploadFile1"
+                  className="hidden"
+                />
+                {imgName ? (
+                  <div className="mt-4 space-y-3 flex flex-col items-center justify-center">
+                    {" "}
+                    <p className="text-lg font-medium text-center">{imgName}</p>
+                    <button className="btn btn-sm bg-blue-500 text-white hover:bg-transparent hover:text-blue-500 hover:border-blue-500">
+                      Upload
+                    </button>
+                  </div>
+                ) : (
+                  <p className="text-xs font-medium text-gray-400 mt-2">
+                    PNG, JPG SVG, WEBP, and GIF are Allowed.
+                  </p>
+                )}
+              </label>
+            </form>
+
+            <div className=" modal-action absolute -top-3 right-2">
+              <form method="dialog">
+                <button className="bg-gray-100 p-1 border-0 rounded-full">
+                  <CloseRoundedIcon
+                    sx={{
+                      fontSize: "30px",
+                    }}
+                  ></CloseRoundedIcon>
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </div>
     </>
   );

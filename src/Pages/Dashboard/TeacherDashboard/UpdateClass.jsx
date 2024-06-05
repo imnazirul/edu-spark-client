@@ -24,6 +24,18 @@ const UpdateClass = () => {
     </>
   );
 
+  const {
+    data: classItem,
+    isPending,
+    refetch,
+  } = useQuery({
+    queryKey: ["SingleClassItem", id],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/single_class/${id}`);
+      return res.data;
+    },
+  });
+
   const { mutate: updateClass } = useMutation({
     mutationFn: async ({ _id, data }) => {
       const res = await axiosSecure.patch(`/classes/${_id}`, data);
@@ -57,18 +69,6 @@ const UpdateClass = () => {
         text: "THERE WAS AN ERROR , TRY AGAIN.",
         icon: "error",
       });
-    },
-  });
-
-  const {
-    data: classItem,
-    isPending,
-    refetch,
-  } = useQuery({
-    queryKey: ["SingleClassItem", id],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/single_class/${id}`);
-      return res.data;
     },
   });
 
