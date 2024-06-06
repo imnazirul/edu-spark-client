@@ -148,7 +148,7 @@ const CheckoutForm = ({ price, id }) => {
         </div>
 
         <button
-          className="btn mt-5 bg-green-500 text-white hover:bg-transparent hover:text-green-500 hover:border-green-500"
+          className="btn mt-5 bg-green-500 text-white hover:bg-green-500 px-8"
           disabled={!stripe || !clientSecret}
         >
           {btnText}

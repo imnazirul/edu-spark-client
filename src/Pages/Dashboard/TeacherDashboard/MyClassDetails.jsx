@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useParams } from "react-router-dom";
 import useAuth from "../../../CustomHooks/useAuth";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -11,6 +11,19 @@ const MyClassDetails = () => {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const { user } = useAuth();
+
+  const {
+    data: classData,
+    isPending,
+    refetch,
+  } = useQuery({
+    queryKey: ["SingleClassItem", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/total_classes_data/${id}`);
+      return res.data;
+    },
+  });
+
   const { mutate: addAssignment } = useMutation({
     mutationFn: async (data) => {
       const res = await axiosSecure.post("/assignments", data);
@@ -18,6 +31,7 @@ const MyClassDetails = () => {
     },
     onSuccess: (response) => {
       if (response.insertedId) {
+        refetch();
         document.getElementById("my_modal_1").close();
         reset();
         Swal.fire({
@@ -45,6 +59,10 @@ const MyClassDetails = () => {
     formState: { errors },
   } = useForm();
 
+  if (isPending) {
+    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  }
+
   const handleAddAssignment = (formData) => {
     const currentTime = new Date().getTime();
     const deadlineTime = new Date(formData.deadline).getTime();
@@ -65,7 +83,8 @@ const MyClassDetails = () => {
       deadline: deadlineTime,
       classId: id,
       teacherEmail: user?.email,
-      assignmentSubmission: 0,
+      assignmentSubmitted: 0,
+      submittedEmails: [],
     };
     addAssignment(assignmentData);
     console.log(assignmentData);
@@ -91,7 +110,9 @@ const MyClassDetails = () => {
               />
             </div>
             <div className="flex flex-col justify-center align-middle">
-              <p className="text-3xl font-semibold ">1000</p>
+              <p className="text-3xl font-semibold ">
+                {classData.totalEnrolled}
+              </p>
               <p className="capitalize font-semibold text-lg">
                 TOTAL ENROLLED STUDENTS
               </p>
@@ -106,7 +127,9 @@ const MyClassDetails = () => {
               />
             </div>
             <div className="flex flex-col justify-center align-middle">
-              <p className="text-3xl font-semibold ">10</p>
+              <p className="text-3xl font-semibold ">
+                {classData.totalAssignment}
+              </p>
               <p className="capitalize font-semibold text-lg">ASSIGNMENTS</p>
             </div>
           </div>

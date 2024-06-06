@@ -106,7 +106,7 @@ const Profile = () => {
                   <img
                     alt="..."
                     src={user?.photoURL}
-                    className="shadow-xl w-28 rounded-full object-cover h-28 align-middle border-4 border-primary-1  "
+                    className="shadow-xl  w-28 rounded-full object-cover h-28  border-4 border-primary-1  "
                   />
                   <p
                     onClick={() =>
