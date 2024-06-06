@@ -20,6 +20,7 @@ import UpdateClass from "../Pages/Dashboard/TeacherDashboard/UpdateClass";
 import EnrolledClassDetails from "../Pages/Dashboard/StudentDashboard/EnrolledClassDetails";
 import MyClassDetails from "../Pages/Dashboard/TeacherDashboard/MyClassDetails";
 import Payment from "../Pages/Payment/Payment";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -76,15 +77,27 @@ const router = createBrowserRouter([
       //admin routes
       {
         path: "teacher_requests",
-        element: <TeacherRequest></TeacherRequest>,
+        element: (
+          <AdminRoute>
+            <TeacherRequest></TeacherRequest>
+          </AdminRoute>
+        ),
       },
       {
         path: "users",
-        element: <Users></Users>,
+        element: (
+          <AdminRoute>
+            <Users></Users>
+          </AdminRoute>
+        ),
       },
       {
         path: "all_classes",
-        element: <AllClassesAdmin></AllClassesAdmin>,
+        element: (
+          <AdminRoute>
+            <AllClassesAdmin></AllClassesAdmin>
+          </AdminRoute>
+        ),
       },
 
       //teacher routes

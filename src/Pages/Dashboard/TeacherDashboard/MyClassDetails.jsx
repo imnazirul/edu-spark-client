@@ -42,6 +42,7 @@ const MyClassDetails = () => {
       }
     },
     onError: () => {
+      document.getElementById("my_modal_1").close();
       Swal.fire({
         title: "ERROR!",
         text: "An Error Ocurred While Creating Assignment.",
@@ -83,7 +84,7 @@ const MyClassDetails = () => {
       deadline: deadlineTime,
       classId: id,
       teacherEmail: user?.email,
-      assignmentSubmitted: 0,
+      total_submitted: 0,
       submittedEmails: [],
     };
     addAssignment(assignmentData);
@@ -128,7 +129,7 @@ const MyClassDetails = () => {
             </div>
             <div className="flex flex-col justify-center align-middle">
               <p className="text-3xl font-semibold ">
-                {classData.totalAssignment}
+                {classData.totalAssignment.length}
               </p>
               <p className="capitalize font-semibold text-lg">ASSIGNMENTS</p>
             </div>
@@ -142,7 +143,12 @@ const MyClassDetails = () => {
               />
             </div>
             <div className="flex flex-col justify-center align-middle">
-              <p className="text-3xl font-semibold ">79</p>
+              <p className="text-3xl font-semibold ">
+                {classData.totalAssignment.reduce(
+                  (total, assignment) => total + assignment.total_submitted,
+                  0
+                )}
+              </p>
               <p className="capitalize font-semibold text-lg">
                 ASSIGNMENT SUBMISSION PER DAY
               </p>
@@ -157,7 +163,13 @@ const MyClassDetails = () => {
               />
             </div>
             <div className="flex flex-col justify-center align-middle">
-              <p className="text-3xl font-semibold ">79%</p>
+              <p className="text-3xl font-semibold ">
+                {(
+                  (classData.totalAssignment.length / classData.totalEnrolled) *
+                  100
+                ).toFixed(2)}
+                %
+              </p>
               <p className="capitalize font-semibold text-lg">
                 ASSIGNMENT SUBMISSION RATE
               </p>
