@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const BecomeInstructor = () => {
   return (
     <>
@@ -22,13 +24,16 @@ const BecomeInstructor = () => {
               today!{" "}
             </p>
             <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
-              <a
-                rel="noopener noreferrer"
-                href="#"
-                className="px-8 py-3 text-lg font-semibold rounded  bg-secondary-1 filter brightness-125 text-white"
-              >
-                START TEACHING TODAY
-              </a>
+              <Link to="teach_on_edu_spark">
+                {" "}
+                <a
+                  rel="noopener noreferrer"
+                  href="#"
+                  className="px-8 py-3 text-lg font-semibold rounded  bg-secondary-1 filter brightness-125 text-white"
+                >
+                  START TEACHING TODAY
+                </a>
+              </Link>
             </div>
           </div>
         </div>

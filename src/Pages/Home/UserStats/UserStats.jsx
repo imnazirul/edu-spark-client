@@ -1,15 +1,30 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import CountUp from "react-countup";
 import VisibilitySensor from "react-visibility-sensor";
+import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 
 const UserStats = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const axiosPublic = useAxiosPublic();
+
+  const { data: webStats, isPending } = useQuery({
+    queryKey: ["site_data"],
+    queryFn: async () => {
+      const res = await axiosPublic("/total_site_data");
+      return res.data;
+    },
+  });
 
   const handleVisibility = (visibility) => {
     if (visibility) {
       setIsVisible(true);
     }
   };
+
+  if (isPending) {
+    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  }
 
   return (
     <>
@@ -33,7 +48,7 @@ const UserStats = () => {
                       {isVisible && (
                         <CountUp
                           start={0}
-                          end={31256}
+                          end={webStats.totalUser}
                           duration={2.75}
                           separator=" "
                           decimal=","
@@ -60,7 +75,7 @@ const UserStats = () => {
                         {isVisible && (
                           <CountUp
                             start={0}
-                            end={1897}
+                            end={webStats.totalClasses}
                             duration={2.75}
                             separator=" "
                             decimal=","
@@ -88,7 +103,7 @@ const UserStats = () => {
                       {isVisible && (
                         <CountUp
                           start={0}
-                          end={13569}
+                          end={webStats.totalEnrollment}
                           duration={2.75}
                           separator=" "
                           decimal=","

@@ -54,7 +54,7 @@ const Navbar = () => {
         </NavLink>
       </span>{" "}
       <span className="hover:text-secondary-1">
-        <NavLink className="px-4 py-2 rounded-lg " to="/techOnEduSpark">
+        <NavLink className="px-4 py-2 rounded-lg " to="/teach_on_edu_spark">
           Teach On EduSpark
         </NavLink>
       </span>

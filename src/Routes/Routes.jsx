@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         element: <AllClasses></AllClasses>,
       },
       {
-        path: "/techOnEduSpark",
+        path: "/teach_on_edu_spark",
         element: (
           <PrivateRoute>
             <TeachOnEdu></TeachOnEdu>

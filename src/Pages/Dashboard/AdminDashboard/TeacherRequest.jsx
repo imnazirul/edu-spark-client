@@ -113,17 +113,31 @@ const TeacherRequest = () => {
                 <td>{request?.title}</td>
                 <td>{request?.category}</td>
                 <td>
-                  <span
+                  {request.status === "approved" ? (
+                    <span className="text-green-500 bg-green-500 bg-opacity-15 rounded-3xl capitalize px-3 py-1">
+                      Accepted
+                    </span>
+                  ) : request.status === "rejected" ? (
+                    <span className="text-red-500 bg-red-500 bg-opacity-15 rounded-3xl capitalize px-3 py-1">
+                      Rejected
+                    </span>
+                  ) : (
+                    <span className="text-orange-500 bg-orange-500 bg-opacity-15 rounded-3xl capitalize px-3 py-1">
+                      Pending
+                    </span>
+                  )}
+
+                  {/* <span
                     className={`${
-                      request.status === "approved"
+                      
                         ? "text-green-500 bg-green-500"
                         : request.status === "rejected"
                         ? "text-red-500 bg-red-500"
                         : "text-orange-500 bg-orange-500"
                     } bg-opacity-15 rounded-3xl capitalize px-3 py-1`}
                   >
-                    {request?.status}
-                  </span>
+                    Accepted
+                  </span> */}
                 </td>
                 <td>
                   <div className="flex gap-1 items-center">

@@ -3,7 +3,7 @@ import CarouselSlider from "./CarouselSlider";
 
 const Banner = () => {
   return (
-    <>
+    <div className="mt-[73px]">
       <CarouselSlider></CarouselSlider>
       <section className="p-6 mt-8 lg:mt-12 dark:bg-gray-100 dark:text-gray-800">
         <div className="container p-4 mx-auto text-center">
@@ -80,7 +80,7 @@ const Banner = () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 

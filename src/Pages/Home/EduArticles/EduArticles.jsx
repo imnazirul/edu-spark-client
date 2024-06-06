@@ -1,14 +1,20 @@
-import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 
 const EduArticles = () => {
-  const [articles, setArticles] = useState([]);
+  const axiosPublic = useAxiosPublic();
+  const { data: articles, isPending } = useQuery({
+    queryKey: ["articles"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/articles");
+      return res.data;
+    },
+  });
 
-  useEffect(() => {
-    fetch("/articles.json")
-      .then((res) => res.json())
-      .then((data) => setArticles(data));
-  }, []);
+  if (isPending) {
+    return <h1 className="text-5xl-text-center mt-10">Loading...</h1>;
+  }
 
   return (
     <div className="mt-8 lg:mt-16">

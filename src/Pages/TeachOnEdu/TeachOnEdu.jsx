@@ -46,7 +46,7 @@ const TeachOnEdu = () => {
         refetch();
         Swal.fire({
           title: "Submitted Successfully!",
-          text: "Please Wait You Got Any Response",
+          text: "Please Wait Until You Got Any Response",
           icon: "success",
         });
       }

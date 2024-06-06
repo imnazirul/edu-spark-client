@@ -1,17 +1,22 @@
-import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { FaPeopleGroup } from "react-icons/fa6";
-import { BsPersonSquare } from "react-icons/bs";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 
 const PopularClasses = () => {
-  const [classes, setClasses] = useState([]);
+  const axiosPublic = useAxiosPublic();
+  const { data: classes, isPending } = useQuery({
+    queryKey: ["popularClasses"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/popular_classes");
+      return res.data;
+    },
+  });
 
-  useEffect(() => {
-    fetch("/popularclass.json")
-      .then((res) => res.json())
-      .then((data) => setClasses(data));
-  }, []);
+  if (isPending) {
+    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  }
 
   const settings = {
     dots: false,
@@ -67,29 +72,36 @@ const PopularClasses = () => {
               <div className="relative">
                 <img
                   className="rounded-t-lg h-52 w-full"
-                  src={item.image}
+                  src={item?.image}
                   alt=""
                 />
                 <p className="text-white bg-secondary-1 bg-opacity-50 font-semibold inline-block px-3 py-1 absolute rounded-3xl top-2 left-1">
-                  Course Fee: ${item.price}
+                  Course Fee: ${item?.price}
                 </p>
               </div>
               <div className="p-5 flex justify-between flex-col items-start h-[200px]">
                 <a href="#">
                   <h5 className="mb-2 text-xl font-semibold tracking-tight text-secondary-1">
-                    {item.title}
+                    {item?.title}
                   </h5>
                 </a>
-                <p className="mb-3 text-sm">{item.description}</p>
+                <p className="mb-3 text-sm">{item?.short_description}</p>
                 <div className="flex justify-between w-full">
                   <div className="">
                     <p className="flex gap-1 items-center">
                       <FaPeopleGroup></FaPeopleGroup> Total Enrollment:
-                      <span className="font-semibold"> {item.enrolment}</span>
+                      <span className="font-semibold">
+                        {" "}
+                        {item?.totalEnrollment}
+                      </span>
                     </p>
                     <p className="flex gap-1 items-center font-semibold">
-                      <BsPersonSquare></BsPersonSquare>
-                      {item.name}
+                      <img
+                        className="w-7 h-7 rounded-full object-cover"
+                        src={item?.teacherImg}
+                        alt=""
+                      />
+                      {item?.name}
                     </p>
                   </div>
                   <button
