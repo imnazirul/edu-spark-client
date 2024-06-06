@@ -49,6 +49,7 @@ const EnrolledClassDetails = () => {
     },
     onSuccess: (response) => {
       if (response.insertedId) {
+        reset();
         document.getElementById("my_modal_1").close();
         Swal.fire({
           position: "middle",
@@ -68,6 +69,7 @@ const EnrolledClassDetails = () => {
     handleSubmit,
     // watch,
     setError,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -85,6 +87,7 @@ const EnrolledClassDetails = () => {
       classId: id,
       className: classData.title,
       description: formData.description,
+      date: new Date().toDateString(),
     };
 
     addFeedback(feedbackData);

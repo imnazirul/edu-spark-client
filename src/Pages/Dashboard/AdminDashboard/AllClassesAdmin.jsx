@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const AllClassesAdmin = () => {
   const axiosPublic = useAxiosPublic();
@@ -136,12 +137,15 @@ const AllClassesAdmin = () => {
                   </div>
                 </td>
                 <td>
-                  <button
-                    disabled={sinClass?.status !== "approved"}
-                    className="btn hover:bg-transparent hover:text-blue-500 hover:border-blue-500 bg-blue-500 text-white  btn-sm"
-                  >
-                    Progress
-                  </button>
+                  <Link to={`/dashboard/class_progress/${sinClass?._id}`}>
+                    {" "}
+                    <button
+                      disabled={sinClass?.status !== "approved"}
+                      className="btn hover:bg-transparent hover:text-blue-500 hover:border-blue-500 bg-blue-500 text-white  btn-sm w-[120px]"
+                    >
+                      See Progress
+                    </button>
+                  </Link>
                 </td>
               </tr>
             ))}

@@ -22,6 +22,7 @@ import MyClassDetails from "../Pages/Dashboard/TeacherDashboard/MyClassDetails";
 import Payment from "../Pages/Payment/Payment";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import TeacherRoute from "../TeacherRoute/TeacherRoute";
+import ClassProgress from "../Pages/Dashboard/AdminDashboard/ClassProgress";
 
 const router = createBrowserRouter([
   {
@@ -97,6 +98,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllClassesAdmin></AllClassesAdmin>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "class_progress/:id",
+        element: (
+          <AdminRoute>
+            <ClassProgress></ClassProgress>
           </AdminRoute>
         ),
       },

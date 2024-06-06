@@ -93,16 +93,7 @@ const ClassDetails = () => {
       <div className="bg-base-200 p-5 mt-8">
         <div className="">
           <h2 className="text-xl font-semibold">More Details</h2>
-          <p className="mt-4 mb-8 ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-            placeat cupiditate nihil! Illum cum sequi eligendi perspiciatis
-            magni placeat dolor obcaecati sapiente earum repudiandae. Inventore
-            adipisci sed, nesciunt pariatur voluptatem sit saepe facilis
-            accusantium totam voluptas consequatur exercitationem, ullam quos
-            ratione? Libero, cum. Repudiandae reiciendis placeat minus,
-            excepturi ex porro, unde eos autem enim quod itaque, quaerat sequi
-            earum laboriosam.
-          </p>
+          <p className="mt-4 mb-8 ">{classItem?.long_description}</p>
         </div>
       </div>
     </div>

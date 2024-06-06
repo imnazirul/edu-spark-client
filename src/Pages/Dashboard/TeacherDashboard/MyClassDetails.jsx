@@ -164,10 +164,13 @@ const MyClassDetails = () => {
             </div>
             <div className="flex flex-col justify-center align-middle">
               <p className="text-3xl font-semibold ">
-                {(
-                  (classData.totalAssignment.length / classData.totalEnrolled) *
-                  100
-                ).toFixed(2)}
+                {classData.totalEnrolled || classData.totalAssignment.length
+                  ? "NAN"
+                  : (
+                      (classData.totalAssignment.length /
+                        classData.totalEnrolled) *
+                      100
+                    ).toFixed(2)}
                 %
               </p>
               <p className="capitalize font-semibold text-lg">
