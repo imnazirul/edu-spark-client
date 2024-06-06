@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -6,15 +6,25 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import "./slick.css";
 import ReactStars from "react-rating-stars-component";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 const StudentFeedback = () => {
-  const [feedbacks, setFeedbacks] = useState([]);
+  const axiosPublic = useAxiosPublic();
 
-  useEffect(() => {
-    fetch("/feedback.json")
-      .then((res) => res.json())
-      .then((data) => setFeedbacks(data));
-  }, []);
+  const {
+    data: feedbacks,
+    isPending,
+    // isError,
+  } = useQuery({
+    queryKey: ["feedbacks"],
+    queryFn: async () => {
+      const res = await axiosPublic("/feedbacks");
+      console.log(res.data);
+      return res.data;
+    },
+  });
 
   let sliderRef = useRef(null);
   const next = () => {
@@ -68,6 +78,10 @@ const StudentFeedback = () => {
       },
     ],
   };
+
+  if (isPending) {
+    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  }
   return (
     <div className="slider-container l relative mt-8 lg:mt-16 h-[430px]">
       <SectionTitle
@@ -89,8 +103,8 @@ const StudentFeedback = () => {
             <div className=" flex ">
               <div className="relative">
                 <img
-                  className="w-16 rounded-full border-2 border-blue-500"
-                  src="https://rhoomy.smartdemowp.com/wp-content/uploads/team-6.jpg"
+                  className="w-16 h-16 object-cover rounded-full border-2 border-blue-500"
+                  src={feedback.studentImg}
                   alt=""
                 />
                 <img
@@ -101,29 +115,33 @@ const StudentFeedback = () => {
               </div>
               <div>
                 <p className="text-secondary-1 font-bold ml-3 text-xl">
-                  {feedback.name}
+                  {feedback.studentName}
                 </p>
                 <p className="text-primary-1 font-semibold ml-3">Student</p>
               </div>
             </div>
             <h3 className="text-xl font-semibold mt-2">
-              Class: {feedback.class}
+              Class: {feedback.className}
             </h3>
-            <div>
+            <div className="flex gap-2">
               <ReactStars
                 value={feedback.rating}
                 size={30}
+                isHalf={true}
                 edit={false}
                 activeColor="#FFD700"
-              />
+              />{" "}
+              <div className="flex items-center">
+                (<p className="text-lg font-medium">{feedback.rating}</p>{" "}
+                <StarRoundedIcon
+                  sx={{ color: "gold", fontSize: "25px" }}
+                ></StarRoundedIcon>
+                )
+              </div>
             </div>
 
             <div className="text-2xl my-2 flex gap-1 justify-center text-[#FFD700]"></div>
-            <p className="max-sm:text-sm my-2">
-              Incredible attention to detail! Every aspect of our trip was
-              tailored to perfection. Highly recommend this agency for anyone
-              seeking a personalized travel experience.
-            </p>
+            <p className="max-sm:text-sm my-2">{feedback.description}</p>
             <h1 className="text-xl md:text-2xl text-primary-1 font-bold text-center"></h1>
           </div>
         ))}
