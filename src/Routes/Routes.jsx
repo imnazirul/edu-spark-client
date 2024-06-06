@@ -21,6 +21,7 @@ import EnrolledClassDetails from "../Pages/Dashboard/StudentDashboard/EnrolledCl
 import MyClassDetails from "../Pages/Dashboard/TeacherDashboard/MyClassDetails";
 import Payment from "../Pages/Payment/Payment";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import TeacherRoute from "../TeacherRoute/TeacherRoute";
 
 const router = createBrowserRouter([
   {
@@ -103,19 +104,35 @@ const router = createBrowserRouter([
       //teacher routes
       {
         path: "add_class",
-        element: <AddClass></AddClass>,
+        element: (
+          <TeacherRoute>
+            <AddClass></AddClass>
+          </TeacherRoute>
+        ),
       },
       {
         path: "my_class",
-        element: <MyClass></MyClass>,
+        element: (
+          <TeacherRoute>
+            <MyClass></MyClass>
+          </TeacherRoute>
+        ),
       },
       {
         path: "update_class/:id",
-        element: <UpdateClass></UpdateClass>,
+        element: (
+          <TeacherRoute>
+            <UpdateClass></UpdateClass>
+          </TeacherRoute>
+        ),
       },
       {
         path: "my_class_details/:id",
-        element: <MyClassDetails></MyClassDetails>,
+        element: (
+          <TeacherRoute>
+            <MyClassDetails></MyClassDetails>
+          </TeacherRoute>
+        ),
       },
       //student routes
       {

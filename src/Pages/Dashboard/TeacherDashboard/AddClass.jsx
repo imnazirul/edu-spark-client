@@ -132,7 +132,7 @@ const AddClass = () => {
             </p>
 
             <img
-              className="rounded-full w-16 h-16 mx-auto"
+              className="rounded-full object-cover w-16 h-16 mx-auto"
               src={user?.photoURL}
               alt=""
             />
