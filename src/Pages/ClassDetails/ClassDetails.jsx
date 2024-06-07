@@ -2,6 +2,7 @@ import { BsPeopleFill } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
 import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const ClassDetails = () => {
   const { id } = useParams();
@@ -26,7 +27,9 @@ const ClassDetails = () => {
 
   return (
     <div>
-      {" "}
+      <Helmet>
+        <title>Class Details | EduSpark</title>
+      </Helmet>
       <section className="bg-base-200 p-5 ">
         <div className="container flex flex-col mx-auto lg:flex-row">
           <div className="flex flex-col space-y-5  w-full p-4 lg:w-2/3 md:p-8 lg:p-10 lg:pt-5">

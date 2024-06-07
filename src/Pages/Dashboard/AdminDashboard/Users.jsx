@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import { Helmet } from "react-helmet-async";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
@@ -62,6 +63,9 @@ const Users = () => {
 
   return (
     <div className="w-full overflow-hidden">
+      <Helmet>
+        <title>Users | Dashboard</title>
+      </Helmet>
       <form onSubmit={handleSearch} className="max-w-md mx-auto">
         <div className="relative">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">

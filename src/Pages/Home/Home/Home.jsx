@@ -6,10 +6,14 @@ import BecomeInstructor from "../BecomeInstructor/BecomeInstructor";
 import EduArticles from "../EduArticles/EduArticles";
 import PopularCategories from "../PopularCategories/PopularCategories";
 import NewsLetter from "../NewsLetter/NewsLetter";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   return (
     <>
+      <Helmet>
+        <title>Home | EduSpark</title>
+      </Helmet>
       <Banner></Banner>
       <PopularClasses></PopularClasses>
       <UserStats></UserStats>

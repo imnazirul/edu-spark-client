@@ -7,6 +7,7 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import toast from "react-hot-toast";
 import useAuth from "../../CustomHooks/useAuth";
 import usePublicMutationPost from "../../CustomHooks/usePublicMutationPost";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const mutation = usePublicMutationPost("/users");
@@ -94,6 +95,9 @@ const Login = () => {
   return (
     <>
       <section className="flex justify-center flex-col items-center bg-[url('https://i.ibb.co/71j9gy9/joanna-kosinska-LAa-So-L0-Lr-Ys-unsplash.jpg')] bg-cover bg-center bg-blend-multiply min-h-screen bg-blue-500 bg-opacity-30">
+        <Helmet>
+          <title>Sign In | EduSpark</title>
+        </Helmet>
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-jost font-bold text-center pt-5 lg:pt-10 text-btn-1 text-white font-poppins">
           SIGN IN
         </h1>

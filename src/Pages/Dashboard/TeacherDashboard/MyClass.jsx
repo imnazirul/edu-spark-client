@@ -6,6 +6,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import InfoIcon from "@mui/icons-material/Info";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const MyClass = () => {
   const { user } = useAuth();
@@ -52,6 +53,9 @@ const MyClass = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Classes | Dashboard</title>
+      </Helmet>
       <h1 className="text-2xl md:text-3xl lg:text-4xl text-center font-semibold font-poppins underline mb-4">
         YOUR CLASSES
       </h1>

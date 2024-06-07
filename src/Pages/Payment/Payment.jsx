@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
+import { Helmet } from "react-helmet-async";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PAYMENT_PK);
 
@@ -30,6 +31,9 @@ const Payment = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Payment | EduSpark</title>
+      </Helmet>
       <h1 className="text-2xl mb-5 md:text-3xl text-center font-semibold font-poppins">
         Payment For {classItem?.title}
       </h1>

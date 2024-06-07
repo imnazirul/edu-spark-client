@@ -9,6 +9,7 @@ import useAxiosPublic from "../../CustomHooks/useAxiosPublic";
 import "./sweetalert.css";
 import usePublicMutationPost from "../../CustomHooks/usePublicMutationPost";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const img_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
@@ -151,6 +152,9 @@ const Register = () => {
       {" "}
       <Toaster></Toaster>
       <section className="flex justify-center flex-col items-center bg-[url('https://i.ibb.co/71j9gy9/joanna-kosinska-LAa-So-L0-Lr-Ys-unsplash.jpg')] bg-cover bg-center bg-blend-multiply min-h-screen bg-blue-500 bg-opacity-30">
+        <Helmet>
+          <title>Sign Up | EduSpark</title>
+        </Helmet>
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-jost font-bold text-center pt-5 lg:pt-10 text-btn-1 text-white font-poppins">
           SIGN UP
         </h1>

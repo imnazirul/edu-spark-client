@@ -3,6 +3,7 @@ import ClassCard from "../../components/ClassCard/ClassCard";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../CustomHooks/useAxiosPublic";
 import useEnrolledClassIds from "../../CustomHooks/useEnrolledClassIds";
+import { Helmet } from "react-helmet-async";
 
 const AllClasses = () => {
   const axiosPublic = useAxiosPublic();
@@ -26,6 +27,9 @@ const AllClasses = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>All Classes | EduSpark</title>
+      </Helmet>
       <SectionTitle title="ALL CLASSES"></SectionTitle>
       <div className="grid md:grid-cols-3 gap-5">
         {classes.map((sClass, index) => (

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import ReactStars from "react-rating-stars-component";
+import { Helmet } from "react-helmet-async";
 
 const ClassProgress = () => {
   const { id } = useParams();
@@ -47,6 +48,9 @@ const ClassProgress = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Class Progress | Dashboard</title>
+      </Helmet>
       <h1 className="text-2xl md:text-3xl text-center font-semibold font-poppins uppercase underline">
         Feedbacks And Progress For This Class
       </h1>

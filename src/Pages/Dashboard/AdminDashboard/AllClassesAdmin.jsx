@@ -3,6 +3,7 @@ import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AllClassesAdmin = () => {
   const axiosPublic = useAxiosPublic();
@@ -76,6 +77,9 @@ const AllClassesAdmin = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>All Classes | Dashboard</title>
+      </Helmet>
       <div className="overflow-x-auto ">
         <table className="table text-center">
           {/* head */}

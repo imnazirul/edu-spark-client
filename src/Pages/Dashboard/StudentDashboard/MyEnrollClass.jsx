@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import useAuth from "../../../CustomHooks/useAuth";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const MyEnrollClass = () => {
   const { user } = useAuth();
@@ -27,6 +28,9 @@ const MyEnrollClass = () => {
 
   return (
     <div className="grid grid-cols-1 gap-5 mb-8">
+      <Helmet>
+        <title>Enrolled Classes | Dashboard</title>
+      </Helmet>
       {enrolledClasses.length === 0 ? (
         <div className="h-[70vh] flex items-center justify-center">
           <h1 className="text-4xl font-semibold text-center">

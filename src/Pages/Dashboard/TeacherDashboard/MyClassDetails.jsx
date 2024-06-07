@@ -6,6 +6,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { Helmet } from "react-helmet-async";
 
 const MyClassDetails = () => {
   const axiosSecure = useAxiosSecure();
@@ -97,6 +98,9 @@ const MyClassDetails = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Class Details | Dashboard</title>
+      </Helmet>
       <h1 className="text-2xl md:text-3xl  text-center font-semibold font-poppins underline">
         CLASS DETAILS
       </h1>

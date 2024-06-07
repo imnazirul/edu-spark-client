@@ -7,6 +7,7 @@ import UpdateIcon from "@mui/icons-material/Update";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const img_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
@@ -150,7 +151,9 @@ const UpdateClass = () => {
 
   return (
     <div>
-      {" "}
+      <Helmet>
+        <title>Update Class | Dashboard</title>
+      </Helmet>
       <h1 className="text-2xl md:text-3xl lg:text-4xl text-center font-semibold font-poppins underline mb-4">
         UPDATE CLASS
       </h1>

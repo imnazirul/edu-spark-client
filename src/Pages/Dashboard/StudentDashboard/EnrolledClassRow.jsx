@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import useAuth from "../../../CustomHooks/useAuth";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 /* eslint-disable react/prop-types */
 const EnrolledClassRow = ({ assignment, index, Refetch }) => {
@@ -17,16 +18,33 @@ const EnrolledClassRow = ({ assignment, index, Refetch }) => {
       return res.data;
     },
     onSuccess: (response) => {
-      console.log(response);
       Refetch();
+      if (response.modifiedCount > 0) {
+        Swal.fire({
+          title: "SUBMITTED SUCCESSFULLY!",
+          text: "Your Assignment has been Submitted.",
+          icon: "success",
+        });
+      }
     },
   });
 
   const handleSubmit = () => {
-    const submittedEmailsArray = assignment.submittedEmails;
-    submittedEmailsArray.push(user?.email);
-    // console.log(submittedEmailsArray);
-    updateSubmissions(submittedEmailsArray);
+    Swal.fire({
+      title: "Are you Want to Submit the Assignment?",
+
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Submit",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const submittedEmailsArray = assignment.submittedEmails;
+        submittedEmailsArray.push(user?.email);
+        updateSubmissions(submittedEmailsArray);
+      }
+    });
   };
 
   return (

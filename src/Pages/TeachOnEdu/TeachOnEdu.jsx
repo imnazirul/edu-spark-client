@@ -9,6 +9,7 @@ import { useState } from "react";
 import AutorenewRoundedIcon from "@mui/icons-material/AutorenewRounded";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import useRole from "../../CustomHooks/useRole";
+import { Helmet } from "react-helmet-async";
 
 const TeachOnEdu = () => {
   const axiosSecure = useAxiosSecure();
@@ -78,6 +79,9 @@ const TeachOnEdu = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Teach On EduSpark | EduSpark</title>
+      </Helmet>
       <SectionTitle
         title="COME TEACH WITH US "
         subtitle="Become an instructor and change lives — including your own"

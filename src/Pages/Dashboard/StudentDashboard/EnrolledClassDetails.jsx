@@ -12,6 +12,7 @@ import { useState } from "react";
 import useAuth from "../../../CustomHooks/useAuth";
 import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const EnrolledClassDetails = () => {
   const { id } = useParams();
@@ -99,6 +100,9 @@ const EnrolledClassDetails = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Enrolled Class Details | Dashboard</title>
+      </Helmet>
       <h1 className="text-3xl text-center font-medium uppercase underline mb-5">
         Assignments For This Class
       </h1>
@@ -190,7 +194,7 @@ const EnrolledClassDetails = () => {
             <div className="form-control  mt-6 col-span-2">
               <button className="btn  bg-blue-500 hover:bg-blue-500 text-xl text-white">
                 <IoMdAddCircleOutline className="text-3xl font-bold"></IoMdAddCircleOutline>{" "}
-                ADD REPORT
+                SEND
               </button>
             </div>
           </form>

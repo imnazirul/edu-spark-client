@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const TeacherRequest = () => {
   const axiosSecure = useAxiosSecure();
@@ -77,6 +78,9 @@ const TeacherRequest = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Teacher Requests | Dashboard</title>
+      </Helmet>
       <div className="overflow-x-auto">
         <table className="table text-center ">
           {/* head */}

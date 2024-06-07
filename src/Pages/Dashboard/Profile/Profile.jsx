@@ -7,6 +7,7 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 const img_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
 
@@ -97,6 +98,9 @@ const Profile = () => {
   return (
     <>
       <div className="w-full  px-4 mx-auto">
+        <Helmet>
+          <title>Profile | EduSpark</title>
+        </Helmet>
         <Toaster></Toaster>
         <div className="relative flex flex-col min-w-0 break-words bg-base-100 w-full mb-6  rounded-lg ">
           <div className="px-6">
