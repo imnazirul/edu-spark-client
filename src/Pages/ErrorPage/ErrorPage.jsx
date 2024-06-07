@@ -17,7 +17,6 @@ const ErrorPage = () => {
               src="https://i.ibb.co/5YCJxtp/Group.png"
               alt=""
             />
-            s
           </div>
 
           <div className=" my-5 ">

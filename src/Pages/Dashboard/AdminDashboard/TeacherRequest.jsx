@@ -1,10 +1,30 @@
+/* eslint-disable no-unused-vars */
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import { useEffect, useState } from "react";
+import { IoMdArrowBack } from "react-icons/io";
+import { IoMdArrowForward } from "react-icons/io";
 
 const TeacherRequest = () => {
   const axiosSecure = useAxiosSecure();
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  //teacher count
+  const {
+    data: totalCount,
+    isPending: isCountPending,
+    // isError,
+  } = useQuery({
+    queryKey: ["teacherCount"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/teacher_requests_count");
+      // console.log(res.data);
+      return res.data.count;
+    },
+  });
 
   const {
     data: teacherRequests = [],
@@ -14,10 +34,16 @@ const TeacherRequest = () => {
   } = useQuery({
     queryKey: ["teachersRequest"],
     queryFn: async () => {
-      const res = await axiosSecure.get("teacher_request");
+      const res = await axiosSecure.get(
+        `teacher_requests?page=${currentPage}&size=${itemsPerPage}`
+      );
       return res.data;
     },
   });
+
+  useEffect(() => {
+    refetch();
+  }, [currentPage, itemsPerPage, refetch]);
 
   const handleReqApprove = (id, name, email) => {
     const info = { status: "approved", email: email };
@@ -72,23 +98,42 @@ const TeacherRequest = () => {
     });
   };
 
-  if (isPending) {
-    <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  if (isPending || isCountPending) {
+    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
   }
+
+  const totalPage = Math.ceil(totalCount / itemsPerPage);
+  const pages = [...Array(totalPage).keys()];
+  // console.log(currentPage);
+
+  const handlePrevious = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div>
       <Helmet>
         <title>Teacher Requests | Dashboard</title>
       </Helmet>
+      <h1 className="text-2xl md:text-3xl  text-center font-semibold font-poppins underline mb-1">
+        TEACHER REQUESTS
+      </h1>
       <div className="overflow-x-auto">
-        <table className="table text-center ">
+        <table className="table text-center w-full ">
           {/* head */}
           <thead className="bg-pink-600 text-white">
             <tr>
               <th>IMAGE </th>
               <th>NAME</th>
-              <th>EMAIL</th>
+              {/* <th>EMAIL</th> */}
               <th>EXPERIENCE</th>
               <th>TITLE</th>
               <th>CATEGORY</th>
@@ -112,7 +157,7 @@ const TeacherRequest = () => {
                   </div>
                 </td>
                 <td>{request?.name}</td>
-                <td>{request?.email}</td>
+                {/* <td>{request?.email}</td> */}
                 <td>{request?.experience}</td>
                 <td>{request?.title}</td>
                 <td>{request?.category}</td>
@@ -130,18 +175,6 @@ const TeacherRequest = () => {
                       Pending
                     </span>
                   )}
-
-                  {/* <span
-                    className={`${
-                      
-                        ? "text-green-500 bg-green-500"
-                        : request.status === "rejected"
-                        ? "text-red-500 bg-red-500"
-                        : "text-orange-500 bg-orange-500"
-                    } bg-opacity-15 rounded-3xl capitalize px-3 py-1`}
-                  >
-                    Accepted
-                  </span> */}
                 </td>
                 <td>
                   <div className="flex gap-1 items-center">
@@ -173,6 +206,40 @@ const TeacherRequest = () => {
             ))}
           </tbody>
         </table>
+        <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center">
+          <div>
+            Showing {currentPage * itemsPerPage} to{" "}
+            {currentPage * itemsPerPage + itemsPerPage} of total {totalCount}{" "}
+            Data
+          </div>
+          <div className="join gap-1">
+            <button
+              onClick={handlePrevious}
+              className="join-item border hover:border-primary-1 border-primary-1 btn btn-md"
+            >
+              <IoMdArrowBack></IoMdArrowBack> Previous
+            </button>
+            {pages.map((page) => (
+              <button
+                key={page}
+                className={`join-item btn btn-md border border-primary-1 hover:border-primary-1 ${
+                  currentPage === page
+                    ? "bg-primary-1 hover:bg-primary-1 text-white"
+                    : ""
+                }`}
+                onClick={() => setCurrentPage(page)}
+              >
+                {page + 1}
+              </button>
+            ))}
+            <button
+              onClick={handleNext}
+              className="join-item border border-primary-1 hover:border-primary-1 btn btn-md"
+            >
+              Next <IoMdArrowForward></IoMdArrowForward>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
