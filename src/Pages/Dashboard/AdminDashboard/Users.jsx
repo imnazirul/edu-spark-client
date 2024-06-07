@@ -1,14 +1,32 @@
+/* eslint-disable no-unused-vars */
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { Helmet } from "react-helmet-async";
+import { IoMdArrowBack, IoMdArrowForward } from "react-icons/io";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
   const [searchText, setSearchText] = useState("");
   const [query, setQuery] = useState(true);
+  const [usersPerPage, setUsersPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  //total Users Count
+  const {
+    data: totalUsers,
+    isPending: isCountPending,
+    // isError,
+  } = useQuery({
+    queryKey: ["teacherCount"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/users_count");
+      // console.log(res.data);
+      return res.data.totalUsers;
+    },
+  });
 
   const {
     data: users,
@@ -17,14 +35,16 @@ const Users = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users?search=${searchText}`);
+      const res = await axiosSecure.get(
+        `/users?search=${searchText}&page=${currentPage}&size=${usersPerPage}`
+      );
       return res.data;
     },
   });
 
   useEffect(() => {
     refetch();
-  }, [query, refetch]);
+  }, [query, refetch, currentPage, usersPerPage]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -57,9 +77,30 @@ const Users = () => {
     });
   };
 
-  if (isPending) {
+  // useEffect(() => {
+  //   refetch();
+  // }, [currentPage, refetch, usersPerPage]);
+
+  if (isPending || isCountPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
   }
+
+  const totalPages = Math.ceil(totalUsers / usersPerPage);
+
+  const pages = [...Array(totalPages).keys()];
+  // console.log(pages);
+
+  const handlePrevious = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div className="w-full overflow-hidden">
@@ -159,6 +200,40 @@ const Users = () => {
             </tbody>
           </table>
         )}
+
+        <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center">
+          <div>
+            Showing {currentPage * usersPerPage} to{" "}
+            {currentPage * usersPerPage + users.length} of total {totalUsers}{" "}
+          </div>
+          <div className="join gap-1">
+            <button
+              onClick={handlePrevious}
+              className="join-item border hover:border-primary-1 border-primary-1 btn btn-md"
+            >
+              <IoMdArrowBack></IoMdArrowBack> Previous
+            </button>
+            {pages.map((page) => (
+              <button
+                key={page}
+                className={`join-item btn btn-md border border-primary-1 hover:border-primary-1 ${
+                  currentPage === page
+                    ? "bg-primary-1 hover:bg-primary-1 text-white"
+                    : ""
+                }`}
+                onClick={() => setCurrentPage(page)}
+              >
+                {page + 1}
+              </button>
+            ))}
+            <button
+              onClick={handleNext}
+              className="join-item border border-primary-1 hover:border-primary-1 btn btn-md"
+            >
+              Next <IoMdArrowForward></IoMdArrowForward>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ import { IoMdArrowForward } from "react-icons/io";
 
 const TeacherRequest = () => {
   const axiosSecure = useAxiosSecure();
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(0);
 
   //teacher count
@@ -209,8 +209,8 @@ const TeacherRequest = () => {
         <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center">
           <div>
             Showing {currentPage * itemsPerPage} to{" "}
-            {currentPage * itemsPerPage + itemsPerPage} of total {totalCount}{" "}
-            Data
+            {currentPage * itemsPerPage + teacherRequests.length} of total{" "}
+            {totalCount} Data
           </div>
           <div className="join gap-1">
             <button

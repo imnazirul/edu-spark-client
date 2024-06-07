@@ -1,13 +1,31 @@
+/* eslint-disable no-unused-vars */
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useEffect, useState } from "react";
+import { IoMdArrowBack, IoMdArrowForward } from "react-icons/io";
 
 const AllClassesAdmin = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  const {
+    data: totalClasses,
+    isPending: isCountPending,
+    // isError,
+  } = useQuery({
+    queryKey: ["teacherCount"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/classes_count");
+      // console.log(res.data);
+      return res.data.totalClasses;
+    },
+  });
 
   const {
     data: classes,
@@ -17,7 +35,9 @@ const AllClassesAdmin = () => {
   } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/classes");
+      const res = await axiosPublic.get(
+        `/classes?page=${currentPage}&size=${itemsPerPage}`
+      );
       return res.data;
     },
   });
@@ -71,9 +91,28 @@ const AllClassesAdmin = () => {
     });
   };
 
-  if (isPending) {
+  useEffect(() => {
+    refetch();
+  }, [currentPage, itemsPerPage, refetch]);
+
+  if (isPending || isCountPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
   }
+
+  const totalPages = Math.ceil(totalClasses / itemsPerPage);
+  const pages = [...Array(totalPages).keys()];
+
+  const handlePrevious = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div>
@@ -81,6 +120,9 @@ const AllClassesAdmin = () => {
         <title>All Classes | Dashboard</title>
       </Helmet>
       <div className="overflow-x-auto ">
+        <h1 className="text-2xl md:text-3xl underline mb-2 text-center font-semibold font-poppins">
+          ALL CLASSES
+        </h1>
         <table className="table text-center">
           {/* head */}
           <thead className="bg-pink-600 text-white">
@@ -155,6 +197,41 @@ const AllClassesAdmin = () => {
             ))}
           </tbody>
         </table>
+
+        <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center">
+          <div>
+            Showing {currentPage * itemsPerPage} to{" "}
+            {currentPage * itemsPerPage + classes.length} of total{" "}
+            {totalClasses}{" "}
+          </div>
+          <div className="join gap-1">
+            <button
+              onClick={handlePrevious}
+              className="join-item border hover:border-primary-1 border-primary-1 btn btn-md"
+            >
+              <IoMdArrowBack></IoMdArrowBack> Previous
+            </button>
+            {pages.map((page) => (
+              <button
+                key={page}
+                className={`join-item btn btn-md border border-primary-1 hover:border-primary-1 ${
+                  currentPage === page
+                    ? "bg-primary-1 hover:bg-primary-1 text-white"
+                    : ""
+                }`}
+                onClick={() => setCurrentPage(page)}
+              >
+                {page + 1}
+              </button>
+            ))}
+            <button
+              onClick={handleNext}
+              className="join-item border border-primary-1 hover:border-primary-1 btn btn-md"
+            >
+              Next <IoMdArrowForward></IoMdArrowForward>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
