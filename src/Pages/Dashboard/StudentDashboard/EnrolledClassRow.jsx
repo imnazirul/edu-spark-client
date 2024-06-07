@@ -58,8 +58,8 @@ const EnrolledClassRow = ({ assignment, index, Refetch }) => {
           {assignment?.submittedEmails.find(
             (email) => email === user?.email
           ) ? (
-            <p className=" bg-green-500 text-green-500 border-green-500 bg-opacity-20 rounded-3xl font-medium py-1">
-              SUBMITTED
+            <p className=" bg-green-500 text-green-500 border-green-500 bg-opacity-15 rounded-3xl font-medium py-1">
+              Submitted
             </p>
           ) : (
             <button

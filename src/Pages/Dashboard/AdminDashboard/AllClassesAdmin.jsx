@@ -120,7 +120,7 @@ const AllClassesAdmin = () => {
         <title>All Classes | Dashboard</title>
       </Helmet>
       <div className="overflow-x-auto ">
-        <h1 className="text-2xl md:text-3xl underline mb-2 text-center font-semibold font-poppins">
+        <h1 className="text-2xl md:text-3xl underline mb-2   text-center font-semibold font-poppins">
           ALL CLASSES
         </h1>
         <table className="table text-center">

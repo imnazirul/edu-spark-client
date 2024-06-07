@@ -1,14 +1,19 @@
+/* eslint-disable no-unused-vars */
 // import { useParams } from "react-router-dom";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 import EnrolledClassRow from "./EnrolledClassRow";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
-import { IoMdAddCircleOutline } from "react-icons/io";
+import {
+  IoMdAddCircleOutline,
+  IoMdArrowBack,
+  IoMdArrowForward,
+} from "react-icons/io";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useForm } from "react-hook-form";
 import ReactStars from "react-rating-stars-component";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../../CustomHooks/useAuth";
 import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 import Swal from "sweetalert2";
@@ -20,6 +25,21 @@ const EnrolledClassDetails = () => {
   const [rating, setRating] = useState(0);
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  const {
+    data: totalCount,
+    isPending: isCountPending,
+    // isError,
+  } = useQuery({
+    queryKey: ["teacherCount"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/assignments_count/${id}`);
+      // console.log(res.data);
+      return res.data.totalIdsAssignment;
+    },
+  });
 
   const {
     data: assignments,
@@ -94,9 +114,28 @@ const EnrolledClassDetails = () => {
     addFeedback(feedbackData);
   };
 
-  if (isPending || isClassPending) {
+  useEffect(() => {
+    refetch();
+  }, [currentPage, itemsPerPage, refetch]);
+
+  if (isPending || isClassPending || isCountPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
   }
+
+  const totalPage = Math.ceil(totalCount / itemsPerPage);
+  const pages = [...Array(totalPage).keys()];
+
+  const handlePrevious = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div>
@@ -148,6 +187,41 @@ const EnrolledClassDetails = () => {
                   ))}
               </tbody>
             </table>
+
+            <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center">
+              <div>
+                Showing {currentPage * itemsPerPage} to{" "}
+                {currentPage * itemsPerPage + assignments.length} of total{" "}
+                {totalCount} Data
+              </div>
+              <div className="join gap-1">
+                <button
+                  onClick={handlePrevious}
+                  className="join-item border hover:border-primary-1 border-primary-1 btn btn-md"
+                >
+                  <IoMdArrowBack></IoMdArrowBack> Previous
+                </button>
+                {pages.map((page) => (
+                  <button
+                    key={page}
+                    className={`join-item btn btn-md border border-primary-1 hover:border-primary-1 ${
+                      currentPage === page
+                        ? "bg-primary-1 hover:bg-primary-1 text-white"
+                        : ""
+                    }`}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    {page + 1}
+                  </button>
+                ))}
+                <button
+                  onClick={handleNext}
+                  className="join-item border border-primary-1 hover:border-primary-1 btn btn-md"
+                >
+                  Next <IoMdArrowForward></IoMdArrowForward>
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>
