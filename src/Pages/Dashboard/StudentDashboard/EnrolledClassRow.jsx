@@ -41,7 +41,10 @@ const EnrolledClassRow = ({ assignment, index, Refetch }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         const submittedEmailsArray = assignment.submittedEmails;
-        submittedEmailsArray.push(user?.email);
+        const submitInfo = { email: user?.email, date: new Date().getTime() };
+
+        submittedEmailsArray.push(submitInfo);
+        // console.log(submittedEmailsArray);
         updateSubmissions(submittedEmailsArray);
       }
     });
@@ -56,7 +59,7 @@ const EnrolledClassRow = ({ assignment, index, Refetch }) => {
         <td>{deadlineTime} 11:59 AM</td>
         <td>
           {assignment?.submittedEmails.find(
-            (email) => email === user?.email
+            (subObj) => subObj.email === user?.email
           ) ? (
             <p className=" bg-green-500 text-green-500 border-green-500 bg-opacity-15 rounded-3xl font-medium py-1">
               Submitted

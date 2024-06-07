@@ -12,6 +12,7 @@ const MyClassDetails = () => {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const { user } = useAuth();
+  console.log(id);
 
   const {
     data: classData,
@@ -23,6 +24,16 @@ const MyClassDetails = () => {
       const res = await axiosSecure.get(`/total_classes_data/${id}`);
       return res.data;
     },
+  });
+  const { data: perDaySubmit, isSubmitPending } = useQuery({
+    queryKey: ["per_day_assignment_submissions", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/per_day_assignment_submissions/${id}`
+      );
+      return res.data;
+    },
+    refetchOnWindowFocus: "always",
   });
 
   const { mutate: addAssignment } = useMutation({
@@ -52,7 +63,6 @@ const MyClassDetails = () => {
     },
   });
 
-  //
   const {
     register,
     handleSubmit,
@@ -61,7 +71,7 @@ const MyClassDetails = () => {
     formState: { errors },
   } = useForm();
 
-  if (isPending) {
+  if (isPending || isSubmitPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
   }
 
@@ -89,11 +99,6 @@ const MyClassDetails = () => {
       submittedEmails: [],
     };
     addAssignment(assignmentData);
-    console.log(assignmentData);
-    // console.log(
-    //   new Date(deadlineTime).toDateString(),
-    //   new Date(deadlineTime).toLocaleTimeString()
-    // );
   };
 
   return (
@@ -133,7 +138,7 @@ const MyClassDetails = () => {
             </div>
             <div className="flex flex-col justify-center align-middle">
               <p className="text-3xl font-semibold ">
-                {classData.totalAssignment.length}
+                {classData.totalAssignment}
               </p>
               <p className="capitalize font-semibold text-lg">ASSIGNMENTS</p>
             </div>
@@ -148,10 +153,7 @@ const MyClassDetails = () => {
             </div>
             <div className="flex flex-col justify-center align-middle">
               <p className="text-3xl font-semibold ">
-                {classData.totalAssignment.reduce(
-                  (total, assignment) => total + assignment.total_submitted,
-                  0
-                )}
+                {perDaySubmit.perDayCount}
               </p>
               <p className="capitalize font-semibold text-lg">
                 ASSIGNMENT SUBMISSION PER DAY
@@ -168,13 +170,12 @@ const MyClassDetails = () => {
             </div>
             <div className="flex flex-col justify-center align-middle">
               <p className="text-3xl font-semibold ">
-                {classData.totalEnrolled || classData.totalAssignment.length
-                  ? "NAN"
-                  : (
-                      (classData.totalAssignment.length /
-                        classData.totalEnrolled) *
+                {classData.totalEnrolled || classData.totalAssignment
+                  ? (
+                      (classData.totalAssignment / classData.totalEnrolled) *
                       100
-                    ).toFixed(2)}
+                    ).toFixed(2)
+                  : "NAN"}
                 %
               </p>
               <p className="capitalize font-semibold text-lg">
