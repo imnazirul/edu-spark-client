@@ -153,14 +153,16 @@ const router = createBrowserRouter([
         path: "my_enroll_class",
         element: (
           <PrivateRoute>
+            {" "}
             <MyEnrollClass></MyEnrollClass>
           </PrivateRoute>
         ),
       },
       {
-        path: "my_enrolled_class/:id",
+        path: "my_enrolled_class_details/:id",
         element: (
           <PrivateRoute>
+            {" "}
             <EnrolledClassDetails></EnrolledClassDetails>
           </PrivateRoute>
         ),

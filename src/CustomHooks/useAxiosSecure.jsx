@@ -13,18 +13,18 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  axiosSecure.interceptors.request.use(
-    (config) => {
-      const token = localStorage.getItem("access-token");
-      config.headers.authorization = `Bearer ${token}`;
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
-
   useEffect(() => {
+    axiosSecure.interceptors.request.use(
+      (config) => {
+        const token = localStorage.getItem("access-token");
+        config.headers.authorization = `Bearer ${token}`;
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+
     axiosSecure.interceptors.response.use(
       (response) => {
         return response;
