@@ -14,13 +14,13 @@ const StudentFeedback = () => {
   const axiosPublic = useAxiosPublic();
 
   const {
-    data: feedbacks,
+    data: feedbacks = [],
     isPending,
     isError,
   } = useQuery({
     queryKey: ["feedbacks"],
     queryFn: async () => {
-      const res = await axiosPublic("/feedbacks");
+      const res = await axiosPublic.get("/feedbacks");
       console.log(res.data);
       return res.data;
     },

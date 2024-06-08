@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 import useAuth from "../../../CustomHooks/useAuth";
 import { useForm } from "react-hook-form";
 import UpdateIcon from "@mui/icons-material/Update";
@@ -8,15 +7,16 @@ import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 
 const img_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
 
 const UpdateClass = () => {
   const { id } = useParams();
-  const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const [btnText, setBtnText] = useState(
     <>
       {" "}
@@ -26,7 +26,7 @@ const UpdateClass = () => {
   );
 
   const {
-    data: classItem,
+    data: classItem = {},
     isPending,
     isError,
     refetch,
@@ -116,7 +116,7 @@ const UpdateClass = () => {
         try {
           if (classData.image.length > 0) {
             const imgFile = { image: classData.image[0] };
-            const res = await axiosSecure.post(img_hosting_api, imgFile, {
+            const res = await axiosPublic.post(img_hosting_api, imgFile, {
               headers: {
                 "content-type": "multipart/form-data",
               },

@@ -9,7 +9,7 @@ const UserStats = () => {
   const axiosPublic = useAxiosPublic();
 
   const {
-    data: webStats,
+    data: webStats = {},
     isPending,
     isError,
   } = useQuery({

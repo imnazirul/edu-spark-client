@@ -4,11 +4,11 @@ import useAuth from "./useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://edu-manage-server-ten.vercel.app",
 });
 
 const useAxiosSecure = () => {
-  const { logOut } = useAuth();
+  const { logOut, loading } = useAuth();
   // console.log(logOut);
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,17 +34,19 @@ const useAxiosSecure = () => {
 
         if (status === 401 || status === 403) {
           //logout the user
-          logOut()
-            .then(() => {
-              navigate("/login", { state: { from: location } });
-            })
-            .catch((err) => console.log(err));
+          if (!loading) {
+            logOut()
+              .then(() => {
+                navigate("/login", { state: { from: location } });
+              })
+              .catch((err) => console.log(err));
+          }
         }
 
         return Promise.reject(error);
       }
     );
-  }, [location, logOut, navigate]);
+  }, [loading, location, logOut, navigate]);
 
   return axiosSecure;
 };

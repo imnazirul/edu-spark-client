@@ -95,19 +95,29 @@ const TeachOnEdu = () => {
       <div className="mt-8">
         <div className="divider mb-8 divider-primary">
           {" "}
-          <h1 className="text-3xl text-primary-1 text-center font-semibold">
-            {role === "teacher"
-              ? "ACCEPTED"
-              : appliedExists
-              ? "PENDING"
-              : "— APPLY NOW —"}
-          </h1>
+          {role === "admin" ? (
+            ""
+          ) : (
+            <h1 className="text-3xl text-primary-1 text-center font-semibold">
+              {role === "teacher"
+                ? "ACCEPTED"
+                : appliedExists
+                ? "PENDING"
+                : "— APPLY NOW —"}
+            </h1>
+          )}
         </div>
 
         <div className="flex justify-evenly">
           <div>
             <div className="flex-1 ">
-              {appliedExists ? (
+              {role === "admin" ? (
+                <div className="mt-8">
+                  <h1 className="text-3xl font-semibold text-blue-600">
+                    YOU ARE ADMIN
+                  </h1>
+                </div>
+              ) : appliedExists ? (
                 <>
                   <button className="btn bg-primary-1 hover:bg-primary-1 text-lg text-white hover:bg-btn-1">
                     <QueryBuilderIcon></QueryBuilderIcon> YOUR REQUEST IS IN

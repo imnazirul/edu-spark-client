@@ -111,16 +111,12 @@ const CheckoutForm = ({ price, id }) => {
       };
       //   console.log(enrolledClassDetails);
       addEnrolledClass(enrolledClassDetails);
-
+      navigate("/dashboard/my_enroll_class");
       Swal.fire({
         title: "PAYMENT SUCCESSFUL",
         text: `YOUR TRANSACTION ID: ${paymentIntent.id}`,
         icon: "success",
         confirmButtonText: "Ok",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/dashboard/my_enroll_class");
-        }
       });
     }
   };

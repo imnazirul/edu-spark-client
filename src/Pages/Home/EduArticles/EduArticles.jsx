@@ -5,7 +5,7 @@ import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 const EduArticles = () => {
   const axiosPublic = useAxiosPublic();
   const {
-    data: articles,
+    data: articles = [],
     isPending,
     isError,
   } = useQuery({

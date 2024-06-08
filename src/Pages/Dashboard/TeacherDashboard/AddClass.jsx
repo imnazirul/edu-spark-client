@@ -7,12 +7,14 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 
 const img_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
 
 const AddClass = () => {
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const [btnText, setBtnText] = useState(
     <>
       <ControlPointRoundedIcon> </ControlPointRoundedIcon> ADD CLASS
@@ -74,7 +76,7 @@ const AddClass = () => {
     try {
       const imgFile = { image: classData.image[0] };
 
-      const res = await axiosSecure.post(img_hosting_api, imgFile, {
+      const res = await axiosPublic.post(img_hosting_api, imgFile, {
         headers: {
           "content-type": "multipart/form-data",
         },

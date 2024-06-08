@@ -55,11 +55,13 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         //get token and store on the local storage
         const userInfo = { email: currentUser.email };
-        axios.post("http://localhost:5000/jwt", userInfo).then((res) => {
-          if (res.data.token) {
-            localStorage.setItem("access-token", res.data.token);
-          }
-        });
+        axios
+          .post("https://edu-manage-server-ten.vercel.app/jwt", userInfo)
+          .then((res) => {
+            if (res.data.token) {
+              localStorage.setItem("access-token", res.data.token);
+            }
+          });
       } else {
         //remove the token from local storage
         localStorage.removeItem("access-token");

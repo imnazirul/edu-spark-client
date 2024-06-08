@@ -14,7 +14,7 @@ const MyClassDetails = () => {
   const { user } = useAuth();
 
   const {
-    data: classData,
+    data: classData = {},
     isPending,
     isError,
     refetch,
@@ -26,7 +26,7 @@ const MyClassDetails = () => {
     },
   });
   const {
-    data: perDaySubmit,
+    data: perDaySubmit = {},
     isSubmitPending,
     isSubmitError,
   } = useQuery({
@@ -35,6 +35,7 @@ const MyClassDetails = () => {
       const res = await axiosSecure.get(
         `/per_day_assignment_submissions/${id}`
       );
+      // console.log(res.data);
       return res.data;
     },
     refetchOnWindowFocus: "always",

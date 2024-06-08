@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-// import { useParams } from "react-router-dom";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 import EnrolledClassRow from "./EnrolledClassRow";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -15,21 +14,21 @@ import { useForm } from "react-hook-form";
 import ReactStars from "react-rating-stars-component";
 import { useEffect, useState } from "react";
 import useAuth from "../../../CustomHooks/useAuth";
-import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 
 const EnrolledClassDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const [rating, setRating] = useState(0);
   const { user } = useAuth();
-  const axiosPublic = useAxiosPublic();
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const {
-    data: totalCount,
+    data: totalCount = 0,
     isPending: isCountPending,
     isError: isCountError,
   } = useQuery({
@@ -42,7 +41,7 @@ const EnrolledClassDetails = () => {
   });
 
   const {
-    data: assignments,
+    data: assignments = [],
     isPending,
     isError,
     refetch,
@@ -57,7 +56,7 @@ const EnrolledClassDetails = () => {
   });
 
   const {
-    data: classData,
+    data: classData = {},
     isPending: isClassPending,
     isError: isClassError,
   } = useQuery({

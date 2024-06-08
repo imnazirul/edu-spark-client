@@ -3,9 +3,11 @@
 import { FaPeopleGroup } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import useEnrolledClassIds from "../../CustomHooks/useEnrolledClassIds";
+import useAuth from "../../CustomHooks/useAuth";
 
 const ClassCard = ({ SClass }) => {
   const { enrolledClassIds } = useEnrolledClassIds();
+  const { user } = useAuth();
 
   return (
     <>
@@ -42,13 +44,39 @@ const ClassCard = ({ SClass }) => {
                 {SClass.name}
               </p>
             </div>
-            {enrolledClassIds.find((id) => {
-              console.log(id == SClass._id, id, SClass._id);
-              return id == SClass._id;
-            }) ? (
-              <button className="btn px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
-                Already Enrolled
-              </button>
+            {user ? (
+              <>
+                {enrolledClassIds.find((id) => {
+                  console.log(id == SClass._id, id, SClass._id);
+                  return id == SClass._id;
+                }) ? (
+                  <button className="btn px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
+                    Already Enrolled
+                  </button>
+                ) : (
+                  <Link to={`/class_details/${SClass._id}`}>
+                    {" "}
+                    <button className="btn px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
+                      Enroll Now
+                      <svg
+                        className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 14 10"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M1 5h12m0 0L9 1m4 4L9 9"
+                        />
+                      </svg>
+                    </button>
+                  </Link>
+                )}
+              </>
             ) : (
               <Link to={`/class_details/${SClass._id}`}>
                 {" "}

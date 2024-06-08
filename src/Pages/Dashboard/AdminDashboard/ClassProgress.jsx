@@ -10,7 +10,7 @@ const ClassProgress = () => {
   const axiosSecure = useAxiosSecure();
 
   const {
-    data: feedbacks,
+    data: feedbacks = [],
     isPending,
     isError,
   } = useQuery({

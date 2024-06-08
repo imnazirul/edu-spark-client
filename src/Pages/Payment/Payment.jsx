@@ -1,16 +1,16 @@
 import { useParams } from "react-router-dom";
-import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../CustomHooks/useAxiosPublic";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PAYMENT_PK);
 
 const Payment = () => {
   const { id } = useParams();
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
 
   const {
     data: classItem = [],
@@ -20,7 +20,7 @@ const Payment = () => {
   } = useQuery({
     queryKey: ["SingleClassItem", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/single_class/${id}`);
+      const res = await axiosPublic.get(`/single_class/${id}`);
       return res.data;
     },
     refetchOnWindowFocus: "always",

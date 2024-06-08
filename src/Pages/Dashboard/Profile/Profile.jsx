@@ -8,12 +8,14 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 const img_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
 
 const Profile = () => {
   const { user, updateUserProfile, reload, setReload } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const [imgName, setImgName] = useState("");
   const [btnText, setBtnText] = useState("Upload");
   const {
@@ -56,7 +58,7 @@ const Profile = () => {
         Uploading...
       </>
     );
-    axiosSecure
+    axiosPublic
       .post(img_hosting_api, imgFile, {
         headers: {
           "content-type": "multipart/form-data",

@@ -10,7 +10,7 @@ const MyEnrollClass = () => {
   const axiosSecure = useAxiosSecure();
 
   const {
-    data: enrolledClasses,
+    data: enrolledClasses = [],
     isPending,
     isError,
     // refetch,

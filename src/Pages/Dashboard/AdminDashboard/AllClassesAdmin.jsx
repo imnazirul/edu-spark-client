@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
@@ -9,13 +8,12 @@ import { useEffect, useState } from "react";
 import { IoMdArrowBack, IoMdArrowForward } from "react-icons/io";
 
 const AllClassesAdmin = () => {
-  const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const {
-    data: totalClasses,
+    data: totalClasses = 0,
     isPending: isCountPending,
     isCountError,
   } = useQuery({
@@ -27,14 +25,14 @@ const AllClassesAdmin = () => {
   });
 
   const {
-    data: classes,
+    data: classes = [],
     isPending,
     isError,
     refetch,
   } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
-      const res = await axiosPublic.get(
+      const res = await axiosSecure.get(
         `/classes?page=${currentPage}&size=${itemsPerPage}`
       );
       return res.data;
@@ -53,7 +51,7 @@ const AllClassesAdmin = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const data = { status: "approved" };
-        axiosSecure.patch(`/classes/${id}`, data).then((res) => {
+        axiosSecure.patch(`/class_status/${id}`, data).then((res) => {
           if (res.data.modifiedCount > 0) {
             refetch();
             Swal.fire({
@@ -77,7 +75,7 @@ const AllClassesAdmin = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const data = { status: "rejected" };
-        axiosSecure.patch(`/classes/${id}`, data).then((res) => {
+        axiosSecure.patch(`/class_status/${id}`, data).then((res) => {
           if (res.data.modifiedCount > 0) {
             refetch();
             Swal.fire({

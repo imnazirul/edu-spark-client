@@ -64,7 +64,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/payment/:id",
-        element: <Payment></Payment>,
+        element: (
+          <PrivateRoute>
+            <Payment></Payment>
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -75,6 +79,7 @@ const router = createBrowserRouter([
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       //admin routes
       {
@@ -146,15 +151,27 @@ const router = createBrowserRouter([
       //student routes
       {
         path: "my_enroll_class",
-        element: <MyEnrollClass></MyEnrollClass>,
+        element: (
+          <PrivateRoute>
+            <MyEnrollClass></MyEnrollClass>
+          </PrivateRoute>
+        ),
       },
       {
         path: "my_enrolled_class/:id",
-        element: <EnrolledClassDetails></EnrolledClassDetails>,
+        element: (
+          <PrivateRoute>
+            <EnrolledClassDetails></EnrolledClassDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "profile",
-        element: <Profile></Profile>,
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
       },
     ],
   },

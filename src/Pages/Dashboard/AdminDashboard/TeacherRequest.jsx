@@ -14,7 +14,7 @@ const TeacherRequest = () => {
 
   //teacher count
   const {
-    data: totalCount,
+    data: totalCount = 0,
     isPending: isCountPending,
     isError: isCountError,
   } = useQuery({

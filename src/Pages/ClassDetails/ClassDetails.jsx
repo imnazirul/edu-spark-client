@@ -1,22 +1,22 @@
 import { BsPeopleFill } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
-import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../CustomHooks/useAxiosPublic";
 
 const ClassDetails = () => {
   const { id } = useParams();
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
 
   const {
-    data: classItem,
+    data: classItem = {},
     isPending,
     isError,
     // refetch,
   } = useQuery({
     queryKey: ["SingleClassItem", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/single_class/${id}`);
+      const res = await axiosPublic.get(`/single_class/${id}`);
       return res.data;
     },
     refetchOnWindowFocus: "always",

@@ -1,18 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
-import useAxiosSecure from "./useAxiosSecure";
+import useAxiosPublic from "./useAxiosPublic";
 
 const useEnrolledClassIds = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
   const {
-    data: enrolledClassIds,
+    data: enrolledClassIds = [],
     isPending: isIdsPending,
     refetch,
   } = useQuery({
     queryKey: ["enrolledClass", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/enrolled_classes_ids/${user?.email}`);
+      const res = await axiosPublic.get(`/enrolled_classes_ids/${user?.email}`);
 
       return res.data;
     },

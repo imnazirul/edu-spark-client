@@ -16,7 +16,7 @@ const Users = () => {
 
   //total Users Count
   const {
-    data: totalUsers,
+    data: totalUsers = 0,
     isPending: isCountPending,
     isError: isCountError,
   } = useQuery({
@@ -29,7 +29,7 @@ const Users = () => {
   });
 
   const {
-    data: users,
+    data: users = [],
     isPending,
     isError,
     refetch,
