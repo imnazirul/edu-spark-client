@@ -19,9 +19,8 @@ const Home = () => {
       <UserStats></UserStats>
       <BecomeInstructor></BecomeInstructor>
       <EduArticles></EduArticles>
-
-      <PopularCategories></PopularCategories>
       <StudentFeedback></StudentFeedback>
+      <PopularCategories></PopularCategories>
       <NewsLetter></NewsLetter>
     </>
   );

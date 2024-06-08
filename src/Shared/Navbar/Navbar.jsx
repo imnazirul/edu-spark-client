@@ -116,7 +116,7 @@ const Navbar = () => {
             {navLinks}
           </div>
         </div>
-        <label className="swap ml-3 md:ml-8 swap-rotate">
+        <label className="swap ml-16 md:ml-8 swap-rotate">
           <input
             onChange={handleToggle}
             type="checkbox"
