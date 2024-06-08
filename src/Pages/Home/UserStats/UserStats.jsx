@@ -8,7 +8,11 @@ const UserStats = () => {
   const [isVisible, setIsVisible] = useState(false);
   const axiosPublic = useAxiosPublic();
 
-  const { data: webStats, isPending } = useQuery({
+  const {
+    data: webStats,
+    isPending,
+    isError,
+  } = useQuery({
     queryKey: ["site_data"],
     queryFn: async () => {
       const res = await axiosPublic("/total_site_data");
@@ -26,9 +30,17 @@ const UserStats = () => {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
   }
 
+  if (isError) {
+    return (
+      <div className="h-[50vh] flex items-center justify-center">
+        <h1 className="text-5xl text-center">Data Not Found!</h1>
+      </div>
+    );
+  }
+
   return (
     <>
-      <section className=" ">
+      <section>
         <div className="max-w-6xl px-6 py-10 mx-auto">
           <main className="relative z-20 w-full mt-8 md:flex md:items-center xl:mt-12">
             <div className="absolute w-full bg-blue-600 -z-10 md:h-96 rounded-2xl"></div>

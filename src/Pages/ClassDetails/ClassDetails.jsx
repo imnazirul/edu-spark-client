@@ -11,6 +11,7 @@ const ClassDetails = () => {
   const {
     data: classItem,
     isPending,
+    isError,
     // refetch,
   } = useQuery({
     queryKey: ["SingleClassItem", id],
@@ -23,6 +24,14 @@ const ClassDetails = () => {
 
   if (isPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  }
+
+  if (isError) {
+    return (
+      <div className="h-[50vh] flex items-center justify-center">
+        <h1 className="text-5xl text-center">Data Not Found!</h1>
+      </div>
+    );
   }
 
   return (

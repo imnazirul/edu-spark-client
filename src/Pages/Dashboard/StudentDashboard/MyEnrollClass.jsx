@@ -12,6 +12,7 @@ const MyEnrollClass = () => {
   const {
     data: enrolledClasses,
     isPending,
+    isError,
     // refetch,
   } = useQuery({
     queryKey: ["myEnrolledClasses", user?.email],
@@ -23,7 +24,15 @@ const MyEnrollClass = () => {
   });
 
   if (isPending) {
-    return <h1 className="text-5xl text-center-mt-10">Loading...</h1>;
+    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  }
+
+  if (isError) {
+    return (
+      <div className="h-[50vh] flex items-center justify-center">
+        <h1 className="text-5xl text-center">Data Not Found!</h1>
+      </div>
+    );
   }
 
   return (

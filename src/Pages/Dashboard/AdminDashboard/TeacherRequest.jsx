@@ -16,7 +16,7 @@ const TeacherRequest = () => {
   const {
     data: totalCount,
     isPending: isCountPending,
-    // isError,
+    isError: isCountError,
   } = useQuery({
     queryKey: ["teacherCount"],
     queryFn: async () => {
@@ -30,7 +30,7 @@ const TeacherRequest = () => {
     data: teacherRequests = [],
     isPending,
     refetch,
-    // isError,
+    isError,
   } = useQuery({
     queryKey: ["teachersRequest"],
     queryFn: async () => {
@@ -100,6 +100,14 @@ const TeacherRequest = () => {
 
   if (isPending || isCountPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  }
+
+  if (isError || isCountError) {
+    return (
+      <div className="h-[50vh] flex items-center justify-center">
+        <h1 className="text-5xl text-center">Data Not Found!</h1>
+      </div>
+    );
   }
 
   const totalPage = Math.ceil(totalCount / itemsPerPage);
@@ -208,9 +216,9 @@ const TeacherRequest = () => {
         </table>
         <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center">
           <div>
-            Showing {currentPage * itemsPerPage} to{" "}
+            Showing {currentPage * itemsPerPage + 1} to{" "}
             {currentPage * itemsPerPage + teacherRequests.length} of total{" "}
-            {totalCount} Data
+            {totalCount}
           </div>
           <div className="join gap-1">
             <button

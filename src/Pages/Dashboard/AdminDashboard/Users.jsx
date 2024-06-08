@@ -18,7 +18,7 @@ const Users = () => {
   const {
     data: totalUsers,
     isPending: isCountPending,
-    // isError,
+    isError: isCountError,
   } = useQuery({
     queryKey: ["teacherCount"],
     queryFn: async () => {
@@ -31,6 +31,7 @@ const Users = () => {
   const {
     data: users,
     isPending,
+    isError,
     refetch,
   } = useQuery({
     queryKey: ["users"],
@@ -83,6 +84,14 @@ const Users = () => {
 
   if (isPending || isCountPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  }
+
+  if (isError || isCountError) {
+    return (
+      <div className="h-[50vh] flex items-center justify-center">
+        <h1 className="text-5xl text-center">Data Not Found!</h1>
+      </div>
+    );
   }
 
   const totalPages = Math.ceil(totalUsers / usersPerPage);
@@ -203,7 +212,7 @@ const Users = () => {
 
         <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center">
           <div>
-            Showing {currentPage * usersPerPage} to{" "}
+            Showing {currentPage * usersPerPage + 1} to{" "}
             {currentPage * usersPerPage + users.length} of total {totalUsers}{" "}
           </div>
           <div className="join gap-1">

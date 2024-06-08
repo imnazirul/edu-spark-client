@@ -35,14 +35,14 @@ const ClassProgress = () => {
   });
 
   if (isPending || isClassPending) {
-    return <h1 className="text-5xl text-center-mt-10">Loading...</h1>;
+    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
   }
 
   if (isError || isClassError) {
     return (
-      <h1 className="text-5xl text-center mt-10">
-        An Unknown Error Ocurred While Getting Data.
-      </h1>
+      <div className="h-[50vh] flex items-center justify-center">
+        <h1 className="text-5xl text-center">Data Not Found!</h1>
+      </div>
     );
   }
 
@@ -82,7 +82,7 @@ const ClassProgress = () => {
 
           <div className="flex flex-col justify-center align-middle">
             <p className="text-3xl font-semibold ">
-              {classData.totalAssignment.length}
+              {classData.totalAssignment}
             </p>
             <p className="capitalize font-semibold text-lg">ASSIGNMENTS</p>
           </div>

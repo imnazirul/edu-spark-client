@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -20,6 +19,7 @@ const TeachOnEdu = () => {
   const {
     data: applications = [],
     isPending,
+    isError,
     refetch,
   } = useQuery({
     queryKey: ["applications"],
@@ -32,12 +32,7 @@ const TeachOnEdu = () => {
     refetchOnWindowFocus: "always",
   });
 
-  const {
-    mutate: applyForTeaching,
-    isPending: isPostPending,
-    isSuccess,
-    isError,
-  } = useMutation({
+  const { mutate: applyForTeaching, isPending: isPostPending } = useMutation({
     mutationFn: async (data) => {
       const res = await axiosSecure.post("/teacher_requests", data);
       return res.data;
@@ -51,6 +46,9 @@ const TeachOnEdu = () => {
           icon: "success",
         });
       }
+    },
+    onError: (err) => {
+      console.log(err);
     },
   });
 
@@ -75,6 +73,14 @@ const TeachOnEdu = () => {
 
   if (isPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  }
+
+  if (isError) {
+    return (
+      <div className="h-[50vh] flex items-center justify-center">
+        <h1 className="text-5xl text-center">Data Not Found!</h1>
+      </div>
+    );
   }
 
   return (

@@ -16,7 +16,7 @@ const StudentFeedback = () => {
   const {
     data: feedbacks,
     isPending,
-    // isError,
+    isError,
   } = useQuery({
     queryKey: ["feedbacks"],
     queryFn: async () => {
@@ -82,82 +82,92 @@ const StudentFeedback = () => {
   if (isPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
   }
+
   return (
     <div className="slider-container l relative mt-8 lg:mt-16 h-[430px]">
       <SectionTitle
         title="STUDENT FEEDBACK"
         subtitle="Rate your experience and provide feedback. Your input helps us improve our services and enhance your learning journey."
       ></SectionTitle>
-      <Slider
-        className=" "
-        ref={(slider) => {
-          sliderRef = slider;
-        }}
-        {...settings}
-      >
-        {feedbacks.map((feedback, index) => (
-          <div
-            key={index}
-            className="border p-5 relative rounded-xl font-poppins mr-3 "
+      {isError ? (
+        <div className="h-[50vh] flex items-center justify-center">
+          <h1 className="text-5xl text-center">Data Not Found!</h1>
+        </div>
+      ) : (
+        <>
+          {" "}
+          <Slider
+            className=" "
+            ref={(slider) => {
+              sliderRef = slider;
+            }}
+            {...settings}
           >
-            <div className=" flex ">
-              <div className="relative">
-                <img
-                  className="w-16 h-16 object-cover rounded-full border-2 border-blue-500"
-                  src={feedback.studentImg}
-                  alt=""
-                />
-                <img
-                  className="w-4 h-4 absolute top-0 right-0"
-                  src="https://rhoomy.smartdemowp.com/wp-content/themes/rhoomy/assets/images/verified.svg"
-                  alt=""
-                />
-              </div>
-              <div>
-                <p className="text-secondary-1 font-bold ml-3 text-xl">
-                  {feedback.studentName}
-                </p>
-                <p className="text-primary-1 font-semibold ml-3">Student</p>
-              </div>
-            </div>
-            <h3 className="text-xl font-semibold mt-2">
-              Class: {feedback.className}
-            </h3>
-            <div className="flex gap-2">
-              <ReactStars
-                value={feedback.rating}
-                size={30}
-                isHalf={true}
-                edit={false}
-                activeColor="#FFD700"
-              />{" "}
-              <div className="flex items-center">
-                (<p className="text-lg font-medium">{feedback.rating}</p>{" "}
-                <StarRoundedIcon
-                  sx={{ color: "gold", fontSize: "25px" }}
-                ></StarRoundedIcon>
-                )
-              </div>
-            </div>
+            {feedbacks.map((feedback, index) => (
+              <div
+                key={index}
+                className="border p-5 relative rounded-xl font-poppins mr-3 "
+              >
+                <div className=" flex ">
+                  <div className="relative">
+                    <img
+                      className="w-16 h-16 object-cover rounded-full border-2 border-blue-500"
+                      src={feedback.studentImg}
+                      alt=""
+                    />
+                    <img
+                      className="w-4 h-4 absolute top-0 right-0"
+                      src="https://rhoomy.smartdemowp.com/wp-content/themes/rhoomy/assets/images/verified.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <p className="text-secondary-1 font-bold ml-3 text-xl">
+                      {feedback.studentName}
+                    </p>
+                    <p className="text-primary-1 font-semibold ml-3">Student</p>
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold mt-2">
+                  Class: {feedback.className}
+                </h3>
+                <div className="flex gap-2">
+                  <ReactStars
+                    value={feedback.rating}
+                    size={30}
+                    isHalf={true}
+                    edit={false}
+                    activeColor="#FFD700"
+                  />{" "}
+                  <div className="flex items-center">
+                    (<p className="text-lg font-medium">{feedback.rating}</p>{" "}
+                    <StarRoundedIcon
+                      sx={{ color: "gold", fontSize: "25px" }}
+                    ></StarRoundedIcon>
+                    )
+                  </div>
+                </div>
 
-            <div className="text-2xl my-2 flex gap-1 justify-center text-[#FFD700]"></div>
-            <p className="max-sm:text-sm my-2">{feedback.description}</p>
-            <h1 className="text-xl md:text-2xl text-primary-1 font-bold text-center"></h1>
-          </div>
-        ))}
-      </Slider>
-      <button
-        className="btn absolute left-2 top-[40%] rounded-full outline-none"
-        onClick={previous}
-      >
-        <IoIosArrowBack></IoIosArrowBack>
-      </button>{" "}
-      <button
-        className="btn absolute right-2 top-[40%] rounded-full outline-none"
-        onClick={next}
-      >
-        <IoIosArrowForward></IoIosArrowForward>
-      </button>
+                <div className="text-2xl my-2 flex gap-1 justify-center text-[#FFD700]"></div>
+                <p className="max-sm:text-sm my-2">{feedback.description}</p>
+                <h1 className="text-xl md:text-2xl text-primary-1 font-bold text-center"></h1>
+              </div>
+            ))}
+          </Slider>
+          <button
+            className="btn absolute left-2 top-[50%] rounded-full outline-none"
+            onClick={previous}
+          >
+            <IoIosArrowBack></IoIosArrowBack>
+          </button>{" "}
+          <button
+            className="btn absolute right-2 top-[50%] rounded-full outline-none"
+            onClick={next}
+          >
+            <IoIosArrowForward></IoIosArrowForward>
+          </button>
+        </>
+      )}
     </div>
   );
 };

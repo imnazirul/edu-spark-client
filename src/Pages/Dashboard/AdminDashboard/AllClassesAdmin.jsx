@@ -17,12 +17,11 @@ const AllClassesAdmin = () => {
   const {
     data: totalClasses,
     isPending: isCountPending,
-    // isError,
+    isCountError,
   } = useQuery({
     queryKey: ["teacherCount"],
     queryFn: async () => {
       const res = await axiosSecure.get("/classes_count");
-      // console.log(res.data);
       return res.data.totalClasses;
     },
   });
@@ -30,7 +29,7 @@ const AllClassesAdmin = () => {
   const {
     data: classes,
     isPending,
-    // isError,
+    isError,
     refetch,
   } = useQuery({
     queryKey: ["classes"],
@@ -97,6 +96,14 @@ const AllClassesAdmin = () => {
 
   if (isPending || isCountPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  }
+
+  if (isError || isCountError) {
+    return (
+      <div className="h-[50vh] flex items-center justify-center">
+        <h1 className="text-5xl text-center">Data Not Found!</h1>
+      </div>
+    );
   }
 
   const totalPages = Math.ceil(totalClasses / itemsPerPage);
@@ -200,7 +207,7 @@ const AllClassesAdmin = () => {
 
         <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center">
           <div>
-            Showing {currentPage * itemsPerPage} to{" "}
+            Showing {currentPage * itemsPerPage + 1} to{" "}
             {currentPage * itemsPerPage + classes.length} of total{" "}
             {totalClasses}{" "}
           </div>

@@ -31,7 +31,7 @@ const EnrolledClassDetails = () => {
   const {
     data: totalCount,
     isPending: isCountPending,
-    // isError,
+    isError: isCountError,
   } = useQuery({
     queryKey: ["teacherCount"],
     queryFn: async () => {
@@ -44,6 +44,7 @@ const EnrolledClassDetails = () => {
   const {
     data: assignments,
     isPending,
+    isError,
     refetch,
   } = useQuery({
     queryKey: ["assignments", id],
@@ -55,7 +56,11 @@ const EnrolledClassDetails = () => {
     refetchOnWindowFocus: "always",
   });
 
-  const { data: classData, isPending: isClassPending } = useQuery({
+  const {
+    data: classData,
+    isPending: isClassPending,
+    isError: isClassError,
+  } = useQuery({
     queryKey: ["SingleClassItem", id],
     queryFn: async () => {
       const res = await axiosPublic.get(`/single_class/${id}`);
@@ -120,6 +125,14 @@ const EnrolledClassDetails = () => {
 
   if (isPending || isClassPending || isCountPending) {
     return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+  }
+
+  if (isError || isClassError || isCountError) {
+    return (
+      <div className="h-[50vh] flex items-center justify-center">
+        <h1 className="text-5xl text-center">Data Not Found!</h1>
+      </div>
+    );
   }
 
   const totalPage = Math.ceil(totalCount / itemsPerPage);
@@ -188,9 +201,9 @@ const EnrolledClassDetails = () => {
               </tbody>
             </table>
 
-            <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center">
+            <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center mt-4">
               <div>
-                Showing {currentPage * itemsPerPage} to{" "}
+                Showing {currentPage * itemsPerPage + 1} to{" "}
                 {currentPage * itemsPerPage + assignments.length} of total{" "}
                 {totalCount} Data
               </div>

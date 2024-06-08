@@ -12,11 +12,11 @@ const MyClassDetails = () => {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const { user } = useAuth();
-  console.log(id);
 
   const {
     data: classData,
     isPending,
+    isError,
     refetch,
   } = useQuery({
     queryKey: ["SingleClassItem", id],
@@ -25,7 +25,11 @@ const MyClassDetails = () => {
       return res.data;
     },
   });
-  const { data: perDaySubmit, isSubmitPending } = useQuery({
+  const {
+    data: perDaySubmit,
+    isSubmitPending,
+    isSubmitError,
+  } = useQuery({
     queryKey: ["per_day_assignment_submissions", id],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -100,6 +104,14 @@ const MyClassDetails = () => {
     };
     addAssignment(assignmentData);
   };
+
+  if (isError || isSubmitError) {
+    return (
+      <div className="h-[50vh] flex items-center justify-center">
+        <h1 className="text-5xl text-center">Data Not Found!</h1>
+      </div>
+    );
+  }
 
   return (
     <div>

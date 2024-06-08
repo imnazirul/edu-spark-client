@@ -14,6 +14,7 @@ const MyClass = () => {
   const {
     data: classes = [],
     isPending,
+    isError,
     refetch,
   } = useQuery({
     queryKey: ["teacherClasses", user?.email],
@@ -50,6 +51,14 @@ const MyClass = () => {
       }
     });
   };
+
+  if (isError) {
+    return (
+      <div className="h-[50vh] flex items-center justify-center">
+        <h1 className="text-5xl text-center">Data Not Found!</h1>
+      </div>
+    );
+  }
 
   return (
     <div>

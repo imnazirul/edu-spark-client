@@ -19,7 +19,7 @@ const Profile = () => {
   const {
     data: userInfo = [],
     isPending,
-    // isError,
+    isError,
   } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
@@ -94,6 +94,14 @@ const Profile = () => {
         });
       });
   };
+
+  if (isError) {
+    return (
+      <div className="h-[50vh] flex items-center justify-center">
+        <h1 className="text-5xl text-center">Data Not Found!</h1>
+      </div>
+    );
+  }
 
   return (
     <>
