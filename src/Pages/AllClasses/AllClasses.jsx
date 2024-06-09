@@ -39,7 +39,7 @@ const AllClasses = () => {
         <title>All Classes | EduSpark</title>
       </Helmet>
       <SectionTitle title="ALL CLASSES"></SectionTitle>
-      <div className="grid md:grid-cols-3 gap-5">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         {classes.map((sClass, index) => (
           <ClassCard key={index} SClass={sClass}></ClassCard>
         ))}

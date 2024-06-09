@@ -43,7 +43,7 @@ const ClassDetails = () => {
         <div className="container flex flex-col mx-auto lg:flex-row-reverse">
           <div className="w-full lg:w-[60%] flex items-center">
             <img
-              className=" max-sm:h-44 w-full object-cover border-4 border-pink-500"
+              className=" max-md:h-44  w-full object-cover border-4 border-pink-500"
               src={classItem.image}
               alt=""
             />

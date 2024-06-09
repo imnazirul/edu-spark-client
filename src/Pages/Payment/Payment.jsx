@@ -47,8 +47,8 @@ const Payment = () => {
         Payment For {classItem?.title}
       </h1>
       <div className="flex gap-5 flex-col-reverse md:flex-row">
-        <div className="flex-1  p-5 border-green-600 bg-green-600 bg-opacity-20 rounded-xl border">
-          <h1 className="text-xl md:text-3xl font-semibold mb-5">
+        <div className="flex-1 flex flex-col justify-center p-5 border-green-600 bg-green-600 bg-opacity-10 rounded-xl border">
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-5">
             {" "}
             PAYMENT AMOUNT: ${classItem?.price}
           </h1>

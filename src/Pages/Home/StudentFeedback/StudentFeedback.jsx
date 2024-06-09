@@ -38,7 +38,7 @@ const StudentFeedback = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
     pauseOnHover: true,
 
     responsive: [
@@ -106,7 +106,7 @@ const StudentFeedback = () => {
                 key={index}
                 className=" flex border-[5px] border-base-100 justify-between h-80  relative rounded-xl font-poppins  "
               >
-                <div className="border h-full p-3 rounded-xl">
+                <div className="border h-full p-3 md:p-5 rounded-xl">
                   <div className=" flex ">
                     <div className="relative">
                       <img

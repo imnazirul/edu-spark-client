@@ -108,44 +108,42 @@ const MyClass = () => {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-1 relative justify-between md:w-[25%] gap-2 md:gap-4  px-2 pb-2">
               <div className="flex gap-2 justify-center items-center">
-                <p className="md:font-semibold text-white text-sm md:text-lg">
-                  STATUS :{" "}
+                <p className="md:font-semibold text-white text-xs lg:text-lg">
+                  STATUS :
                 </p>
                 {classItem?.status === "approved" ? (
-                  <p className="text-green-500 md:px-3 px-1 text-center py-1 bg-white  border-green-500 rounded-3xl text-xs md:text-lg font-medium">
+                  <p className="text-green-500 md:px-3 px-1 text-center py-1 bg-white  border-green-500 rounded-3xl text-xs lg:text-lg font-medium">
                     Approved
                   </p>
                 ) : classItem?.status === "rejected" ? (
-                  <p className="text-red-500 text-center py-1 bg-white  rounded-3xl md:text-lg font-medium md:px-3 px-2 text-xs  ">
+                  <p className="text-red-500 text-center py-1 bg-white  rounded-3xl lg:text-lg font-medium md:px-3 px-2 text-xs  ">
                     Rejected
                   </p>
                 ) : (
-                  <p className="text-blue-500  text-center py-1 bg-white  rounded-3xl md:text-lg font-medium md:px-3 px-2 text-xs ">
+                  <p className="text-blue-500  text-center py-1 bg-white  rounded-3xl lg:text-lg font-medium md:px-3 px-2 text-xs ">
                     Pending
                   </p>
                 )}
               </div>
               <Link
-                className="btn btn-sm bg-green-500 hover:bg-green-200   border-green-500 hover:bg-opacity-70 hover:border-green-100  text-white hover:text-green-600  md:text-lg font-medium "
+                className="btn btn-sm bg-green-500 hover:bg-green-200   border-green-500 hover:bg-opacity-70 hover:border-green-100  text-white hover:text-green-600  lg:text-lg font-medium "
                 to={`/dashboard/update_class/${classItem._id}`}
               >
                 <UpdateIcon></UpdateIcon> UPDATE
               </Link>
               <button
                 onClick={() => handleDelete(classItem?._id)}
-                className="btn btn-sm bg-red-500 hover:bg-red-200   border-red-500 hover:bg-opacity-70 hover:border-red-100  text-white hover:text-red-500 text-sm  md:text-lg font-medium "
+                className="btn btn-sm bg-red-500 hover:bg-red-200   border-red-500 hover:bg-opacity-70 hover:border-red-100  text-white hover:text-red-500 text-sm  lg:text-lg font-medium "
               >
                 <DeleteOutlineIcon></DeleteOutlineIcon> DELETE
               </button>
               {classItem?.status === "approved" ? (
                 <Link
-                  className="btn btn-sm bg-blue-700  hover:bg-opacity-70 hover:bg-blue-200 border-blue-700 hover:border-blue-900  text-white hover:text-blue-800  text-sm  md:text-lg font-medium"
+                  className="btn btn-sm bg-blue-700  hover:bg-opacity-70 hover:bg-blue-200 border-blue-700 hover:border-blue-900  text-white hover:text-blue-800  text-sm  lg:text-lg font-medium"
                   to={`/dashboard/my_class_details/${classItem?._id}`}
                 >
                   {" "}
-                  <button className="">
-                    <InfoIcon></InfoIcon> SEE DETAILS
-                  </button>
+                  <InfoIcon></InfoIcon> SEE DETAILS
                 </Link>
               ) : (
                 <button className="text-gray-500 text-opacity-80 bg-gray-200 bg-opacity-60 py-1 rounded-lg cursor-not-allowed">

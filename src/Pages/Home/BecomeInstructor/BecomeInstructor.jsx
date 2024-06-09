@@ -4,12 +4,12 @@ const BecomeInstructor = () => {
   return (
     <>
       <section className="bg-base-200 mt-8 lg:mt-16">
-        <div className="container flex flex-col justify-center md:p-6 mx-auto sm:py-8 lg:py-12 lg:flex-row lg:justify-between p-3 ">
-          <div className="flex items-center justify-center md:p-6 md:mt-8 lg:mt-0">
+        <div className="container flex flex-col justify-center lg:p-6 mx-auto sm:py-8 lg:py-12 md:flex-row lg:justify-between p-3 ">
+          <div className="flex items-center justify-center lg:p-6 md:mt-8 lg:mt-0">
             <img
               src="https://i.ibb.co/vdd8cN3/3d-minimal-self-development-concept-self-learning-concept-reading-a-book-to-get-a-new-idea-knowledge.webp"
               alt=""
-              className="object-contain  sm:h-80 lg:h-96 xl:h-112 "
+              className="object-contain  lg:h-96 xl:h-112 "
             />
           </div>
           <div className="flex flex-col justify-center md:p-6 text-center rounded-sm  lg:text-left">

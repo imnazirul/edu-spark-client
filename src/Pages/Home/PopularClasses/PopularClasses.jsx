@@ -37,8 +37,8 @@ const PopularClasses = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           infinite: true,
           dots: true,
         },
@@ -80,7 +80,7 @@ const PopularClasses = () => {
                 key={index}
                 className=" flex justify-between  border-4 border-base-100  rounded-xl h-[450px] "
               >
-                <div className="h-full border rounded-xl overflow-hidden">
+                <div className="h-full border   rounded-xl overflow-hidden">
                   <div className="relative">
                     <img
                       className="rounded-t-lg object-cover h-52 w-full"
@@ -92,7 +92,7 @@ const PopularClasses = () => {
                       Course Fee: ${item?.price}
                     </p>
                   </div>
-                  <div className="p-2 py-3 md:p-5 flex justify-between flex-col items-start">
+                  <div className="p-2 py-3 md:p-5 flex justify-between flex-col ">
                     <h5 className="mb-1 text-xl font-semibold tracking-tight text-secondary-1">
                       {item?.title}
                     </h5>
@@ -104,8 +104,8 @@ const PopularClasses = () => {
                       </span>
                     </p>
                     <p className="mb-3 text-sm">{item?.short_description}</p>
-                    <div className="flex justify-between  w-full">
-                      <div className="flex gap-1">
+                    <div className="flex justify-between items-end h-full  w-full">
+                      <div className="flex items-end gap-1">
                         <p className="flex gap-1 text-sm items-center font-semibold">
                           <img
                             className="w-7 h-7 rounded-full object-cover"
@@ -116,7 +116,7 @@ const PopularClasses = () => {
                         </p>
                       </div>
 
-                      <div className="flex justify-end">
+                      <div className="flex justify-end items-end">
                         <Link to={`/class_details/${item?._id}`}>
                           {" "}
                           <button className="btn px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">

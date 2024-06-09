@@ -112,7 +112,7 @@ const TeachOnEdu = () => {
           <div>
             <div className="flex-1 ">
               {role === "admin" ? (
-                <div className="mt-8">
+                <div className="mt-8 md:h-[30vh] flex items-center">
                   <h1 className="text-3xl font-semibold text-blue-600">
                     YOU ARE ADMIN
                   </h1>

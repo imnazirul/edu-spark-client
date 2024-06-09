@@ -92,7 +92,7 @@ const Navbar = () => {
             </div>
             <div
               tabIndex={0}
-              className=" menu menu-sm gap-4 dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 border border-secondary-1 py-5 md:text-lg md:py-7 "
+              className=" menu menu-sm gap-4 dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 md:w-64 border border-secondary-1 py-5 md:text-lg md:py-7 "
             >
               {navLinks}
             </div>

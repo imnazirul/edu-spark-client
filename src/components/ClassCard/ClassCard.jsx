@@ -55,7 +55,7 @@ const ClassCard = ({ SClass }) => {
                   ) : (
                     <Link to={`/class_details/${SClass._id}`}>
                       {" "}
-                      <button className="btn  text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
+                      <button className="btn flex text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
                         Enroll Now
                         <svg
                           className="rtl:rotate-180 w-3.5 h-3.5 ms-2"

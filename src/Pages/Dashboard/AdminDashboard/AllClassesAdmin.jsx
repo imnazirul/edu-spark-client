@@ -202,40 +202,38 @@ const AllClassesAdmin = () => {
             ))}
           </tbody>
         </table>
-
-        <div className="flex mt-2 md:justify-between w-full flex-col md:flex-row items-center">
-          <p className="max-sm:mb-3">
-            Showing {currentPage * itemsPerPage + 1} to{" "}
-            {currentPage * itemsPerPage + classes.length} of total{" "}
-            {totalClasses}{" "}
-          </p>
-          <div className="join gap-1">
+      </div>
+      <div className="flex mt-2 md:justify-between w-full flex-col md:flex-row items-center">
+        <p className="max-sm:mb-3">
+          Showing {currentPage * itemsPerPage + 1} to{" "}
+          {currentPage * itemsPerPage + classes.length} of total {totalClasses}{" "}
+        </p>
+        <div className="join gap-1">
+          <button
+            onClick={handlePrevious}
+            className="join-item border hover:border-primary-1 border-primary-1 btn btn-sm md:btn-md"
+          >
+            <IoMdArrowBack></IoMdArrowBack> Previous
+          </button>
+          {pages.map((page) => (
             <button
-              onClick={handlePrevious}
-              className="join-item border hover:border-primary-1 border-primary-1 btn btn-sm md:btn-md"
+              key={page}
+              className={`join-item btn btn-sm md:btn-md border border-primary-1 hover:border-primary-1 ${
+                currentPage === page
+                  ? "bg-primary-1 hover:bg-primary-1 text-white"
+                  : ""
+              }`}
+              onClick={() => setCurrentPage(page)}
             >
-              <IoMdArrowBack></IoMdArrowBack> Previous
+              {page + 1}
             </button>
-            {pages.map((page) => (
-              <button
-                key={page}
-                className={`join-item btn btn-sm md:btn-md border border-primary-1 hover:border-primary-1 ${
-                  currentPage === page
-                    ? "bg-primary-1 hover:bg-primary-1 text-white"
-                    : ""
-                }`}
-                onClick={() => setCurrentPage(page)}
-              >
-                {page + 1}
-              </button>
-            ))}
-            <button
-              onClick={handleNext}
-              className="join-item border border-primary-1 hover:border-primary-1 btn btn-sm md:btn-md"
-            >
-              Next <IoMdArrowForward></IoMdArrowForward>
-            </button>
-          </div>
+          ))}
+          <button
+            onClick={handleNext}
+            className="join-item border border-primary-1 hover:border-primary-1 btn btn-sm md:btn-md"
+          >
+            Next <IoMdArrowForward></IoMdArrowForward>
+          </button>
         </div>
       </div>
     </div>
