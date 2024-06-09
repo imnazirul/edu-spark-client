@@ -151,22 +151,25 @@ const Register = () => {
     <>
       {" "}
       <Toaster></Toaster>
-      <section className="flex justify-center flex-col items-center bg-[url('https://i.ibb.co/71j9gy9/joanna-kosinska-LAa-So-L0-Lr-Ys-unsplash.jpg')] bg-cover bg-center bg-blend-multiply min-h-screen bg-blue-500 bg-opacity-30">
+      <section className="flex justify-center flex-col items-center bg-[url('https://i.ibb.co/71j9gy9/joanna-kosinska-LAa-So-L0-Lr-Ys-unsplash.jpg')] bg-cover bg-center bg-blend-multiply md:min-h-screen max-sm:py-2 bg-blue-500 bg-opacity-30 max-sm:px-2 max-sm:rounded-xl">
         <Helmet>
           <title>Sign Up | EduSpark</title>
         </Helmet>
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-jost font-bold text-center pt-5 lg:pt-10 text-btn-1 text-white font-poppins">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-jost font-semibold md:font-bold text-center mb-3 md:pt-5 lg:pt-10 text-btn-1 text-white font-poppins">
           SIGN UP
         </h1>
-        <div className="flex gap-3 mb-10 bg-blue-600 max-w-5xl p-5 rounded-xl">
-          <div className="">
+        <div
+          className="flex md:gap-3 bg-blue-600 max-sm:bg-opacity-50
+         max-w-5xl md:p-5 max-sm:px-3 rounded-xl md:mb-10"
+        >
+          <div className="hidden md:flex">
             <img
               src="https://i.ibb.co/zNnbLRd/cloud-computing-modern-flat-concept-for-web-banner-design-man-enters-password-and-login-to-access-cl.png"
               alt=""
               className="object-contain drop-shadow-2xl drop-shadow-white h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
             />
           </div>
-          <div className="flex flex-1 flex-col justify-center text-center rounded-sm pr-8">
+          <div className="flex flex-1 flex-col justify-center text-center rounded-sm md:pr-8">
             <div className=" w-full  ">
               <form onSubmit={handleSubmit(handleRegister)} className="">
                 <div className="form-control">
@@ -310,7 +313,7 @@ const Register = () => {
                 {" "}
                 <button
                   onClick={handleGoogleSignIn}
-                  className="disabled:cursor-not-allowed flex justify-center items-center space-x-3 border m-3 px-8 py-2 hover:shadow-xl border-gray-300 rounded-3xl bg-base-100 brightness-110 font-medium cursor-pointer"
+                  className="disabled:cursor-not-allowed flex justify-center items-center md:space-x-3 space-x-1 max-sm:mt-3 border md:m-3 md:px-8 px-3 py-2 hover:shadow-xl border-gray-300 rounded-3xl bg-base-100 brightness-110 font-medium cursor-pointer"
                 >
                   <FcGoogle size={32} />
 

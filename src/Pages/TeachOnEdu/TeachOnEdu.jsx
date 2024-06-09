@@ -108,7 +108,7 @@ const TeachOnEdu = () => {
           )}
         </div>
 
-        <div className="flex justify-evenly">
+        <div className="flex flex-col-reverse md:flex-row justify-evenly">
           <div>
             <div className="flex-1 ">
               {role === "admin" ? (
@@ -119,7 +119,7 @@ const TeachOnEdu = () => {
                 </div>
               ) : appliedExists ? (
                 <>
-                  <button className="btn bg-primary-1 hover:bg-primary-1 text-lg text-white hover:bg-btn-1">
+                  <button className="btn bg-primary-1 hover:bg-primary-1 md:text-lg max-sm:w-full text-white hover:bg-btn-1">
                     <QueryBuilderIcon></QueryBuilderIcon> YOUR REQUEST IS IN
                     PENDING...
                   </button>
@@ -165,14 +165,14 @@ const TeachOnEdu = () => {
                       />
                     </div>
 
-                    <button className="btn bg-primary-1 hover:bg-primary-1 mt-3 text-lg text-white hover:bg-btn-1">
+                    <button className="btn bg-primary-1 hover:bg-primary-1 mt-3 md:text-lg max-sm:w-full text-white hover:bg-btn-1">
                       <AutorenewRoundedIcon></AutorenewRoundedIcon>WE WILL
                       RESPONSE SHORTLY...
                     </button>
                   </form>
                 </>
               ) : role === "teacher" ? (
-                <div className="mt-8">
+                <div className="md:mt-8 max-sm:my-5 max-sm:mb-10">
                   <h1 className="text-3xl font-semibold text-blue-600">
                     YOU ARE A TEACHER
                   </h1>
@@ -281,7 +281,9 @@ const TeachOnEdu = () => {
             </div>
           </div>
 
-          <div className="divider divider-horizontal divider-secondary">X</div>
+          <div className="divider hidden md:flex divider-horizontal divider-secondary">
+            X
+          </div>
 
           <div className=" flex flex-col justify-center items-center">
             <div className="avatar">

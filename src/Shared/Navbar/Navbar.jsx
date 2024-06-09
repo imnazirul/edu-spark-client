@@ -103,7 +103,7 @@ const Navbar = () => {
           >
             <div className="flex md:ml-2 md:gap-1 items-center">
               <img
-                className="w-9"
+                className="w-7 md:w-9"
                 src="https://i.ibb.co/cyns15p/images-removebg-preview-1.png"
                 alt=""
               />
@@ -116,7 +116,7 @@ const Navbar = () => {
             {navLinks}
           </div>
         </div>
-        <label className="swap ml-16 md:ml-8 swap-rotate">
+        <label className="swap ml-12 md:ml-8 swap-rotate">
           <input
             onChange={handleToggle}
             type="checkbox"

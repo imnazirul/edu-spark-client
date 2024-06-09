@@ -78,7 +78,7 @@ const PopularClasses = () => {
             {classes.map((item, index) => (
               <div
                 key={index}
-                className=" flex justify-between bg-base-300 border-4 border-base-100 h-[410px] rounded-xl  "
+                className=" flex justify-between  border-4 border-base-100  rounded-xl  "
               >
                 <div className="h-full border rounded-xl overflow-hidden">
                   <div className="relative">
@@ -87,26 +87,25 @@ const PopularClasses = () => {
                       src={item?.image}
                       alt=""
                     />
+
                     <p className="text-white bg-secondary-1 bg-opacity-50 font-semibold inline-block px-3 py-1 absolute rounded-3xl top-2 left-1">
                       Course Fee: ${item?.price}
                     </p>
                   </div>
                   <div className="p-2 py-3 md:p-5 flex justify-between flex-col items-start">
-                    <a href="#">
-                      <h5 className="mb-2 text-xl font-semibold tracking-tight text-secondary-1">
-                        {item?.title}
-                      </h5>
-                    </a>
+                    <h5 className="mb-1 text-xl font-semibold tracking-tight text-secondary-1">
+                      {item?.title}
+                    </h5>
+                    <p className="flex gap-1 mb-1 text-sm items-center">
+                      <FaPeopleGroup></FaPeopleGroup> Total Enrollment:
+                      <span className="font-semibold">
+                        {" "}
+                        {item?.totalEnrollment}
+                      </span>
+                    </p>
                     <p className="mb-3 text-sm">{item?.short_description}</p>
                     <div className="flex justify-between  w-full">
-                      <div className="">
-                        <p className="flex gap-1 text-sm items-center">
-                          <FaPeopleGroup></FaPeopleGroup> Total Enrollment:
-                          <span className="font-semibold">
-                            {" "}
-                            {item?.totalEnrollment}
-                          </span>
-                        </p>
+                      <div className="flex gap-1">
                         <p className="flex gap-1 text-sm items-center font-semibold">
                           <img
                             className="w-7 h-7 rounded-full object-cover"
@@ -117,7 +116,7 @@ const PopularClasses = () => {
                         </p>
                       </div>
 
-                      <div className="">
+                      <div className="flex justify-end">
                         <Link to={`/class_details/${item?._id}`}>
                           {" "}
                           <button className="btn px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
