@@ -151,7 +151,9 @@ const Users = () => {
         </div>
       </form>
 
-      <h1 className="text-3xl font-semibold mb-3">ALL USERS</h1>
+      <h1 className="text-2xl max-sm:underline md:text-3xl font-semibold mb-3 max-sm:text-center ">
+        ALL USERS
+      </h1>
       <div className="overflow-x-auto">
         {users.length === 0 ? (
           <div className="flex justify-center h-[70vh] items-center">
@@ -190,7 +192,7 @@ const Users = () => {
                   <td>{user?.name}</td>
                   <td>{user?.email}</td>
 
-                  <th>
+                  <th className="min-w-36">
                     {user?.role === "admin" ? (
                       <button className="rounded-3xl bg-opacity-20 bg-primary-1  text-primary-1  btn-sm">
                         <AdminPanelSettingsIcon></AdminPanelSettingsIcon> Admin
@@ -209,39 +211,38 @@ const Users = () => {
             </tbody>
           </table>
         )}
-
-        <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center">
-          <div>
-            Showing {currentPage * usersPerPage + 1} to{" "}
-            {currentPage * usersPerPage + users.length} of total {totalUsers}{" "}
-          </div>
-          <div className="join gap-1">
+      </div>
+      <div className="flex mt-2 md:justify-between w-full flex-col md:flex-row items-center">
+        <p className="max-sm:mb-3">
+          Showing {currentPage * usersPerPage + 1} to{" "}
+          {currentPage * usersPerPage + users.length} of total {totalUsers}{" "}
+        </p>
+        <div className="join gap-1">
+          <button
+            onClick={handlePrevious}
+            className="join-item border hover:border-primary-1 border-primary-1 btn btn-sm md:btn-md"
+          >
+            <IoMdArrowBack></IoMdArrowBack> Previous
+          </button>
+          {pages.map((page) => (
             <button
-              onClick={handlePrevious}
-              className="join-item border hover:border-primary-1 border-primary-1 btn btn-md"
+              key={page}
+              className={`join-item btn btn-sm md:btn-md border border-primary-1 hover:border-primary-1 ${
+                currentPage === page
+                  ? "bg-primary-1 hover:bg-primary-1 text-white"
+                  : ""
+              }`}
+              onClick={() => setCurrentPage(page)}
             >
-              <IoMdArrowBack></IoMdArrowBack> Previous
+              {page + 1}
             </button>
-            {pages.map((page) => (
-              <button
-                key={page}
-                className={`join-item btn btn-md border border-primary-1 hover:border-primary-1 ${
-                  currentPage === page
-                    ? "bg-primary-1 hover:bg-primary-1 text-white"
-                    : ""
-                }`}
-                onClick={() => setCurrentPage(page)}
-              >
-                {page + 1}
-              </button>
-            ))}
-            <button
-              onClick={handleNext}
-              className="join-item border border-primary-1 hover:border-primary-1 btn btn-md"
-            >
-              Next <IoMdArrowForward></IoMdArrowForward>
-            </button>
-          </div>
+          ))}
+          <button
+            onClick={handleNext}
+            className="join-item border border-primary-1 hover:border-primary-1 btn btn-sm md:btn-md"
+          >
+            Next <IoMdArrowForward></IoMdArrowForward>
+          </button>
         </div>
       </div>
     </div>

@@ -132,8 +132,8 @@ const AllClassesAdmin = () => {
           {/* head */}
           <thead className="bg-pink-600 text-white">
             <tr>
-              <th>TITLE</th>
               <th>IMAGE</th>
+              <th>TITLE</th>
               <th>EMAIL</th>
               <th>SHORT DESCRIPTION</th>
               <th>STATUS</th>
@@ -143,7 +143,6 @@ const AllClassesAdmin = () => {
           <tbody>
             {classes.map((sinClass) => (
               <tr key={sinClass._id}>
-                <td>{sinClass?.title}</td>
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
@@ -156,8 +155,9 @@ const AllClassesAdmin = () => {
                     </div>
                   </div>
                 </td>
+                <td className="min-w-36">{sinClass?.title}</td>
                 <td>{sinClass?.email}</td>
-                <td>{sinClass?.short_description}</td>
+                <td className="min-w-60">{sinClass?.short_description}</td>
                 <td className="  justify-center">
                   <div className="flex items-center justify-center gap-1">
                     {sinClass.status === "approved" ? (
@@ -203,23 +203,23 @@ const AllClassesAdmin = () => {
           </tbody>
         </table>
 
-        <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center">
-          <div>
+        <div className="flex mt-2 md:justify-between w-full flex-col md:flex-row items-center">
+          <p className="max-sm:mb-3">
             Showing {currentPage * itemsPerPage + 1} to{" "}
             {currentPage * itemsPerPage + classes.length} of total{" "}
             {totalClasses}{" "}
-          </div>
+          </p>
           <div className="join gap-1">
             <button
               onClick={handlePrevious}
-              className="join-item border hover:border-primary-1 border-primary-1 btn btn-md"
+              className="join-item border hover:border-primary-1 border-primary-1 btn btn-sm md:btn-md"
             >
               <IoMdArrowBack></IoMdArrowBack> Previous
             </button>
             {pages.map((page) => (
               <button
                 key={page}
-                className={`join-item btn btn-md border border-primary-1 hover:border-primary-1 ${
+                className={`join-item btn btn-sm md:btn-md border border-primary-1 hover:border-primary-1 ${
                   currentPage === page
                     ? "bg-primary-1 hover:bg-primary-1 text-white"
                     : ""
@@ -231,7 +231,7 @@ const AllClassesAdmin = () => {
             ))}
             <button
               onClick={handleNext}
-              className="join-item border border-primary-1 hover:border-primary-1 btn btn-md"
+              className="join-item border border-primary-1 hover:border-primary-1 btn btn-sm md:btn-md"
             >
               Next <IoMdArrowForward></IoMdArrowForward>
             </button>

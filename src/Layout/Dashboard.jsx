@@ -243,7 +243,9 @@ const Dashboard = () => {
           </ListItem>
         </List>
       </Drawer>
-      <main className={`${classes.content} mt-16 font-poppins overflow-x-auto`}>
+      <main
+        className={`${classes.content} mt-12 md:mt-16 font-poppins overflow-x-auto`}
+      >
         <Outlet></Outlet>
       </main>
     </div>

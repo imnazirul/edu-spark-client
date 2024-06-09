@@ -69,75 +69,77 @@ const MyClass = () => {
         YOUR CLASSES
       </h1>
 
-      <div className="flex flex-col pl-5 gap-4">
+      <div className="flex flex-col md:pl-5 gap-4">
         {classes.map((classItem) => (
           <div
             key={classItem._id}
-            className="flex flex-col items-center justify-enter gap-3 p-3  border border-gray-200 rounded-lg shadow md:flex-row  bg-gradient-to-r  from-blue-700 to-blue-400 bg-base-300 bg-blend-overlay bg-opacity-20"
+            className="flex flex-col items-center justify-enter gap-3 md:p-3 max-sm:pt-2  border border-gray-200 rounded-lg shadow md:flex-row  bg-gradient-to-r  from-blue-700 to-blue-400 bg-base-300 bg-blend-overlay bg-opacity-20"
           >
-            <div className="h-full overflow-hidden w-[30%] rounded-xl ">
+            <div className="h-full w-full px-3 overflow-hidden md:w-[30%] rounded-xl ">
               <img
-                className="object-cover w-full max-h-52 h-52 rounded-xl  "
+                className="object-cover w-full h-24 md:max-h-52 md:h-52 rounded-xl  "
                 src={classItem.image}
                 alt=""
               />
             </div>
 
-            <div className="w-[45%]">
+            <div className="md:w-[45%] max-sm:px-2">
               <div className="">
-                <p className="text-white ">
+                <p className="text-white text-xs">
                   <span>Email: </span>
                   {classItem.email}
                 </p>
-                <p className=" font-normal text-white  ">
+                <p className=" font-normal text-xs text-white  ">
                   <span>Name: </span> {classItem.name}
                 </p>
               </div>
-              <h2 className=" text-2xl text- font-bold tracking-tight max-sm:text-center">
+              <h2 className="text-lg md:text-2xl text- font-bold tracking-tight w-full">
                 {classItem.title}
               </h2>
-              <p className="text-xl mb-1 text-white font-medium">
+              <p className="md:text-xl mb-1 text-white font-medium">
                 Price: $
-                <span className="text-3xl font-semibold">
+                <span className="text-xl md:text-3xl font-semibold">
                   {classItem.price}
                 </span>
               </p>
-              <p className=" font-normal text-white  ">
+              <p className=" font-normal max-sm:text-xs text-white  ">
                 {classItem.short_description}
               </p>
             </div>
-            <div className="flex flex-col relative justify-between w-[25%] gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-1 relative justify-between md:w-[25%] gap-2 md:gap-4  px-2 pb-2">
               <div className="flex gap-2 justify-center items-center">
-                <p className="font-semibold text-white text-lg">STATUS : </p>
+                <p className="md:font-semibold text-white text-sm md:text-lg">
+                  STATUS :{" "}
+                </p>
                 {classItem?.status === "approved" ? (
-                  <p className="text-green-500 px-3 text-center py-1 bg-white  border-green-500 rounded-3xl text-lg font-medium">
+                  <p className="text-green-500 md:px-3 px-1 text-center py-1 bg-white  border-green-500 rounded-3xl text-xs md:text-lg font-medium">
                     Approved
                   </p>
                 ) : classItem?.status === "rejected" ? (
-                  <p className="text-red-500 text-center py-1 bg-white  rounded-3xl text-lg font-medium px-3">
+                  <p className="text-red-500 text-center py-1 bg-white  rounded-3xl md:text-lg font-medium md:px-3 px-2 text-xs  ">
                     Rejected
                   </p>
                 ) : (
-                  <p className="text-blue-500  text-center py-1 bg-white  rounded-3xl text-lg font-medium px-3">
+                  <p className="text-blue-500  text-center py-1 bg-white  rounded-3xl md:text-lg font-medium md:px-3 px-2 text-xs ">
                     Pending
                   </p>
                 )}
               </div>
               <Link
-                className="btn btn-sm bg-green-500 hover:bg-green-200   border-green-500 hover:bg-opacity-70 hover:border-green-100  text-white hover:text-green-600  text-lg font-medium "
+                className="btn btn-sm bg-green-500 hover:bg-green-200   border-green-500 hover:bg-opacity-70 hover:border-green-100  text-white hover:text-green-600  md:text-lg font-medium "
                 to={`/dashboard/update_class/${classItem._id}`}
               >
                 <UpdateIcon></UpdateIcon> UPDATE
               </Link>
               <button
                 onClick={() => handleDelete(classItem?._id)}
-                className="btn btn-sm bg-red-500 hover:bg-red-200   border-red-500 hover:bg-opacity-70 hover:border-red-100  text-white hover:text-red-500   text-lg font-medium "
+                className="btn btn-sm bg-red-500 hover:bg-red-200   border-red-500 hover:bg-opacity-70 hover:border-red-100  text-white hover:text-red-500 text-sm  md:text-lg font-medium "
               >
                 <DeleteOutlineIcon></DeleteOutlineIcon> DELETE
               </button>
               {classItem?.status === "approved" ? (
                 <Link
-                  className="btn btn-sm bg-blue-700  hover:bg-opacity-70 hover:bg-blue-200 border-blue-700 hover:border-blue-900  text-white hover:text-blue-800    text-lg font-medium"
+                  className="btn btn-sm bg-blue-700  hover:bg-opacity-70 hover:bg-blue-200 border-blue-700 hover:border-blue-900  text-white hover:text-blue-800  text-sm  md:text-lg font-medium"
                   to={`/dashboard/my_class_details/${classItem?._id}`}
                 >
                   {" "}

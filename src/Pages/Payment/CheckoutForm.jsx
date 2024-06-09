@@ -129,7 +129,7 @@ const CheckoutForm = ({ price, id }) => {
             options={{
               style: {
                 base: {
-                  fontSize: "20px",
+                  fontSize: "18px",
                   color: "#424770",
                   "::placeholder": {
                     color: "#aab7c4",

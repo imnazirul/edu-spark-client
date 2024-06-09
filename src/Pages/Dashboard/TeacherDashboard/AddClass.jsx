@@ -130,7 +130,7 @@ const AddClass = () => {
       </h1>
 
       <div>
-        <div className="px-8">
+        <div className="px-8 ">
           {" "}
           <div className="my-2">
             <p className="label-text text-center mb-1 font-medium text-[17px]">
@@ -144,10 +144,10 @@ const AddClass = () => {
             />
           </div>
           <div>
-            <div className="flex gap-5">
+            <div className="flex flex-col md:flex-row gap-5">
               <div className="form-control flex-1">
                 <label className="label">
-                  <span className="label-text  text-primary-1 text-lg">
+                  <span className="label-text  text-primary-1 text-sm md:text-lg">
                     YOUR NAME ( -NOT EDITABLE )
                   </span>
                 </label>
@@ -160,7 +160,7 @@ const AddClass = () => {
               </div>
               <div className="form-control flex-1  ">
                 <label className="label">
-                  <span className="label-text  text-primary-1 text-lg">
+                  <span className="label-text  text-primary-1 text-sm md:text-lg">
                     YOUR EMAIL (-NOT EDITABLE )
                   </span>
                 </label>
@@ -181,7 +181,7 @@ const AddClass = () => {
         </div>
         <form
           onSubmit={handleSubmit(handleAddClass)}
-          className="grid grid-cols-2 gap-5 px-8"
+          className="grid  md:grid-cols-2 gap-5 md:px-8"
         >
           <div className="form-control">
             <label className="label">
@@ -253,7 +253,7 @@ const AddClass = () => {
             )}
           </div>
 
-          <div className="form-control relative">
+          <div className="form-control ">
             <label className="label">
               <span className="label-text  text-lg">DESCRIPTION</span>
             </label>
@@ -274,7 +274,7 @@ const AddClass = () => {
             )}
           </div>
 
-          <div className="form-control col-span-2">
+          <div className="form-control md:col-span-2">
             <label className="label">
               <span className="label-text  text-lg">
                 LONG DESCRIPTION (OPTIONAL)
@@ -287,7 +287,7 @@ const AddClass = () => {
             ></textarea>
           </div>
 
-          <div className="form-control mt-6 col-span-2">
+          <div className="form-control mt-6 md:col-span-2">
             <button className="btn  bg-primary-1 hover:bg-primary-1  text-lg text-white ">
               {btnText}
             </button>

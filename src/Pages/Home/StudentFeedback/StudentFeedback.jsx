@@ -104,9 +104,9 @@ const StudentFeedback = () => {
             {feedbacks.map((feedback, index) => (
               <div
                 key={index}
-                className=" flex border-[5px] border-base-100 justify-between h-64  relative rounded-xl font-poppins  "
+                className=" flex border-[5px] border-base-100 justify-between h-80  relative rounded-xl font-poppins  "
               >
-                <div className="border p-3 rounded-xl">
+                <div className="border h-full p-3 rounded-xl">
                   <div className=" flex ">
                     <div className="relative">
                       <img

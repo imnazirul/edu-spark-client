@@ -43,12 +43,12 @@ const Payment = () => {
       <Helmet>
         <title>Payment | EduSpark</title>
       </Helmet>
-      <h1 className="text-2xl mb-5 md:text-3xl text-center font-semibold font-poppins">
+      <h1 className="text-xl  mb-5 md:text-3xl text-center font-semibold font-poppins">
         Payment For {classItem?.title}
       </h1>
-      <div className="flex gap-5">
-        <div className="flex-1  p-5 bg-base-300 rounded-xl border">
-          <h1 className="text-3xl font-semibold mb-5">
+      <div className="flex gap-5 flex-col-reverse md:flex-row">
+        <div className="flex-1  p-5 border-green-600 bg-green-600 bg-opacity-20 rounded-xl border">
+          <h1 className="text-xl md:text-3xl font-semibold mb-5">
             {" "}
             PAYMENT AMOUNT: ${classItem?.price}
           </h1>
@@ -58,7 +58,11 @@ const Payment = () => {
         </div>
         <div className="flex-1">
           <div>
-            <img className="h-96" src={classItem?.image} alt="" />
+            <img
+              className="h-32 w-full object-cover border-2 border-blue-600 md:h-96 rounded-xl"
+              src={classItem?.image}
+              alt=""
+            />
           </div>
         </div>
       </div>

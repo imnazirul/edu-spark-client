@@ -19,7 +19,7 @@ const Profile = () => {
   const [imgName, setImgName] = useState("");
   const [btnText, setBtnText] = useState("Upload");
   const {
-    data: userInfo = [],
+    data: userInfo,
     isPending,
     isError,
   } = useQuery({
@@ -107,13 +107,13 @@ const Profile = () => {
 
   return (
     <>
-      <div className="w-full  px-4 mx-auto">
+      <div className="w-full border py-3  rounded-xl px-1  md:px-4 mx-auto">
         <Helmet>
           <title>Profile | EduSpark</title>
         </Helmet>
         <Toaster></Toaster>
-        <div className="relative flex flex-col min-w-0 break-words bg-base-100 w-full mb-6  rounded-lg ">
-          <div className="px-6">
+        <div className="relative flex flex-col  bg-base-100 w-full mb-6  rounded-lg ">
+          <div className="md:px-6">
             <div className="flex flex-wrap justify-center">
               <div className="w-full px-4 flex justify-center">
                 <div className="relative rounded-full">
@@ -134,23 +134,23 @@ const Profile = () => {
                   </p>
                 </div>
               </div>
-              <div className="w-full px-4 text-center mt-5">
-                <h1 className="text-3xl font-bold block uppercase tracking-wide text-blueGray-600">
+              <div className="w-full md:px-4 text-center mt-5">
+                <h1 className="text-xl md:text-3xl font-bold block uppercase tracking-wide text-blueGray-600">
                   {user?.displayName}
                 </h1>
-                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                <span className="text-lg md:text-xl font-bold block uppercase tracking-wide text-blueGray-600">
                   ({userInfo?.role})
                 </span>
               </div>
             </div>
-            <div className="text-center mt-12">
-              <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 ">
+            <div className="text-center mt-5 md:mt-12">
+              <h3 className="text-sm md:text-xl font-semibold leading-normal mb-2 text-blueGray-700 ">
                 Email: {userInfo?.email}
               </h3>
               <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                 Phone: {user?.phoneNumber || "Not Available"}
               </div>
-              <div className="flex justify-between items-center mt-8">
+              <div className="flex justify-between flex-col text-sm items-center mt-8">
                 <p className="mb-2 text-blueGray-600 ">
                   Account Created - {user?.metadata?.creationTime}
                 </p>
@@ -162,7 +162,7 @@ const Profile = () => {
             <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
               <div className="flex flex-wrap justify-center">
                 <div className="w-full lg:w-9/12 px-4">
-                  <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
+                  <p className="mb-4 md:text-lg leading-relaxed text-blueGray-700">
                     "Life is like riding a bicycle. To keep your balance, you
                     must keep moving."
                   </p>

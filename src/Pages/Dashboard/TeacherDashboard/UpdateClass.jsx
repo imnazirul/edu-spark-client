@@ -175,16 +175,16 @@ const UpdateClass = () => {
             </p>
 
             <img
-              className="rounded-full w-16 h-16 mx-auto"
+              className="rounded-full object-cover w-16 h-16 mx-auto"
               src={user?.photoURL}
               alt=""
             />
           </div>
           <div>
-            <div className="flex gap-5">
+            <div className="flex flex-col md:flex-row gap-5">
               <div className="form-control flex-1">
                 <label className="label">
-                  <span className="label-text  text-primary-1 text-lg">
+                  <span className="label-text  text-primary-1 text-sm md:text-lg">
                     YOUR NAME ( -NOT EDITABLE )
                   </span>
                 </label>
@@ -197,7 +197,7 @@ const UpdateClass = () => {
               </div>
               <div className="form-control flex-1  ">
                 <label className="label">
-                  <span className="label-text  text-primary-1 text-lg">
+                  <span className="label-text  text-primary-1 text-sm md:text-lg">
                     YOUR EMAIL (-NOT EDITABLE )
                   </span>
                 </label>
@@ -218,7 +218,7 @@ const UpdateClass = () => {
         </div>
         <form
           onSubmit={handleSubmit(handleUpdateClass)}
-          className="grid grid-cols-2 gap-5 px-8"
+          className="grid md:grid-cols-2 gap-5 px-8"
         >
           <div className="form-control">
             <label className="label">
@@ -305,9 +305,9 @@ const UpdateClass = () => {
             )}
           </div>
 
-          <div className="form-control col-span-2">
+          <div className="form-control md:col-span-2">
             <label className="label">
-              <span className="label-text  text-lg">
+              <span className="label-text  md:text-lg">
                 LONG DESCRIPTION (OPTIONAL)
               </span>
             </label>
@@ -319,7 +319,7 @@ const UpdateClass = () => {
             ></textarea>
           </div>
 
-          <div className="form-control mt-6 col-span-2">
+          <div className="form-control mt-6 md:col-span-2">
             <button className="btn  bg-primary-1 hover:bg-primary-1  text-lg text-white ">
               {btnText}
             </button>

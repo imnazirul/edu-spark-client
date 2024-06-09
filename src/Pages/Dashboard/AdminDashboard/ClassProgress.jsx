@@ -51,13 +51,13 @@ const ClassProgress = () => {
       <Helmet>
         <title>Class Progress | Dashboard</title>
       </Helmet>
-      <h1 className="text-2xl md:text-3xl text-center font-semibold font-poppins uppercase underline">
+      <h1 className=" md:text-3xl text-center font-semibold font-poppins uppercase underline">
         Feedbacks And Progress For This Class
       </h1>
-      <h1 className="text-2xl  mt-5 font-semibold font-poppins uppercase bg-blue-500 px-3 rounded-xl py-2 text-white">
+      <h1 className="md:text-2xl  mt-5 font-semibold font-poppins uppercase bg-blue-500 py-1 px-3 rounded-xl md:py-2 text-white">
         CLASS PROGRESS
       </h1>
-      <div className="flex gap-5 mt-5">
+      <div className="flex flex-col md:flex-row gap-5 mt-5">
         <div className="flex flex-1 border bg-base-100  p-3 rounded-lg items-center gap-5">
           <img
             className="w-28 object-cover h-28"
@@ -66,8 +66,10 @@ const ClassProgress = () => {
           />
 
           <div className="flex flex-col justify-center align-middle">
-            <p className="text-3xl font-semibold ">{classData.totalEnrolled}</p>
-            <p className="capitalize font-semibold text-lg">
+            <p className="text-lg md:text-3xl font-semibold ">
+              {classData.totalEnrolled}
+            </p>
+            <p className="capitalize font-semibold md:text-lg">
               TOTAL ENROLLED STUDENTS
             </p>
           </div>
@@ -81,15 +83,15 @@ const ClassProgress = () => {
           />
 
           <div className="flex flex-col justify-center align-middle">
-            <p className="text-3xl font-semibold ">
+            <p className="text-lg md:text-3xl font-semibold ">
               {classData.totalAssignment}
             </p>
-            <p className="capitalize font-semibold text-lg">ASSIGNMENTS</p>
+            <p className="capitalize font-semibold md:text-lg">ASSIGNMENTS</p>
           </div>
         </div>
       </div>
 
-      <h1 className="text-2xl my-5  font-semibold font-poppins uppercase bg-blue-500 px-3 rounded-xl py-2 text-white">
+      <h1 className="text-lg md:text-2xl my-5 py-1  font-semibold font-poppins uppercase bg-blue-500 px-3 rounded-xl md:py-2 text-white">
         CLASS FEEDBACKS
       </h1>
 
@@ -100,7 +102,7 @@ const ClassProgress = () => {
           </h1>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid md:grid-cols-2 gap-2 md:gap-5">
           {feedbacks.map((feedback) => (
             <div
               key={feedback._id}
@@ -115,16 +117,16 @@ const ClassProgress = () => {
                   />
                   <h1>{feedback?.studentName}</h1>
                 </div>
-                <div className="flex p-1 gap-1">
+                <div className="flex flex-col md:flex-row md:justify-center p-1 gap-1">
                   <ReactStars
                     value={feedback.rating}
-                    size={30}
+                    size={20}
                     isHalf={true}
                     edit={false}
                     activeColor="#FFD700"
                   />{" "}
                   <div className="flex items-center">
-                    (<p className="text-lg font-medium">{feedback.rating}</p>{" "}
+                    (<p className="md:text-lg font-medium">{feedback.rating}</p>{" "}
                     <StarRoundedIcon
                       sx={{ color: "gold", fontSize: "25px" }}
                     ></StarRoundedIcon>

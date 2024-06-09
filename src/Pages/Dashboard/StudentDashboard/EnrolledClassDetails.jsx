@@ -25,7 +25,7 @@ const EnrolledClassDetails = () => {
   const [rating, setRating] = useState(0);
   const { user } = useAuth();
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(1);
 
   const {
     data: totalCount = 0,
@@ -48,7 +48,9 @@ const EnrolledClassDetails = () => {
   } = useQuery({
     queryKey: ["assignments", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/assignments/${id}`);
+      const res = await axiosSecure.get(
+        `/assignments/${id}?page=${currentPage}&size=${itemsPerPage}`
+      );
       // console.log(res);
       return res.data;
     },
@@ -154,12 +156,12 @@ const EnrolledClassDetails = () => {
       <Helmet>
         <title>Enrolled Class Details | Dashboard</title>
       </Helmet>
-      <h1 className="text-3xl text-center font-medium uppercase underline mb-5">
+      <h1 className="text-lg md:text-3xl text-center font-medium uppercase underline mb-5">
         Assignments For This Class
       </h1>
       <button
         onClick={() => document.getElementById("my_modal_1").showModal()}
-        className="btn bg-blue-500 text-white hover:bg-transparent hover:border-blue-500 hover:text-blue-500 mb-4"
+        className="btn max-sm:text-xs max-sm:w-full bg-blue-500 text-white hover:bg-transparent hover:border-blue-500 hover:text-blue-500 mb-4"
       >
         {" "}
         <AddCircleOutlineRoundedIcon></AddCircleOutlineRoundedIcon> ADD TEACHING
@@ -199,57 +201,59 @@ const EnrolledClassDetails = () => {
                   ))}
               </tbody>
             </table>
-
-            <div className="flex max-sm:pl-8 md:justify-between w-full flex-col md:flex-row items-center mt-4">
-              <div>
-                Showing {currentPage * itemsPerPage + 1} to{" "}
-                {currentPage * itemsPerPage + assignments.length} of total{" "}
-                {totalCount} Data
-              </div>
-              <div className="join gap-1">
-                <button
-                  onClick={handlePrevious}
-                  className="join-item border hover:border-primary-1 border-primary-1 btn btn-md"
-                >
-                  <IoMdArrowBack></IoMdArrowBack> Previous
-                </button>
-                {pages.map((page) => (
-                  <button
-                    key={page}
-                    className={`join-item btn btn-md border border-primary-1 hover:border-primary-1 ${
-                      currentPage === page
-                        ? "bg-primary-1 hover:bg-primary-1 text-white"
-                        : ""
-                    }`}
-                    onClick={() => setCurrentPage(page)}
-                  >
-                    {page + 1}
-                  </button>
-                ))}
-                <button
-                  onClick={handleNext}
-                  className="join-item border border-primary-1 hover:border-primary-1 btn btn-md"
-                >
-                  Next <IoMdArrowForward></IoMdArrowForward>
-                </button>
-              </div>
-            </div>
           </div>
         )}
+
+        <div className="flex  md:justify-between w-full flex-col md:flex-row items-center mt-4 max-sm:gap-2">
+          <div>
+            Showing {currentPage * itemsPerPage + 1} to{" "}
+            {currentPage * itemsPerPage + assignments.length} of total{" "}
+            {totalCount}
+          </div>
+          <div className="join gap-1">
+            <button
+              onClick={handlePrevious}
+              className="join-item border hover:border-primary-1 border-primary-1 btn btn-md max-sm:btn-sm"
+            >
+              <IoMdArrowBack></IoMdArrowBack> Previous
+            </button>
+            {pages.map((page) => (
+              <button
+                key={page}
+                className={`join-item btn btn-md border border-primary-1 hover:border-primary-1 max-sm:btn-sm ${
+                  currentPage === page
+                    ? "bg-primary-1 hover:bg-primary-1 text-white"
+                    : ""
+                }`}
+                onClick={() => setCurrentPage(page)}
+              >
+                {page + 1}
+              </button>
+            ))}
+            <button
+              onClick={handleNext}
+              className="join-item border border-primary-1 hover:border-primary-1 btn  max-sm:btn-sm btn-md"
+            >
+              Next <IoMdArrowForward></IoMdArrowForward>
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Open the modal using document.getElementById('ID').showModal() method */}
 
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box relative">
-          <h1 className="text-2xl text-center">REPORT AND FEEDBACK</h1>
+          <h1 className="text-lg md:text-2xl text-center">
+            REPORT AND FEEDBACK
+          </h1>
           <p className="text-center">(Select Rating Star)</p>
           <div className="flex justify-center items-center">
             <ReactStars
               count={5}
               isHalf={true}
               onChange={(rating) => setRating(rating)}
-              size={70}
+              size={60}
               activeColor="#ffd700"
             />
           </div>

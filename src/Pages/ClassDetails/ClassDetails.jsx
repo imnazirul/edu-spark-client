@@ -40,11 +40,18 @@ const ClassDetails = () => {
         <title>Class Details | EduSpark</title>
       </Helmet>
       <section className="bg-base-200 p-5 ">
-        <div className="container flex flex-col mx-auto lg:flex-row">
-          <div className="flex flex-col space-y-5  w-full p-4 lg:w-2/3 md:p-8 lg:p-10 lg:pt-5">
+        <div className="container flex flex-col mx-auto lg:flex-row-reverse">
+          <div className="w-full lg:w-[60%] flex items-center">
+            <img
+              className=" max-sm:h-44 w-full object-cover border-4 border-pink-500"
+              src={classItem.image}
+              alt=""
+            />
+          </div>
+          <div className="flex flex-col space-y-3 md:space-y-5  w-full py-4 lg:w-2/3 md:p-8 lg:p-10 lg:pt-5">
             <div className="flex item-center gap-1">
               {" "}
-              <h2 className="text-3xl font-semibold  border-l-[6px] border-primary-1 pl-1">
+              <h2 className="text-xl md:text-3xl font-semibold  border-l-[6px] border-primary-1 pl-1">
                 {classItem.title}
               </h2>
             </div>
@@ -57,10 +64,10 @@ const ClassDetails = () => {
               {" "}
               <img
                 alt=""
-                className="w-10 h-10 rounded-full object-cover ring-[3px]  ring-blue-500 dark:bg-gray-500 "
+                className="w-7 md:w-10 h-7 md:h-10 rounded-full object-cover ring-[3px]  ring-blue-500 dark:bg-gray-500 "
                 src={classItem?.teacherImg}
               />
-              <h3 className="text-xl font-semibold">
+              <h3 className="text-lg md:text-xl font-semibold">
                 Instructor: {classItem.name}
               </h3>
             </div>
@@ -70,34 +77,27 @@ const ClassDetails = () => {
               </div>
               <div className="flex items-center p-2 gap-1 md:gap-2 md:p-3">
                 <p className="text-lg md:text-xl font-medium">
-                  {classItem.enrolment}
+                  {classItem.totalEnrollment}
                 </p>
                 <p className="text-lg md:text-xl font-medium">
                   Student Enrolled
                 </p>
               </div>
             </div>
-            <h2 className="text-2xl font-semibold">
+            <h2 className="text-xl md:text-2xl font-semibold">
               Fee: <span className="text-xl">$</span>
-              <span className="text-3xl">{classItem.price}</span>
+              <span className="text-2xl md:text-3xl">{classItem.price}</span>
             </h2>
           </div>
-          <div className="w-full lg:w-[60%] flex items-center">
-            <img
-              className="  border-4 border-pink-500"
-              src={classItem.image}
-              alt=""
-            />
-          </div>
         </div>
-        <div className="flex justify-between  gap-24">
+        <div className="flex justify-between max-sm:mt-2 gap-2 md:gap-24">
           <Link
-            className="btn px-10 flex-1 text-lg font-medium rounded-3xl bg-primary-1 text-white hover:bg-primary-1 hover:bg-opacity-30 hover:border-primary-1 hover:border-2 hover:text-blue-700"
+            className="btn md:px-10 flex-1 md:text-lg font-medium rounded-3xl bg-primary-1 text-white hover:bg-primary-1 hover:bg-opacity-30 hover:border-primary-1 hover:border-2 hover:text-blue-700"
             to={`/payment/${classItem?._id}`}
           >
             <button>PAY NOW</button>
           </Link>
-          <button className="flex-1  btn px-10  text-lg font-medium rounded-3xl border-2 bg-secondary-1 bg-opacity-30  border-secondary-1  text-pink-800 hover:bg-pink-600 hover:text-white ">
+          <button className="flex-1  btn md:px-10  md:text-lg font-medium rounded-3xl border-2 bg-secondary-1 bg-opacity-30  border-secondary-1  text-pink-800 hover:bg-pink-600 hover:text-white ">
             ADD TO CART
           </button>
         </div>

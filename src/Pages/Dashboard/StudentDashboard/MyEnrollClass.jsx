@@ -52,15 +52,15 @@ const MyEnrollClass = () => {
             key={index}
             className="flex flex-col items-center justify-start max-w-5xl  border border-gray-200 rounded-lg shadow md:flex-row  bg-gradient-to-r  from-blue-700 to-blue-400 bg-base-300 bg-blend-overlay bg-opacity-20"
           >
-            <div className="h-full overflow-hidden w-72 rounded-xl p-5">
+            <div className="h-full overflow-hidden md:w-72 rounded-xl md:p-5 max-sm:pt-2">
               <img
-                className="object-cover w-full h-40 rounded-xl  "
+                className="object-cover w-full h-20   md:h-40 rounded-xl  "
                 src={enrolledClass.image}
                 alt=""
               />
             </div>
             <div className="flex flex-col max-sm:items-center px-3">
-              <h2 className="mb-2 text-2xl bg-gradient-to-r inline-block text-transparent bg-clip-text from-gray-700 to-gray-900 font-bold tracking-tight max-sm:text-center">
+              <h2 className="md:mb-2 text-lg md:text-2xl bg-gradient-to-r inline-block text-transparent bg-clip-text from-gray-700 to-gray-900 font-bold tracking-tight max-sm:text-center">
                 {enrolledClass.title}
               </h2>
               <p className="mb-3 font-normal text-white  ">
@@ -71,11 +71,11 @@ const MyEnrollClass = () => {
                 <Link
                   to={`/dashboard/my_enrolled_class_details/${enrolledClass._id}`}
                 >
-                  <button className="btn bg-blue-900 hover:bg-transparent border-blue-900 hover:border-blue-900 hover:scale-105 transition duration-300 text-white  text-lg font-medium ">
+                  <button className="btn bg-blue-900 hover:bg-transparent border-blue-900 hover:border-blue-900 hover:scale-105 transition duration-300 text-white  md:text-lg font-medium ">
                     Continue Class
                   </button>
                 </Link>
-                <button className="btn text-white text-lg border-2 border-blue-900 hover:bg-blue-900 hover:border-blue-900   bg-transparent  hover:scale-105 transition duration-300">
+                <button className="btn text-white md:text-lg border-2 border-blue-900 hover:bg-blue-900 hover:border-blue-900   bg-transparent  hover:scale-105 transition duration-300">
                   Outline
                 </button>
               </div>

@@ -25,7 +25,7 @@ const BecomeInstructor = () => {
             </p>
             <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 bg-base-200 sm:space-x-4 lg:justify-start">
               <Link
-                className="px-8 py-3 text-lg font-semibold rounded  bg-secondary-1 filter mb-2 brightness-125 text-white"
+                className="px-8 py-3 md:text-lg md:font-semibold rounded  bg-secondary-1 filter mb-2 brightness-125 text-white"
                 to="teach_on_edu_spark"
               >
                 START TEACHING TODAY

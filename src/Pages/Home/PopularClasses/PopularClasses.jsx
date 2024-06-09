@@ -78,7 +78,7 @@ const PopularClasses = () => {
             {classes.map((item, index) => (
               <div
                 key={index}
-                className=" flex justify-between  border-4 border-base-100  rounded-xl  "
+                className=" flex justify-between  border-4 border-base-100  rounded-xl h-[450px] "
               >
                 <div className="h-full border rounded-xl overflow-hidden">
                   <div className="relative">

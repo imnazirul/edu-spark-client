@@ -46,7 +46,7 @@ const UserStats = () => {
                 <div className="flex items-center justify-between bg-secondary-1 brightness-110 text-white px-4 py-2 rounded-md">
                   <div className="text-xl font-bold"></div>
                   <div className="flex items-center">
-                    <div className="text-2xl  md:text-4xl font-bold">
+                    <div className="text-2xl  md:text-4xl md:font-bold">
                       {webStats.totalUser}
                       <p>Total Users</p>
                     </div>
@@ -55,7 +55,7 @@ const UserStats = () => {
 
                 <div className="flex items-center justify-between bg-secondary-1 brightness-110 text-white px-4 py-2 rounded-md">
                   <div className="flex items-center">
-                    <div className="text-2xl md:text-4xl font-bold">
+                    <div className="text-2xl md:text-4xl md:font-bold">
                       {webStats.totalClasses}
 
                       <p> Total Classes</p>
@@ -66,7 +66,7 @@ const UserStats = () => {
                   <div className="text-xl font-bold"></div>
 
                   <div className="flex items-center">
-                    <div className="text-2xl md:text-4xl font-bold">
+                    <div className="text-2xl md:text-4xl md:font-bold">
                       {webStats.totalEnrollment}
 
                       <p> Total Enrollment</p>

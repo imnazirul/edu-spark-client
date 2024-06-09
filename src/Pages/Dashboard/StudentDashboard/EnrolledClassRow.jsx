@@ -52,16 +52,16 @@ const EnrolledClassRow = ({ assignment, index, Refetch }) => {
 
   return (
     <>
-      <tr>
+      <tr className="w-full">
         <td>{index + 1}</td>
-        <td>{assignment.assignmentTitle}</td>
-        <td className="max-w-80">{assignment.description}</td>
-        <td>{deadlineTime} 11:59 AM</td>
+        <td className="min-w-48">{assignment.assignmentTitle}</td>
+        <td className="min-w-56">{assignment.description}</td>
+        <td className="min-w-40">{deadlineTime} 11:59 AM</td>
         <td>
           {assignment?.submittedEmails.find(
             (subObj) => subObj.email === user?.email
           ) ? (
-            <p className=" bg-green-500 text-green-500 border-green-500 bg-opacity-15 rounded-3xl font-medium py-1">
+            <p className=" bg-green-500 text-green-500 border-green-500 bg-opacity-15 px-2 rounded-3xl font-medium py-1">
               Submitted
             </p>
           ) : (
