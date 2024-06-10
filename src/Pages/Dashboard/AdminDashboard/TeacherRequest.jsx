@@ -98,25 +98,6 @@ const TeacherRequest = () => {
     });
   };
 
-  if (isPending || isCountPending) {
-    return (
-      <div className="mt-8">
-        <div className="flex flex-col gap-4 w-full">
-          <div className="skeleton h-10 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-        </div>
-      </div>
-    );
-  }
-
   if (isError || isCountError) {
     return (
       <div className="h-[50vh] flex items-center justify-center">
@@ -149,87 +130,104 @@ const TeacherRequest = () => {
       <h1 className="text-2xl md:text-3xl  text-center font-semibold font-poppins underline mb-1">
         TEACHER REQUESTS
       </h1>
-      <div className="overflow-x-auto">
-        <table className="table text-center w-full ">
-          {/* head */}
-          <thead className="bg-pink-600 text-white">
-            <tr>
-              <th>IMAGE </th>
-              <th>NAME</th>
-              {/* <th>EMAIL</th> */}
-              <th>EXPERIENCE</th>
-              <th>TITLE</th>
-              <th>CATEGORY</th>
-              <th>STATUS</th>
-              <th>ACTION</th>
-            </tr>
-          </thead>
-          <tbody>
-            {teacherRequests.map((request) => (
-              <tr key={request._id}>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src={request.image}
-                          alt="Avatar Tailwind CSS Component"
-                        />
+      {isPending || isCountPending ? (
+        <div className="">
+          <div className="flex flex-col gap-4 w-full">
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+          </div>
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="table text-center w-full ">
+            {/* head */}
+            <thead className="bg-pink-600 text-white">
+              <tr>
+                <th>IMAGE </th>
+                <th>NAME</th>
+                {/* <th>EMAIL</th> */}
+                <th>EXPERIENCE</th>
+                <th>TITLE</th>
+                <th>CATEGORY</th>
+                <th>STATUS</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              {teacherRequests.map((request) => (
+                <tr key={request._id}>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
+                          <img
+                            src={request.image}
+                            alt="Avatar Tailwind CSS Component"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td>{request?.name}</td>
-                {/* <td>{request?.email}</td> */}
-                <td>{request?.experience}</td>
-                <td>{request?.title}</td>
-                <td>{request?.category}</td>
-                <td>
-                  {request.status === "approved" ? (
-                    <span className="text-green-500 bg-green-500 bg-opacity-15 rounded-3xl capitalize px-3 py-1">
-                      Accepted
-                    </span>
-                  ) : request.status === "rejected" ? (
-                    <span className="text-red-500 bg-red-500 bg-opacity-15 rounded-3xl capitalize px-3 py-1">
-                      Rejected
-                    </span>
-                  ) : (
-                    <span className="text-orange-500 bg-orange-500 bg-opacity-15 rounded-3xl capitalize px-3 py-1">
-                      Pending
-                    </span>
-                  )}
-                </td>
-                <td>
-                  <div className="flex gap-1 items-center">
-                    <button
-                      onClick={() =>
-                        handleReqApprove(
-                          request?._id,
-                          request?.name,
-                          request?.email
-                        )
-                      }
-                      disabled={request?.status !== "pending"}
-                      className="btn mr-1 bg-green-500 hover:bg-transparent hover:text-green-500 hover:border-green-500 text-white btn-sm"
-                    >
-                      Approve
-                    </button>
-                    <button
-                      onClick={() =>
-                        handleReqReject(request?._id, request?.name)
-                      }
-                      disabled={request?.status !== "pending"}
-                      className="btn bg-red-500 hover:bg-transparent hover:text-red-500 hover:border-red-500 text-white btn-sm"
-                    >
-                      Reject
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  </td>
+                  <td>{request?.name}</td>
+                  {/* <td>{request?.email}</td> */}
+                  <td>{request?.experience}</td>
+                  <td>{request?.title}</td>
+                  <td>{request?.category}</td>
+                  <td>
+                    {request.status === "approved" ? (
+                      <span className="text-green-500 bg-green-500 bg-opacity-15 rounded-3xl capitalize px-3 py-1">
+                        Accepted
+                      </span>
+                    ) : request.status === "rejected" ? (
+                      <span className="text-red-500 bg-red-500 bg-opacity-15 rounded-3xl capitalize px-3 py-1">
+                        Rejected
+                      </span>
+                    ) : (
+                      <span className="text-orange-500 bg-orange-500 bg-opacity-15 rounded-3xl capitalize px-3 py-1">
+                        Pending
+                      </span>
+                    )}
+                  </td>
+                  <td>
+                    <div className="flex gap-1 items-center">
+                      <button
+                        onClick={() =>
+                          handleReqApprove(
+                            request?._id,
+                            request?.name,
+                            request?.email
+                          )
+                        }
+                        disabled={request?.status !== "pending"}
+                        className="btn mr-1 bg-green-500 hover:bg-transparent hover:text-green-500 hover:border-green-500 text-white btn-sm"
+                      >
+                        Approve
+                      </button>
+                      <button
+                        onClick={() =>
+                          handleReqReject(request?._id, request?.name)
+                        }
+                        disabled={request?.status !== "pending"}
+                        className="btn bg-red-500 hover:bg-transparent hover:text-red-500 hover:border-red-500 text-white btn-sm"
+                      >
+                        Reject
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
       <div className="flex mt-2 md:justify-between w-full flex-col md:flex-row items-center">
         <p className="max-sm:mb-3">
           Showing {currentPage * itemsPerPage + 1} to{" "}

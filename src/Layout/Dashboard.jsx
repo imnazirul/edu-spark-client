@@ -71,12 +71,9 @@ const Dashboard = () => {
   const [open, setOpen] = useState(false);
   if (isRoleLoading) {
     return (
-      <>
-        <div className="flex  gap-5 w-full">
-          <div className="skeleton hidden lg:flex h-[100vh] w-80"></div>
-          <div className="skeleton mt-8 max-lg:mx-8 h-[90vh] w-full"></div>
-        </div>
-      </>
+      <div className="flex h-[70vh] justify-center items-center">
+        <div className="h-20 w-20 md:w-24 md:h-24 border-[6px] md:border-[8px] border-dashed rounded-full animate-spin border-primary-1"></div>
+      </div>
     );
   }
 

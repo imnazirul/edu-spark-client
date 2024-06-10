@@ -92,22 +92,22 @@ const AllClassesAdmin = () => {
     refetch();
   }, [currentPage, itemsPerPage, refetch]);
 
-  if (isPending || isCountPending) {
-    return (
-      <div className="mt-16">
-        <div className="flex flex-col gap-4 w-full">
-          <div className="skeleton h-10 w-full"></div>
-          <div className="skeleton h-16 w-full"></div>
-          <div className="skeleton h-16 w-full"></div>
-          <div className="skeleton h-16 w-full"></div>
-          <div className="skeleton h-16 w-full"></div>
-          <div className="skeleton h-16 w-full"></div>
-          <div className="skeleton h-16 w-full"></div>
-          <div className="skeleton h-16 w-full"></div>
-        </div>
-      </div>
-    );
-  }
+  // if (isPending || isCountPending) {
+  //   return (
+  //     <div className="mt-16">
+  //       <div className="flex flex-col gap-4 w-full">
+  //         <div className="skeleton h-10 w-full"></div>
+  //         <div className="skeleton h-16 w-full"></div>
+  //         <div className="skeleton h-16 w-full"></div>
+  //         <div className="skeleton h-16 w-full"></div>
+  //         <div className="skeleton h-16 w-full"></div>
+  //         <div className="skeleton h-16 w-full"></div>
+  //         <div className="skeleton h-16 w-full"></div>
+  //         <div className="skeleton h-16 w-full"></div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   if (isError || isCountError) {
     return (
@@ -137,85 +137,100 @@ const AllClassesAdmin = () => {
       <Helmet>
         <title>All Classes | Dashboard</title>
       </Helmet>
-      <div className="overflow-x-auto ">
-        <h1 className="text-2xl md:text-3xl underline mb-2   text-center font-semibold font-poppins">
-          ALL CLASSES
-        </h1>
-        <table className="table text-center">
-          {/* head */}
-          <thead className="bg-pink-600 text-white">
-            <tr>
-              <th>IMAGE</th>
-              <th>TITLE</th>
-              <th>EMAIL</th>
-              <th>SHORT DESCRIPTION</th>
-              <th>STATUS</th>
-              <th>ACTION</th>
-            </tr>
-          </thead>
-          <tbody>
-            {classes.map((sinClass) => (
-              <tr key={sinClass._id}>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src={sinClass?.image}
-                          alt="Avatar Tailwind CSS Component"
-                        />
+      <h1 className="text-2xl md:text-3xl underline mb-2   text-center font-semibold font-poppins">
+        ALL CLASSES
+      </h1>
+      {isPending || isCountPending ? (
+        <div className="">
+          <div className="flex flex-col gap-4 w-full">
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-16 w-full"></div>
+            <div className="skeleton h-16 w-full"></div>
+            <div className="skeleton h-16 w-full"></div>
+            <div className="skeleton h-16 w-full"></div>
+            <div className="skeleton h-16 w-full"></div>
+            <div className="skeleton h-16 w-full"></div>
+            <div className="skeleton h-16 w-full"></div>
+          </div>
+        </div>
+      ) : (
+        <div className="overflow-x-auto ">
+          <table className="table text-center">
+            {/* head */}
+            <thead className="bg-pink-600 text-white">
+              <tr>
+                <th>IMAGE</th>
+                <th>TITLE</th>
+                <th>EMAIL</th>
+                <th>SHORT DESCRIPTION</th>
+                <th>STATUS</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              {classes.map((sinClass) => (
+                <tr key={sinClass._id}>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
+                          <img
+                            src={sinClass?.image}
+                            alt="Avatar Tailwind CSS Component"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td className="min-w-36">{sinClass?.title}</td>
-                <td>{sinClass?.email}</td>
-                <td className="min-w-60">{sinClass?.short_description}</td>
-                <td className="  justify-center">
-                  <div className="flex items-center justify-center gap-1">
-                    {sinClass.status === "approved" ? (
-                      <button className=" text-green-500 bg-green-500 bg-opacity-10 px-3 rounded-3xl py-1">
-                        Approved
-                      </button>
-                    ) : sinClass.status === "rejected" ? (
-                      <button className=" text-red-500  bg-red-500 bg-opacity-10 px-3 rounded-3xl py-1">
-                        Rejected
-                      </button>
-                    ) : (
-                      <>
-                        {" "}
-                        <button
-                          onClick={() => handleApprove(sinClass?._id)}
-                          className="btn bg-green-600 hover:bg-transparent hover:text-green-500 hover:border-green-500 text-white btn-sm"
-                        >
-                          Approve
+                  </td>
+                  <td className="min-w-36">{sinClass?.title}</td>
+                  <td>{sinClass?.email}</td>
+                  <td className="min-w-60">{sinClass?.short_description}</td>
+                  <td className="  justify-center">
+                    <div className="flex items-center justify-center gap-1">
+                      {sinClass.status === "approved" ? (
+                        <button className=" text-green-500 bg-green-500 bg-opacity-10 px-3 rounded-3xl py-1">
+                          Approved
                         </button>
-                        <button
-                          onClick={() => handleReject(sinClass?._id)}
-                          className="btn hover:bg-transparent hover:text-red-500 hover:border-red-500 bg-red-500 text-white btn-sm"
-                        >
-                          Reject
+                      ) : sinClass.status === "rejected" ? (
+                        <button className=" text-red-500  bg-red-500 bg-opacity-10 px-3 rounded-3xl py-1">
+                          Rejected
                         </button>
-                      </>
-                    )}
-                  </div>
-                </td>
-                <td>
-                  <Link to={`/dashboard/class_progress/${sinClass?._id}`}>
-                    {" "}
-                    <button
-                      disabled={sinClass?.status !== "approved"}
-                      className="btn hover:bg-transparent hover:text-blue-500 hover:border-blue-500 bg-blue-500 text-white  btn-sm w-[120px]"
-                    >
-                      See Progress
-                    </button>
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                      ) : (
+                        <>
+                          {" "}
+                          <button
+                            onClick={() => handleApprove(sinClass?._id)}
+                            className="btn bg-green-600 hover:bg-transparent hover:text-green-500 hover:border-green-500 text-white btn-sm"
+                          >
+                            Approve
+                          </button>
+                          <button
+                            onClick={() => handleReject(sinClass?._id)}
+                            className="btn hover:bg-transparent hover:text-red-500 hover:border-red-500 bg-red-500 text-white btn-sm"
+                          >
+                            Reject
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <Link to={`/dashboard/class_progress/${sinClass?._id}`}>
+                      {" "}
+                      <button
+                        disabled={sinClass?.status !== "approved"}
+                        className="btn hover:bg-transparent hover:text-blue-500 hover:border-blue-500 bg-blue-500 text-white  btn-sm w-[120px]"
+                      >
+                        See Progress
+                      </button>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
       <div className="flex mt-2 md:justify-between w-full flex-col md:flex-row items-center">
         <p className="max-sm:mb-3">
           Showing {currentPage * itemsPerPage + 1} to{" "}

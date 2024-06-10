@@ -78,24 +78,24 @@ const Users = () => {
     });
   };
 
-  if (isPending || isCountPending) {
-    return (
-      <div className="mt-16">
-        <div className="flex flex-col gap-4 w-full">
-          <div className="skeleton h-10 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-          <div className="skeleton h-9 w-full"></div>
-        </div>
-      </div>
-    );
-  }
+  // if (isPending || isCountPending) {
+  //   return (
+  //     <div className="mt-16">
+  //       <div className="flex flex-col gap-4 w-full">
+  //         <div className="skeleton h-10 w-full"></div>
+  //         <div className="skeleton h-9 w-full"></div>
+  //         <div className="skeleton h-9 w-full"></div>
+  //         <div className="skeleton h-9 w-full"></div>
+  //         <div className="skeleton h-9 w-full"></div>
+  //         <div className="skeleton h-9 w-full"></div>
+  //         <div className="skeleton h-9 w-full"></div>
+  //         <div className="skeleton h-9 w-full"></div>
+  //         <div className="skeleton h-9 w-full"></div>
+  //         <div className="skeleton h-9 w-full"></div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   if (isError || isCountError) {
     return (
@@ -165,64 +165,84 @@ const Users = () => {
       <h1 className="text-2xl max-sm:underline md:text-3xl font-semibold mb-3 max-sm:text-center ">
         ALL USERS
       </h1>
-      <div className="overflow-x-auto">
-        {users.length === 0 ? (
-          <div className="flex justify-center h-[70vh] items-center">
-            <h1 className="text-5xl">NO USERS FOUND!</h1>
+      {isPending || isCountPending ? (
+        <div className="">
+          <div className="flex flex-col gap-4 w-full">
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
+            <div className="skeleton h-10 w-full"></div>
           </div>
-        ) : (
-          <table className="table text-center ">
-            {/* head */}
-            <thead className="bg-pink-600 text-white">
-              <tr>
-                <th>#</th>
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          {users.length === 0 ? (
+            <div className="flex justify-center h-[70vh] items-center">
+              <h1 className="text-5xl">NO USERS FOUND!</h1>
+            </div>
+          ) : (
+            <table className="table text-center ">
+              {/* head */}
+              <thead className="bg-pink-600 text-white">
+                <tr>
+                  <th>#</th>
 
-                <th>IMAGE</th>
-                <th>NAME</th>
-                <th>EMAIL</th>
-                <th>ACTION</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* row 1 */}
-              {users.map((user, index) => (
-                <tr key={user._id}>
-                  <td>{index + 1}</td>
-                  <td>
-                    <div className="flex items-center justify-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src={user?.photoURL}
-                            alt="Avatar Tailwind CSS Component"
-                          />
+                  <th>IMAGE</th>
+                  <th>NAME</th>
+                  <th>EMAIL</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* row 1 */}
+                {users.map((user, index) => (
+                  <tr key={user._id}>
+                    <td>{index + 1}</td>
+                    <td>
+                      <div className="flex items-center justify-center gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img
+                              src={user?.photoURL}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </td>
-                  <td>{user?.name}</td>
-                  <td>{user?.email}</td>
+                    </td>
+                    <td>{user?.name}</td>
+                    <td>{user?.email}</td>
 
-                  <th className="min-w-36">
-                    {user?.role === "admin" ? (
-                      <button className="rounded-3xl bg-opacity-20 bg-primary-1  text-primary-1  btn-sm">
-                        <AdminPanelSettingsIcon></AdminPanelSettingsIcon> Admin
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => handleMakeAdmin(user?.email, user?.name)}
-                        className="btn bg-primary-1 hover:bg-transparent hover:text-primary-1 hover:border-primary-1 text-white btn-sm"
-                      >
-                        Make Admin
-                      </button>
-                    )}
-                  </th>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
+                    <th className="min-w-36">
+                      {user?.role === "admin" ? (
+                        <button className="rounded-3xl bg-opacity-20 bg-primary-1  text-primary-1  btn-sm">
+                          <AdminPanelSettingsIcon></AdminPanelSettingsIcon>{" "}
+                          Admin
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() =>
+                            handleMakeAdmin(user?.email, user?.name)
+                          }
+                          className="btn bg-primary-1 hover:bg-transparent hover:text-primary-1 hover:border-primary-1 text-white btn-sm"
+                        >
+                          Make Admin
+                        </button>
+                      )}
+                    </th>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      )}
       <div className="flex mt-2 md:justify-between w-full flex-col md:flex-row items-center">
         <p className="max-sm:mb-3">
           Showing {currentPage * usersPerPage + 1} to{" "}
