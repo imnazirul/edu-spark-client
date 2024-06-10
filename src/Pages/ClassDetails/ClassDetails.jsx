@@ -23,7 +23,32 @@ const ClassDetails = () => {
   });
 
   if (isPending) {
-    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+    return (
+      <div className="mt-24">
+        <div className="flex flex-col-reverse lg:flex-row gap-5 w-full ">
+          <div className=" w-full py-5 lg:p-5">
+            <div className="skeleton h-10 mb-5 w-full"></div>
+            <div className="skeleton h-4 mb-2 w-full"></div>
+            <div className="skeleton h-4 w-full mb-8"></div>
+            <div className=" h-10 w-full flex gap-1 items-center mb-5">
+              {" "}
+              <div className="skeleton h-12 w-12 rounded-full"></div>
+              <div className="skeleton h-7 w-60"></div>
+            </div>
+            <div className="skeleton h-12 rounded-xl w-60 mb-5"></div>
+            <div className="skeleton h-12 w-40"></div>
+          </div>
+          <div className="skeleton w-full">
+            <div className="skeleton h-48 md:h-80 w-full"></div>
+          </div>
+        </div>
+        <div className="flex gap-10 mt-3 lg:mt-5  lg:px-5">
+          <div className="skeleton h-10  w-full"></div>{" "}
+          <div className="skeleton h-10 w-full"></div>
+        </div>
+        <div className="skeleton h-40 mt-5  w-full"></div>
+      </div>
+    );
   }
 
   if (isError) {
@@ -90,7 +115,7 @@ const ClassDetails = () => {
             </h2>
           </div>
         </div>
-        <div className="flex justify-between max-sm:mt-2 gap-2 md:gap-24">
+        <div className="flex justify-between mt-2 gap-2 md:gap-24">
           <Link
             className="btn md:px-10 flex-1 md:text-lg font-medium rounded-3xl bg-primary-1 text-white hover:bg-primary-1 hover:bg-opacity-30 hover:border-primary-1 hover:border-2 hover:text-blue-700"
             to={`/payment/${classItem?._id}`}
