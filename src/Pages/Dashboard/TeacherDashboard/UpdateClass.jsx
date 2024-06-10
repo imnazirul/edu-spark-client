@@ -81,7 +81,21 @@ const UpdateClass = () => {
   } = useForm();
 
   if (isPending) {
-    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+    return (
+      <div className="justify-center  flex flex-col  md:gap-8 border p-5 rounded-xl">
+        <div className="skeleton h-20 w-20 self-center  rounded-full"></div>
+        <div className="items-center grid grid-cols-1 max-md:mt-4 md:gap-8 gap-5 md:grid-cols-2">
+          <div className="skeleton h-12 w-full"></div>
+          <div className="skeleton h-12 w-full"></div>
+          <div className="skeleton h-12 w-full"></div>
+          <div className="skeleton h-12 w-full"></div>
+          <div className="skeleton h-12 w-full"></div>
+          <div className="skeleton h-12 w-full"></div>
+          <div className="skeleton md:col-span-2 h-32 w-full"></div>
+          <div className="skeleton h-12 w-full md:col-span-2"></div>
+        </div>
+      </div>
+    );
   }
 
   if (isError) {

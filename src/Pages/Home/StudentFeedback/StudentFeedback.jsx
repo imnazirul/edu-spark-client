@@ -77,17 +77,61 @@ const StudentFeedback = () => {
     ],
   };
 
-  if (isPending) {
-    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
-  }
-
   return (
     <div className=" mt-8 lg:mt-16 ">
       <SectionTitle
         title="STUDENT FEEDBACK"
         subtitle="Rate your experience and provide feedback. Your input helps us improve our services and enhance your learning journey."
       ></SectionTitle>
-      {isError ? (
+      {isPending ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-5 lg:gap-10">
+          <div className="flex flex-col gap-3 md:gap-6 border p-5 rounded-xl">
+            <div className="flex gap-2">
+              <div className="skeleton h-16 w-16 rounded-full"></div>
+              <div>
+                <div className="skeleton h-6 mb-1 w-32  "></div>
+                <div className="skeleton h-4 w-16"></div>
+              </div>
+            </div>
+            <div className="skeleton h-8 w-full"></div>
+
+            <div className="skeleton h-6 my-1 w-24"></div>
+            <div className="skeleton h-3 w-full mt-3 mb-1"></div>
+            <div className="skeleton h-3 w-full mb-1"></div>
+            <div className="skeleton h-3 w-full mb-4"></div>
+          </div>
+          <div className="flex flex-col gap-3 md:gap-6 border p-5 rounded-xl">
+            <div className="flex gap-2">
+              <div className="skeleton h-16 w-16 rounded-full"></div>
+              <div>
+                <div className="skeleton h-6 mb-1 w-32  "></div>
+                <div className="skeleton h-4 w-16"></div>
+              </div>
+            </div>
+            <div className="skeleton h-8 w-full"></div>
+
+            <div className="skeleton h-6 my-1 w-24"></div>
+            <div className="skeleton h-3 w-full mt-3 mb-1"></div>
+            <div className="skeleton h-3 w-full mb-1"></div>
+            <div className="skeleton h-3 w-full mb-4"></div>
+          </div>
+          <div className="flex flex-col gap-3 md:gap-6 border p-5 rounded-xl">
+            <div className="flex gap-2">
+              <div className="skeleton h-16 w-16 rounded-full"></div>
+              <div>
+                <div className="skeleton h-6 mb-1 w-32  "></div>
+                <div className="skeleton h-4 w-16"></div>
+              </div>
+            </div>
+            <div className="skeleton h-8 w-full"></div>
+
+            <div className="skeleton h-6 my-1 w-24"></div>
+            <div className="skeleton h-3 w-full mt-3 mb-1"></div>
+            <div className="skeleton h-3 w-full mb-1"></div>
+            <div className="skeleton h-3 w-full mb-4"></div>
+          </div>
+        </div>
+      ) : isError ? (
         <div className="h-[50vh] flex items-center justify-center">
           <h1 className="text-5xl text-center">Data Not Found!</h1>
         </div>

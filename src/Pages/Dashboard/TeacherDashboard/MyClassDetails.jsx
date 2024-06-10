@@ -77,7 +77,19 @@ const MyClassDetails = () => {
   } = useForm();
 
   if (isPending || isSubmitPending) {
-    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+    return (
+      <>
+        <h1 className="text-2xl md:text-3xl  text-center font-semibold font-poppins underline">
+          CLASS DETAILS
+        </h1>
+        <div className="  my-8 grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="skeleton h-36 w-full"></div>
+          <div className="skeleton h-36 w-full"></div>
+          <div className="skeleton h-36 w-full"></div>
+          <div className="skeleton h-36 w-full"></div>
+        </div>
+      </>
+    );
   }
 
   const handleAddAssignment = (formData) => {
