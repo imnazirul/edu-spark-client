@@ -32,7 +32,20 @@ const Profile = () => {
   });
 
   if (isPending) {
-    return <h1 className="text-xl text-center mt-16">Loading...</h1>;
+    return (
+      <div className="mt-4">
+        <div className="flex justify-center items-center flex-col gap-4 w-full">
+          <div className="skeleton h-24 w-24 rounded-full"></div>
+          <div className="skeleton h-7 w-36"></div>
+          <div className="skeleton h-8 w-16"></div>
+          <div className="skeleton h-5 mt-5 w-64"></div>
+          <div className="skeleton h-5 w-48 "></div>
+          <div className="skeleton h-4 w-80 mt-5"></div>
+          <div className="skeleton h-4 w-80"></div>
+          <div className="skeleton h-3 mt-16 w-[80%]"></div>
+        </div>
+      </div>
+    );
   }
 
   const handleName = () => {

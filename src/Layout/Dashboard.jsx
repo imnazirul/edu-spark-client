@@ -70,7 +70,14 @@ const Dashboard = () => {
   const role = userRole;
   const [open, setOpen] = useState(false);
   if (isRoleLoading) {
-    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+    return (
+      <>
+        <div className="flex  gap-5 w-full">
+          <div className="skeleton hidden lg:flex h-[100vh] w-80"></div>
+          <div className="skeleton mt-8 max-lg:mx-8 h-[90vh] w-full"></div>
+        </div>
+      </>
+    );
   }
 
   const toggleDrawer = (event) => {

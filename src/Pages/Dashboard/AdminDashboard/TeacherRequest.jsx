@@ -32,7 +32,7 @@ const TeacherRequest = () => {
     refetch,
     isError,
   } = useQuery({
-    queryKey: ["teachersRequest"],
+    queryKey: ["teachersRequest", currentPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `teacher_requests?page=${currentPage}&size=${itemsPerPage}`
@@ -99,7 +99,22 @@ const TeacherRequest = () => {
   };
 
   if (isPending || isCountPending) {
-    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+    return (
+      <div className="mt-8">
+        <div className="flex flex-col gap-4 w-full">
+          <div className="skeleton h-10 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+        </div>
+      </div>
+    );
   }
 
   if (isError || isCountError) {

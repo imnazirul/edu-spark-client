@@ -17,7 +17,7 @@ const UserStats = () => {
   });
 
   if (isPending) {
-    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+    return <div className="skeleton h-[400px] md:h-96 mt-16  md:mx-40"></div>;
   }
 
   if (isError) {

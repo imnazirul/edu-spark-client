@@ -155,8 +155,11 @@ const Register = () => {
             />
           </div>
           <div className="flex flex-1 flex-col justify-center text-center rounded-sm md:pr-8">
-            <div className=" w-full  ">
-              <form onSubmit={handleSubmit(handleRegister)} className="">
+            <div className="w-full">
+              <form
+                onSubmit={handleSubmit(handleRegister)}
+                className="flex flex-col flex-wrap"
+              >
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text text-white text-lg">Name</span>
@@ -298,7 +301,7 @@ const Register = () => {
                 {" "}
                 <button
                   onClick={handleGoogleSignIn}
-                  className="disabled:cursor-not-allowed flex justify-center items-center lg:space-x-3 space-x-1 max-sm:mt-3 border md:m-3 lg:px-8 md:px-2 md:text-sm py-2 hover:shadow-xl border-gray-300 rounded-3xl bg-base-100 brightness-110 font-medium cursor-pointer"
+                  className="disabled:cursor-not-allowed flex justify-center items-center lg:space-x-3 space-x-1 max-sm:mt-3 border md:m-3 lg:px-8 md:px-2 px-1 md:text-sm py-2 hover:shadow-xl border-gray-300 rounded-3xl bg-base-100 brightness-110 font-medium cursor-pointer"
                 >
                   <FcGoogle size={32} />
 

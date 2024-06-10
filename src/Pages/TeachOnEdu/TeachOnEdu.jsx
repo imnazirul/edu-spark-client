@@ -72,7 +72,14 @@ const TeachOnEdu = () => {
   };
 
   if (isPending) {
-    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+    return (
+      <div className="flex mt-24 flex-col items-center justify-center gap-4 w-full">
+        <div className="skeleton h-12 w-48 md:w-96"></div>
+        <div className="skeleton h-4 w-80 md:w-[450px]"></div>
+
+        <div className="skeleton h-60 mt-10 w-full"></div>
+      </div>
+    );
   }
 
   if (isError) {
@@ -112,7 +119,7 @@ const TeachOnEdu = () => {
           <div>
             <div className="flex-1 ">
               {role === "admin" ? (
-                <div className="mt-8 md:h-[30vh] flex items-center">
+                <div className="mt-8 md:h-[30vh] flex mb-5 justify-center items-center">
                   <h1 className="text-3xl font-semibold text-blue-600">
                     YOU ARE ADMIN
                   </h1>

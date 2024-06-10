@@ -21,10 +21,6 @@ const AllClasses = () => {
     },
   });
 
-  if (isPending || isIdsPending) {
-    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
-  }
-
   if (isError) {
     return (
       <div className="h-[50vh] flex items-center justify-center">
@@ -39,11 +35,64 @@ const AllClasses = () => {
         <title>All Classes | EduSpark</title>
       </Helmet>
       <SectionTitle title="ALL CLASSES"></SectionTitle>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {classes.map((sClass, index) => (
-          <ClassCard key={index} SClass={sClass}></ClassCard>
-        ))}
-      </div>
+      {isPending || isIdsPending ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-5 lg:gap-10">
+          <div className="flex flex-col gap-3 md:gap-6 border p-5 rounded-xl">
+            <div className="skeleton h-60 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <hr className="" />
+            <div className="skeleton h-8 w-20"></div>
+          </div>
+          <div className="flex flex-col gap-3 md:gap-6 border p-5 rounded-xl">
+            <div className="skeleton h-60 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <hr className="" />
+            <div className="skeleton h-8 w-20"></div>
+          </div>
+          <div className="flex flex-col gap-3 md:gap-6 border p-5 rounded-xl">
+            <div className="skeleton h-60 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <hr className="" />
+            <div className="skeleton h-8 w-20"></div>
+          </div>
+          <div className="flex flex-col gap-3 md:gap-6 border p-5 rounded-xl">
+            <div className="skeleton h-60 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <hr className="" />
+            <div className="skeleton h-8 w-20"></div>
+          </div>
+          <div className="flex flex-col gap-3 md:gap-6 border p-5 rounded-xl">
+            <div className="skeleton h-60 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <hr className="" />
+            <div className="skeleton h-8 w-20"></div>
+          </div>
+          <div className="flex flex-col gap-3 md:gap-6 border p-5 rounded-xl">
+            <div className="skeleton h-60 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <hr className="" />
+            <div className="skeleton h-8 w-20"></div>
+          </div>
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {classes.map((sClass, index) => (
+            <ClassCard key={index} SClass={sClass}></ClassCard>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

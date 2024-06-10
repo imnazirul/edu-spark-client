@@ -46,7 +46,7 @@ const EnrolledClassDetails = () => {
     isError,
     refetch,
   } = useQuery({
-    queryKey: ["assignments", id],
+    queryKey: ["assignments", id, currentPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/assignments/${id}?page=${currentPage}&size=${itemsPerPage}`

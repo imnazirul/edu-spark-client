@@ -20,10 +20,6 @@ const PopularClasses = () => {
     },
   });
 
-  if (isPending) {
-    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
-  }
-
   const settings = {
     dots: false,
     infinite: true,
@@ -69,7 +65,34 @@ const PopularClasses = () => {
           subtitle="Explore our top-rated courses in programming,Designing, Marketing and more. Learn from expert tutors and enhance your skills"
         ></SectionTitle>
 
-        {isError ? (
+        {isPending ? (
+          <div className="grid  md:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-5 lg:gap-10">
+            <div className="flex flex-col gap-3 md:gap-6 border p-5 rounded-xl">
+              <div className="skeleton h-60 w-full"></div>
+              <div className="skeleton h-4 w-28"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <hr className="" />
+              <div className="skeleton h-8 w-20"></div>
+            </div>
+            <div className="hidden md:flex flex-col gap-3 md:gap-6 border p-5 rounded-xl">
+              <div className="skeleton h-60 w-full"></div>
+              <div className="skeleton h-4 w-28"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <hr className="" />
+              <div className="skeleton h-8 w-20"></div>
+            </div>
+            <div className="hidden lg:flex flex-col gap-3 md:gap-6 border p-5 rounded-xl">
+              <div className="skeleton h-60 w-full"></div>
+              <div className="skeleton h-4 w-28"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <hr className="" />
+              <div className="skeleton h-8 w-20"></div>
+            </div>
+          </div>
+        ) : isError ? (
           <div className="h-[50vh] flex items-center justify-center">
             <h1 className="text-5xl text-center">Data Not Found!</h1>
           </div>

@@ -99,7 +99,10 @@ const Login = () => {
           </div>
           <div className="flex flex-1 flex-col justify-center text-center rounded-sm md:pr-8">
             <div className="w-full ">
-              <form onSubmit={handleSubmit(handleLogin)} className="">
+              <form
+                onSubmit={handleSubmit(handleLogin)}
+                className="flex flex-col flex-wrap"
+              >
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text text-white text-lg">Email</span>
@@ -178,7 +181,7 @@ const Login = () => {
                 {" "}
                 <button
                   onClick={handleGoogleSignIn}
-                  className="disabled:cursor-not-allowed flex justify-center items-center lg:space-x-3 space-x-1 max-sm:mt-3 border md:m-3 lg:px-8 md:px-2 py-2 hover:shadow-xl border-gray-300 rounded-3xl bg-base-100 brightness-110 font-medium cursor-pointer"
+                  className="disabled:cursor-not-allowed flex justify-center items-center lg:space-x-3 space-x-1 max-sm:mt-3 border md:m-3 lg:px-8 md:px-2 px-1 py-2 hover:shadow-xl border-gray-300 rounded-3xl bg-base-100 brightness-110 font-medium cursor-pointer"
                 >
                   <FcGoogle size={32} />
 

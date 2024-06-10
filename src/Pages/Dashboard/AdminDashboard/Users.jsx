@@ -34,7 +34,7 @@ const Users = () => {
     isError,
     refetch,
   } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", currentPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/users?search=${searchText}&page=${currentPage}&size=${usersPerPage}`
@@ -78,12 +78,23 @@ const Users = () => {
     });
   };
 
-  // useEffect(() => {
-  //   refetch();
-  // }, [currentPage, refetch, usersPerPage]);
-
   if (isPending || isCountPending) {
-    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+    return (
+      <div className="mt-16">
+        <div className="flex flex-col gap-4 w-full">
+          <div className="skeleton h-10 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+          <div className="skeleton h-9 w-full"></div>
+        </div>
+      </div>
+    );
   }
 
   if (isError || isCountError) {

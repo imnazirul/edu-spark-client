@@ -30,7 +30,7 @@ const AllClassesAdmin = () => {
     isError,
     refetch,
   } = useQuery({
-    queryKey: ["classes"],
+    queryKey: ["classes", currentPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/classes?page=${currentPage}&size=${itemsPerPage}`
@@ -93,7 +93,20 @@ const AllClassesAdmin = () => {
   }, [currentPage, itemsPerPage, refetch]);
 
   if (isPending || isCountPending) {
-    return <h1 className="text-5xl text-center mt-10">Loading...</h1>;
+    return (
+      <div className="mt-16">
+        <div className="flex flex-col gap-4 w-full">
+          <div className="skeleton h-10 w-full"></div>
+          <div className="skeleton h-16 w-full"></div>
+          <div className="skeleton h-16 w-full"></div>
+          <div className="skeleton h-16 w-full"></div>
+          <div className="skeleton h-16 w-full"></div>
+          <div className="skeleton h-16 w-full"></div>
+          <div className="skeleton h-16 w-full"></div>
+          <div className="skeleton h-16 w-full"></div>
+        </div>
+      </div>
+    );
   }
 
   if (isError || isCountError) {
