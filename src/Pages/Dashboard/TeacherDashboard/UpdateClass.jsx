@@ -232,7 +232,7 @@ const UpdateClass = () => {
         </div>
         <form
           onSubmit={handleSubmit(handleUpdateClass)}
-          className="grid md:grid-cols-2 gap-5 px-8"
+          className="grid md:grid-cols-2 gap-5 w-[100%] md:px-8"
         >
           <div className="form-control">
             <label className="label">
