@@ -1,5 +1,3 @@
-### Assignment_Category_0008
-
 # EduSpark
 
 #### AdminEmail: admin@eduspark.com
