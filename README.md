@@ -1,10 +1,12 @@
 # EduSpark
 
-#### AdminEmail:    ```bash
+#### AdminEmail:  
+   ```bash
    admin@eduspark.com
    ```
 
-#### AdminPass:    ```bash
+#### AdminPass:
+ ```bash
 Eduspark1234
    ```
 
