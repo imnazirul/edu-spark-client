@@ -1,8 +1,12 @@
 # EduSpark
 
-#### AdminEmail: admin@eduspark.com
+#### AdminEmail:    ```bash
+   admin@eduspark.com
+   ```
 
-#### AdminPass: Eduspark1234
+#### AdminPass:    ```bash
+Eduspark1234
+   ```
 
 ## **Live Site URL:** [www.eduspark.com](https://eduspark-live.web.app/)
 
